@@ -13,13 +13,17 @@ func _process(_delta):
 		global_transform.origin = follow.global_transform.origin
 
 func add_bait():
-	var baitPickup = castResource.equipResource.get_slot_pickup("Bait")
+	var baitPickup = castResource.get_equiped_bait()
 	if baitPickup:
 		var baitInstance = itemScene.instance()
 		baitInstance.canBePickedUp = false
 		add_child(baitInstance)
 		baitInstance.freeze()
+		baitInstance.connect("item_gone", self, "bait_eaten")
 		baitInstance.itemResource = baitPickup.itemResource
+
+func bait_eaten():
+	castResource.bait_is_eaten()
 
 func change_parent(newparent):
 	get_parent().remove_child(self)

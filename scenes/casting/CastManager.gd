@@ -65,7 +65,6 @@ func remove_instance(instance):
 	currentCastScenes.erase(instance)
 
 func hooked_fish(fish):
-	equipResource.remove_slot_pickup("BaitSlot")
 	emit_signal("fish_hooked", fish)
 
 func fish_nibbled(fish):

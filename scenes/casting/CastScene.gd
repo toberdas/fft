@@ -37,14 +37,6 @@ func _process(_delta):
 	if state == ANGLESTATE.CASTING:
 		if Input.is_action_just_released("aligncam"):
 			cancel_cast()
-#	if state == ANGLESTATE.WAITING:
-#		if Input.is_action_just_released("aligncam"):
-#			cancel_cast()
-#		if Input.is_action_pressed("reelin"):
-#			if castNode.reel_in(0.1):
-#				emit_signal("reeled_in")
-#				castNode.queue_free()
-#				free_cast()
 	if state == ANGLESTATE.RESET:
 		if is_instance_valid(castNode):
 			if castNode.reel_in(0.2):

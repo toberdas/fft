@@ -49,3 +49,6 @@ func set_as_food():
 
 func _on_3DPickable_picked(_pickingPointer):
 	picked(_pickingPointer)
+
+func _on_AttackableNode_attacked(attackNode):
+	picked_up(attackNode.owner)

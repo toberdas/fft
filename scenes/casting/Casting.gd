@@ -20,12 +20,6 @@ onready var detecting_pathwalker = $CastPath/DetectingPathwalker
 signal castdone
 signal castcancelled
 signal reeledin
-signal fishhooked
-signal fishbaited
-signal nibble
-signal ignore_nibble
-
-
 
 func _ready():
 	castbobber.castResource = castResource
@@ -110,12 +104,3 @@ func get_line_distributed_points(lineArray:Array):
 	for point in lineArray:
 		curve.add_point(point)
 	return Array(curve.get_baked_points())
-
-func _on_Bobber_fishhooked(fish):
-	emit_signal("fishhooked", fish) #pass on the signal from the hook to the angle
-
-func _on_Bobber_nibble(fish):
-	emit_signal("nibble", fish) #pass on the signal from the hook to the angle
-
-func _on_Bobber_ignore_nibble(fish):
-	emit_signal("ignore_nibble", fish) #pass on the signal from the hook to the angle

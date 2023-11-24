@@ -9,10 +9,10 @@
 extents = Vector3( 0.22778, 0.220549, 0.213554 )
 
 [sub_resource type="BoxShape" id=6]
-extents = Vector3( 0.141239, 0.187382, 0.17306 )
+extents = Vector3( 0.21461, 0.199688, 0.17306 )
 
 [sub_resource type="BoxShape" id=5]
-extents = Vector3( 0.102465, 0.140852, 0.137434 )
+extents = Vector3( 0.484757, 0.523103, 0.499278 )
 
 [node name="3DItem" type="Spatial" groups=["Item"]]
 script = ExtResource( 1 )
@@ -47,6 +47,7 @@ shape = SubResource( 6 )
 shape = SubResource( 5 )
 
 [connection signal="picked" from="Body/3DPickable" to="." method="_on_3DPickable_picked"]
+[connection signal="attacked" from="Body/AttackableNode" to="." method="_on_AttackableNode_attacked"]
 
 [editable path="Body/3DPickable"]
 [editable path="Body/AttackableNode"]

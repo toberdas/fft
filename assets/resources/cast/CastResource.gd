@@ -2,7 +2,7 @@ extends Resource
 class_name CastResource
 
 var castInstance
-var equipResource
+var equipResource : EquipResource
 
 var baitItemResource  
 var rodItemResource 
@@ -53,3 +53,9 @@ func set_hooked_fish(fish:Fish):
 
 func set_reelin_fish(fish:Fish):
 	pass
+
+func get_equiped_bait():
+	return equipResource.get_slot_pickup("Bait")
+
+func bait_is_eaten():
+	equipResource.remove_slot_pickup("Bait")

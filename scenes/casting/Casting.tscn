@@ -69,8 +69,5 @@ readyToJumpShader = SubResource( 7 )
 
 [connection signal="castdone" from="." to="CastPath/DetectingPathwalker/Bobber" method="_on_Casting_castdone"]
 [connection signal="castdone" from="." to="CastLine" method="_on_Casting_castdone"]
-[connection signal="fishhooked" from="CastPath/DetectingPathwalker/Bobber" to="." method="_on_Bobber_fishhooked"]
-[connection signal="ignore_nibble" from="CastPath/DetectingPathwalker/Bobber" to="." method="_on_Bobber_ignore_nibble"]
-[connection signal="nibble" from="CastPath/DetectingPathwalker/Bobber" to="." method="_on_Bobber_nibble"]
 
 [editable path="CastPath/DetectingPathwalker"]

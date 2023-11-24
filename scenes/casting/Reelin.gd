@@ -76,7 +76,9 @@ func _process(delta):
 						lineHealth -= damage
 				else:
 					currentLineBuffer = move_toward(currentLineBuffer, lineBuffer, delta * 4.0) 
-				reelinFish.hookedAmount = max(0.0,(catchRate / initialCatchRate) - currentYank) #supply the fish with a normalized number, being the amount the fish is reeled in, it uses it to find the nearest point on a sphere around the player
+				var lineLength = calculate_line_length()
+				print(lineLength)
+				reelinFish.hookedAmount = lineLength #supply the fish with a normalized number, being the amount the fish is reeled in, it uses it to find the nearest point on a sphere around the player
 				GlobalSingleton.cam.targetFOV = minFOV + FOVdif * catchRate / initialCatchRate 
 				emit_signal("tick", {catchRate = catchRate, lineHealth = lineHealth, time = reelinSpeed}) #emit signal mostly to gui, to show off
 		decay_yank()
@@ -110,6 +112,9 @@ func start(fish, castarray):
 	reelinFish.hookedAmount = 1 #sets hookedamount to 1, will decrease to 0 as you reel in the fish, making it wander clsoer by to the player
 	rotator.start()
 	obs.start_observer(fish)
+
+func calculate_line_length():
+	return max(0.0,(catchRate / initialCatchRate) - currentYank)
 
 func stop():
 	rotator.stop()
