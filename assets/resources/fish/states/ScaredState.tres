@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://assets/resources/fish/states/BrainState.gd" type="Script" id=1]
+[ext_resource path="res://scenes/fish/brainstateexpressions/Fleeing.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/resources/fish/responses/neutral/FleeResponse.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resources/fish/responses/neutral/NothingResponse.tres" type="Resource" id=4]
+[ext_resource path="res://assets/resources/fish/responses/neutral/FlockResponse.tres" type="Resource" id=5]
+[ext_resource path="res://assets/resources/fish/responses/neutral/RelocateResponse.tres" type="Resource" id=6]
+
+[resource]
+script = ExtResource( 1 )
+stateType = ""
+stateExpressionScene = ExtResource( 2 )
+messagey = ""
+fishResponse = ExtResource( 5 )
+foodResponse = ExtResource( 4 )
+unidentifiedResponse = ExtResource( 3 )
+threatResponse = ExtResource( 3 )
+relocateResponse = ExtResource( 6 )

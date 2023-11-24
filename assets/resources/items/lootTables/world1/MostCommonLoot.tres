@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/items/specificItems/rods/BeginnersRod.tres" type="Resource" id=1]
+[ext_resource path="res://assets/resources/items/LootTable.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/items/specificItems/line/UnstableLine.tres" type="Resource" id=3]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 2 )
+guaranteedItem = ExtResource( 3 )
+guaranteedRarity = "strange"
+itemList = [ ExtResource( 3 ), ExtResource( 1 ) ]
+amount = 6

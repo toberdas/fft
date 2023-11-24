@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/fish/Flock.gd" type="Script" id=1]
+[ext_resource path="res://scenes/fish/FishNode.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+time = 6.0
+factor = 1.0
+distance = 125.0
+slowdown = 6.0
+stop = 1.0
+type = 0
+unique = false
+priority = 0
+clears = true
+persistent = false
+
+[sub_resource type="CylinderMesh" id=1]
+height = 48.0
+
+[node name="Flock" type="Spatial"]
+script = ExtResource( 1 )
+fish = ExtResource( 2 )
+mover = SubResource( 2 )
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.608, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+transform = Transform( 2.06957, 0, 0, 0, 2.06957, 0, 0, 0, 2.06957, 0, 0, 0 )
+visible = false
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="Spawnpoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -40, 0 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/helper/ReplacementGrammar.gd" type="Script" id=1]
+[ext_resource path="res://assets/replacementrules/sets/LookAtSet.tres" type="Resource" id=2]
+
+[node name="ReplacementGrammarNode" type="Node"]
+script = ExtResource( 1 )
+ruleset = ExtResource( 2 )
+DEBUG = true

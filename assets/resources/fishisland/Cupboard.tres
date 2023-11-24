@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://assets/resources/fishisland/FishIslandResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/interacts/TreasureResource.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/items/specificItems/rods/BeginnersRod.tres" type="Resource" id=3]
+[ext_resource path="res://assets/img/textures/rock_1.png" type="Texture" id=4]
+[ext_resource path="res://scenes/fishisland/islandlevels/CupboardsChallenge.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/resources/items/specificItems/KEYS/GreenKey.tres" type="Resource" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 4 )
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+key = ExtResource( 6 )
+lootItem = ExtResource( 3 )
+
+[resource]
+script = ExtResource( 1 )
+fishName = "Cupboard"
+description = "This fragile egg will likely crack. You don't wanna find out how this will go. You deserve better. I could say that nothing bad will happen, but that'd be a lie."
+levelScene = ExtResource( 5 )
+fishMeshName = "fish_2"
+fishIslandMaterial = SubResource( 1 )
+treasureResource = SubResource( 2 )

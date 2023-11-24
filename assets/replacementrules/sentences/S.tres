@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/replacementgrammar/Rule.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+startSign = "S"
+replacementString = "#Dm~the~#AqAdj~#PersonN~#LookV~`s~you|#Ad~the~#FishN~#LookAtV~`s~at~you|#AdS~the~#FishN~#LookV~`s~you|#Dm~the~fish~#LookAtV~`s~at~you"
+ruleSplit = "|"
+elementSplit = "~"
+tagSplit = "*"
+noSpaceChar = "`"

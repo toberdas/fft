@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/music/Music.gd" type="Script" id=2]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+octaves = 1
+period = 3.0
+persistence = 0.0
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=2]
+width = 20
+height = 10
+noise = SubResource( 1 )
+
+[resource]
+script = ExtResource( 2 )
+BPM = 120
+totalInstruments = [  ]
+noiseTex = SubResource( 2 )
+noiseCutoff = 0.5
+movements = 10
+spatial = false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scripts/generation/island/Dialog.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/effects/eiland1_resp_2.wav" type="AudioStream" id=2]
+
+[resource]
+script = ExtResource( 1 )
+dialogText = "As you eat, don' t think of the one you love."
+trigger = 1
+secondsBeforeLetterbox = 2.0
+secondsBefore = 1.0
+secondsAfter = 3.0
+responseStream = ExtResource( 2 )
+played = false

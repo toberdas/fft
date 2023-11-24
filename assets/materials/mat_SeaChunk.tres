@@ -1,0 +1,62 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=2]
+
+[ext_resource path="res://assets/shaders/sh_3d_waves.tres" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=24]
+octaves = 1
+period = 256.0
+persistence = 0.0
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=25]
+width = 2048
+height = 2048
+seamless = true
+bump_strength = 32.0
+noise = SubResource( 24 )
+
+[sub_resource type="OpenSimplexNoise" id=26]
+octaves = 4
+
+[sub_resource type="NoiseTexture" id=27]
+width = 1024
+height = 1024
+seamless = true
+as_normalmap = true
+bump_strength = 13.8
+noise = SubResource( 26 )
+
+[sub_resource type="OpenSimplexNoise" id=28]
+
+[sub_resource type="NoiseTexture" id=29]
+width = 50
+height = 50
+seamless = true
+noise = SubResource( 28 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/time_scale = 0.8
+shader_param/wave = 6.0
+shader_param/fish_length = 50.0
+shader_param/world_wave_length = 300.0
+shader_param/world_wave_amp = 8.0
+shader_param/world_wave_time_scale = 0.6
+shader_param/time = null
+shader_param/up = 1.0
+shader_param/proximity_fade_distance = 10.0
+shader_param/distance_fade_min = 1450.0
+shader_param/distance_fade_max = 1300.0
+shader_param/albedo = Color( 0.0235294, 0.698039, 0.768627, 1 )
+shader_param/specular = 0.303
+shader_param/metallic = 0.258
+shader_param/roughness = 0.0
+shader_param/point_size = 0.0
+shader_param/normal_scale = 0.5
+shader_param/uv1_scale = null
+shader_param/uv1_offset = null
+shader_param/uv2_scale = null
+shader_param/uv2_offset = null
+shader_param/wave_noise = SubResource( 29 )
+shader_param/texture_noise = SubResource( 25 )
+shader_param/texture_normal = SubResource( 27 )

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/music/sounds/A2_uppingdeungeon.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/resources/music/Instrument.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+tone = 440.0
+audio = ExtResource( 1 )
+tuneScale = 0.0
+intervalRange = 8

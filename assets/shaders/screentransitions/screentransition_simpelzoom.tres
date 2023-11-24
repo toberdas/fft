@@ -1,0 +1,23 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "// Author: 0gust1
+// License: MIT
+shader_type canvas_item;
+uniform float zoom_quickness; // = 0.8
+uniform float progress;
+
+vec2 zoom(vec2 uv, float amount) {
+	return 0.5 + ((uv - 0.5) * (1.0-amount));	
+}
+
+void fragment(){
+	vec2 uv = vec2(UV.x, 1.0 - UV.y);
+	float nQuick = clamp(zoom_quickness,0.2,1.0);
+	COLOR = mix(
+	texture(TEXTURE, zoom(UV, smoothstep(0.0, nQuick, progress))), 
+	texture(SCREEN_TEXTURE, uv),
+	smoothstep(nQuick-0.2, 1.0, progress)
+  );
+}
+"

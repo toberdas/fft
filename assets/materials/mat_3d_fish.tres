@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/img/textures/DALL·E 2023-08-08 18.59.09 - alien fishscale texture.png" type="Texture" id=1]
+[ext_resource path="res://assets/shaders/sh_3d_swimmingfish.tres" type="Shader" id=3]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/time_scale = 0.8
+shader_param/side_to_side = 0.5
+shader_param/pivot = 1.0
+shader_param/wave = 0.5
+shader_param/fish_length = 2.0
+shader_param/mask_black = 1.0
+shader_param/mask_white = -0.5
+shader_param/time = 0.0
+shader_param/albedo = Color( 1, 0.698039, 0.945098, 1 )
+shader_param/specular = 0.0
+shader_param/metallic = 0.314
+shader_param/roughness = 0.819
+shader_param/point_size = 0.0
+shader_param/normal_scale = 1.0
+shader_param/uv1_scale = null
+shader_param/uv1_offset = null
+shader_param/uv2_scale = null
+shader_param/uv2_offset = null
+shader_param/texture_albedo = ExtResource( 1 )

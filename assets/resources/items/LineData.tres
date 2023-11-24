@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/items/LineData.gd" type="Script" id=1]
+[ext_resource path="res://assets/curves/castcurves/castcurve_2.tres" type="Curve3D" id=2]
+
+[resource]
+script = ExtResource( 1 )
+castCurve = ExtResource( 2 )
+lineHealth = 1.0

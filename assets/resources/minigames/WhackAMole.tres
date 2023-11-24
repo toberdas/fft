@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/minigames/MinigameResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/minigames/WhackAMole/WhackAMole.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Whack-a-Mole"
+scene = ExtResource( 2 )
+tutorialText = "The classic game with a spin; I'm the mole!"
+winText = "Well done! You don't let small details distract you."
+loseText = "Ahh, it is kind of confusing, I get it."

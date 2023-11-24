@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://import/FishBone.glb" type="PackedScene" id=1]
+[ext_resource path="res://testiing/IKFish.gd" type="Script" id=2]
+[ext_resource path="res://testiing/InputNode.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.270588, 0.772549, 0.278431, 1 )
+
+[node name="IKFish" type="Spatial"]
+script = ExtResource( 2 )
+IKTarget = NodePath("Position3D/Target")
+FishMesh = NodePath("FishBone")
+IKPivot = NodePath("Position3D")
+f = 2.5
+z = 0.087
+r = -0.05
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 5.58112e-08, 2.01334e-08, -5.58112e-08, 0.7697, 0.638405, 2.01334e-08, -0.638405, 0.7697, 0.00852871, 6.1257, 5.46252 )
+
+[node name="Position3D" type="Position3D" parent="."]
+
+[node name="Target" type="Position3D" parent="Position3D"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4.37114e-08, 3 )
+
+[node name="InputScene" parent="." instance=ExtResource( 3 )]
+
+[node name="FishBone" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="Fish" parent="FishBone/Armature/Skeleton" index="0"]
+material/0 = SubResource( 1 )
+
+[node name="SkeletonIK" type="SkeletonIK" parent="FishBone/Armature/Skeleton" index="1"]
+process_priority = 1
+root_bone = "Bone.01"
+tip_bone = "Bone.03"
+use_magnet = true
+magnet = Vector3( 0, 0, -10 )
+target_node = NodePath("../../../../Position3D/Target")
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 0.866025, 5.96046e-08, -0.5, 0.433013, 0.5, 0.75, 0.25, -0.866025, 0.433013, -4.73205, 5.13397, 3.5 )
+spot_range = 12.0
+
+[connection signal="input_out" from="InputScene" to="." method="_on_InputScene_input_out"]
+
+[editable path="FishBone"]

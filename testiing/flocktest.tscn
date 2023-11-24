@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://testiing/flocktest.gd" type="Script" id=1]
+[ext_resource path="res://scenes/fish/Flock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/helper/PathWalker.gd" type="Script" id=3]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -14.9916, 0, 5.6667, 0, 0, 0, 0, 0, 0, -28.6204, 0, -13.9874, 0, 0, 0, 0, 0, 0, 7.53168, 0, -16.9284, 0, 0, 0, 0, 0, 0, 20.2997, 0, -1.50634, 0, 0, 0, 0, 0, 0, 11.1899, 0, 10.8313, 0, 0, 0, 0, 0, 0, -7.38822, 0, 13.6288, 0, 0, 0, 0, 0, 0, -14.9916, 0, 5.6667 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="flocktest" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.9881, 28.1731 )
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 1 )
+
+[node name="PathWalker" type="PathFollow" parent="Path"]
+transform = Transform( -0.80357, 0, -0.595206, 0, 1, 0, 0.595206, 0, -0.80357, -21.8784, 0, -4.26473 )
+offset = 12.1
+rotation_mode = 0
+script = ExtResource( 3 )
+looping = true
+
+[node name="Flock" parent="Path/PathWalker" instance=ExtResource( 2 )]
+transform = Transform( -0.246454, 0, -0.969154, 0, 1, 0, 0.969154, 0, -0.246454, -2.80494, 0, 5.91429 )

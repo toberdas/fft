@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/helper/Rotator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/maingame/camera/RotatingCam.gd" type="Script" id=3]
+
+[node name="RotatingCamOrigin" type="Spatial"]
+script = ExtResource( 3 )
+point = NodePath("Rotator/RotatingCamPoint")
+
+[node name="Rotator" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.809929, 0, 0.58642, 0, 1, 0, -0.58642, 0, -0.809929, 0, 0, 0 )
+
+[node name="RotatingCamPoint" type="Spatial" parent="Rotator"]
+transform = Transform( 1, 0, 0, 0, 0.860937, 0.508718, 0, -0.508704, 0.860937, 0, 2.29548, 3.95158 )

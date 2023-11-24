@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://import/props.glb" type="PackedScene" id=1]
+[ext_resource path="res://scenes/environment/Props.gd" type="Script" id=2]
+
+[node name="PropRoot" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="props" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.31328, 0, 0, 0, 0.31328, 0, 0, 0, 0.31328, 0, 0, 0 )
+
+[node name="can" parent="props" index="0"]
+visible = false
+
+[node name="tubules" parent="props" index="1"]
+visible = false
+
+[node name="smokingstar" parent="props" index="2"]
+visible = false
+
+[editable path="props"]

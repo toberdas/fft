@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://assets/resources/fishisland/FishIslandResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/textures/DALL·E 2023-08-08 18.59.09 - alien fishscale texture.png" type="Texture" id=2]
+[ext_resource path="res://assets/resources/interacts/TreasureResource.gd" type="Script" id=3]
+[ext_resource path="res://assets/resources/items/specificItems/rods/BeginnersRod.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/fishisland/islandlevels/KingKoisChallenge.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/resources/items/specificItems/KEYS/BlueKey.tres" type="Resource" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+key = ExtResource( 6 )
+lootItem = ExtResource( 4 )
+
+[resource]
+script = ExtResource( 1 )
+fishName = "King Koi"
+description = "It can feel it coming in the air. Every night it sees your face in the dark. It's been waiting for this moment. All it's life it has remembered the first and last time it will meet you."
+levelScene = ExtResource( 5 )
+fishMeshName = "fish_5"
+fishIslandMaterial = SubResource( 1 )
+treasureResource = SubResource( 2 )

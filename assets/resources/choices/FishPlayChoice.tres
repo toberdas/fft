@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/choices/ChoiceResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+acceptInputName = "a"
+denyInputName = "b"
+time = 4.5
+hasUI = true
+promptLabel = "THE FISH IS CAUGHT"
+acceptLabel = "PLAY"
+denyLabel = "RELEASE"
+openAnimationSpeed = 1.0

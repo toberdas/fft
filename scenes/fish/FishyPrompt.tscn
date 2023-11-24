@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/fish/FishyPrompt.gd" type="Script" id=1]
+[ext_resource path="res://scenes/helper/PromptMatcher.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sound/effects/dia_tog.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sound/effects/crunchy_confirm.wav" type="AudioStream" id=5]
+
+[node name="FishyPrompt" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+possibleEvents = [ "action", "jump", "moveleft", "moveright" ]
+posssibleEventNames = [ "B", "A", "<-", "->" ]
+promptMatcher = NodePath("PromptMatcher")
+labelParent = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer")
+
+[node name="PromptMatcher" parent="." instance=ExtResource( 2 )]
+promptMatchSound = ExtResource( 5 )
+inputMatchSound = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 0.875
+anchor_bottom = 0.746667
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 896.0
+margin_bottom = 448.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 896.0
+margin_bottom = 448.0
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 896.0
+margin_bottom = 444.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 448.0
+margin_right = 896.0
+margin_bottom = 448.0
+
+[connection signal="inputfail" from="PromptMatcher" to="." method="_on_PromptMatcher_inputfail"]
+[connection signal="inputsuccess" from="PromptMatcher" to="." method="_on_PromptMatcher_inputsuccess"]
+[connection signal="promptsuccess" from="PromptMatcher" to="." method="_on_PromptMatcher_promptsuccess"]

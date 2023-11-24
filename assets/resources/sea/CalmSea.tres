@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://scenes/environment/EndlessSeaResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/materials/mat_SeaChunk.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/mat_SeaChunk_Under.tres" type="Material" id=3]
+
+[resource]
+script = ExtResource( 1 )
+seaChunkMaterialAbove = ExtResource( 2 )
+seaChunkMaterialUnder = ExtResource( 3 )
+timeScale = 0.4
+worldWaveLength = 800.0
+wave = 1.0
+worldWaveAmp = 2.0
+worldWaveTimeScale = 0.2

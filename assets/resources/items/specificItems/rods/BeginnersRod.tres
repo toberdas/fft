@@ -1,0 +1,41 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://assets/resources/items/BaseItem.gd" type="Script" id=1]
+[ext_resource path="res://scenes/casting/CastScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/resources/fish/buffs/Wallgrab.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resources/fish/buffs/RodjumpOfAges.tres" type="Resource" id=4]
+[ext_resource path="res://assets/resources/fish/buffs/DoubleJumpFromWall.tres" type="Resource" id=5]
+[ext_resource path="res://assets/resources/fish/buffs/DashFromWall.tres" type="Resource" id=6]
+[ext_resource path="res://assets/resources/fish/buffs/Dash.tres" type="Resource" id=7]
+[ext_resource path="res://assets/resources/fish/buffs/WallgrabFromWall.tres" type="Resource" id=8]
+[ext_resource path="res://assets/resources/fish/buffs/DoubleJump.tres" type="Resource" id=9]
+[ext_resource path="res://assets/img/icons/beginners_rod.png" type="Texture" id=10]
+[ext_resource path="res://assets/resources/items/RodData.gd" type="Script" id=11]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 11 )
+castScene = ExtResource( 2 )
+depthPower = 1.0
+rodMeshName = "BeginnersRod"
+predictLen = 48
+predictMaxTry = 128
+maxCast = 32
+grav = 0.1
+castSpeed = 10
+
+[resource]
+script = ExtResource( 1 )
+extendedResource = SubResource( 1 )
+icon = ExtResource( 10 )
+itemName = "Beginner's Rod"
+itemID = "beg_rod"
+description = "A decent rod, nothing too out of this world. Kinda of what you would get if you were just starting a hobby."
+toolTip = "A rod"
+itemType = "rod"
+rarity = "everyday"
+buffArray = [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 8 ) ]
+iconModulate = Color( 1, 1, 1, 1 )
+id = ""
+currentScene = 0
+inEquip = false
+pickedUp = false

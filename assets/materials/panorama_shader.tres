@@ -1,0 +1,92 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+
+[sub_resource type="Shader" id=31]
+code = "shader_type canvas_item;
+
+uniform sampler2D pan_tex;
+uniform sampler2D targ_pan_tex;
+uniform sampler2D noise_tex;
+
+uniform vec4 primary_color : hint_color;
+uniform vec4 secondary_color : hint_color;
+
+uniform float targ_fac;
+uniform float time_scale = 0.01;
+const float PI = 3.14159265359;
+
+mat4 brightnessMatrix( float brightness )
+{
+    return mat4( vec4(1, 0, 0, 0),
+                vec4(0, 1, 0, 0),
+                 vec4(0, 0, 1, 0),
+                 vec4(brightness, brightness, brightness, 1) );
+}
+
+
+mat4 saturationMatrix( float saturation )
+{
+    vec3 luminance = vec3( 0.3086, 0.6094, 0.0820 );
+    
+    float oneMinusSat = 1.0 - saturation;
+    
+    vec3 red = vec3( luminance.x * oneMinusSat );
+    red+= vec3( saturation, 0, 0 );
+    
+    vec3 green = vec3( luminance.y * oneMinusSat );
+    green += vec3( 0, saturation, 0 );
+    
+    vec3 blue = vec3( luminance.z * oneMinusSat );
+    blue += vec3( 0, 0, saturation );
+    
+    return mat4( vec4(red,     0),
+                 vec4(green,   0),
+                 vec4(blue,    0),
+                 vec4(0, 0, 0, 1) );
+}
+
+mat4 contrastMatrix( float contrast )
+{
+	float t = ( 1.0 - contrast ) / 2.0;
+    
+    return mat4( vec4(contrast, 0, 0, 0),
+                 vec4(0, contrast, 0, 0),
+                 vec4(0, 0, contrast, 0),
+                 vec4(t, t, t, 1));
+
+}
+
+
+void fragment(){
+	float time = TIME * time_scale;
+	float timer = fract(time);
+
+	float n = texture(noise_tex, UV + time).g;
+	vec4 pan = texture(pan_tex, UV);
+	vec4 pant = texture(targ_pan_tex, UV);
+	
+	vec4 color = mix(pan, pant, targ_fac) * primary_color;
+
+	COLOR = contrastMatrix(max(0.0 ,.27 - UV.y * n)) * saturationMatrix(max(0.0 ,1. - UV.y)) * color * primary_color ;
+//	COLOR = pan * primColor * 1.5;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=32]
+period = 125.1
+
+[sub_resource type="NoiseTexture" id=33]
+width = 2048
+height = 1024
+seamless = true
+noise = SubResource( 32 )
+
+[sub_resource type="StreamTexture" id=34]
+flags = 4
+
+[resource]
+shader = SubResource( 31 )
+shader_param/primary_color = Color( 1, 0, 0, 1 )
+shader_param/secondary_color = Color( 0.482353, 0, 0, 1 )
+shader_param/targ_fac = 0.0
+shader_param/time_scale = 0.01
+shader_param/pan_tex = SubResource( 34 )
+shader_param/noise_tex = SubResource( 33 )

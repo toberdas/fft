@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/maingame/camera/FirstPersonGetup.gd" type="Script" id=1]
+
+[node name="FirstPersonPivot" type="Spatial"]
+script = ExtResource( 1 )
+point = NodePath("Spatial/FirstPersonPoint")
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91327, 2.38419e-07, 0.535624 )
+
+[node name="FirstPersonPoint" type="Spatial" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.999998, 0, 0, 0, 0.999998, 0, 1.9, 0 )

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/fish/responses/FishResponse.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 1 )
+node = null
+time = 26.0
+factor = 2.0
+distance = 64.0
+slowdown = 2.0
+stop = 1.0
+type = 2
+unique = true
+priority = 20
+clears = false
+persistent = false
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 2 )
+expressionOutcomes = [ 1, "song" ]
+moverResource = SubResource( 1 )
+buffs = [  ]
+nerveStrain = 0.0

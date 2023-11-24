@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="UI3DRoot" type="Spatial"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 800, 500 )
+transparent_bg = true

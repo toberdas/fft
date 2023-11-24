@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/minigames/MinigameResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/minigames/SpinTheWheel.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Spin the Wheel"
+scene = ExtResource( 2 )
+tutorialText = "Try to hook me as I fly by on the wheel, it's harder than it looks!"
+winText = "You did it, what reaction times you have."
+loseText = "I told you it's deceptively hard."

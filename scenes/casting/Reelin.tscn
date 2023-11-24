@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/casting/Reelin.gd" type="Script" id=1]
+[ext_resource path="res://scenes/helper/LineRenderer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/helper/Observer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/helper/Rotation.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/shaders/sh_rainbow.tres" type="Shader" id=5]
+[ext_resource path="res://scenes/casting/NewReelinUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/casting/FishDotter.gd" type="Script" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/density = 0.25
+shader_param/speed = 1.0
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
+shader_param/density = 0.95
+shader_param/speed = 1.0
+
+[node name="Reelin" type="Spatial"]
+script = ExtResource( 1 )
+uiScene = ExtResource( 6 )
+
+[node name="Rotation" parent="." instance=ExtResource( 4 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="ReelinLine" parent="." instance=ExtResource( 2 )]
+material_override = SubResource( 1 )
+startThickness = 0.03
+endThickness = 0.02
+drawCorners = false
+
+[node name="Observer" parent="." instance=ExtResource( 3 )]
+
+[node name="LineRenderer" parent="." instance=ExtResource( 2 )]
+material_override = SubResource( 2 )
+startThickness = 0.05
+endThickness = 0.05
+drawCaps = false
+drawCorners = false
+
+[node name="FishDotter" type="Spatial" parent="."]
+script = ExtResource( 7 )
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+
+[connection signal="isin" from="Observer" to="." method="_on_Observer_isin"]
+[connection signal="isout" from="Observer" to="." method="_on_Observer_isout"]

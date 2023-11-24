@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/map/FishIslandCollection.tres" type="Resource" id=1]
+[ext_resource path="res://assets/resources/map/MapEntitySettings.tres" type="Resource" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Resource
+export(Resource) var mapEntitySettings
+export(Resource) var fishIslandCollection
+export(int) var islandAmount
+export(int) var islandAmountVariance
+export(int) var flockAmount
+export(int) var flockAmountVariance
+"
+
+[resource]
+script = SubResource( 1 )
+mapEntitySettings = ExtResource( 2 )
+fishIslandCollection = ExtResource( 1 )
+islandAmount = 16
+islandAmountVariance = 8
+flockAmount = 16
+flockAmountVariance = 8

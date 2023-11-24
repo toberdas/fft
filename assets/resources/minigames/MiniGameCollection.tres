@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://assets/resources/minigames/FootRace.tres" type="Resource" id=1]
+[ext_resource path="res://assets/resources/minigames/RockPaperScissors.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/minigames/WhackAMole.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resources/minigames/SpinTheWheel.tres" type="Resource" id=4]
+[ext_resource path="res://assets/resources/minigames/DownTheHatch.tres" type="Resource" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Resource
+
+export(Array, Resource) var minigameResources
+"
+
+[resource]
+script = SubResource( 1 )
+minigameResources = [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ]

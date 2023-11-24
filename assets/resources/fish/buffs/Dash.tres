@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/fish/buffs/Buff.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+duration = -1.0
+strength = 1.0
+property = "dash"
+name = "Dash"
+description = "With blinding speed, this slime is able to dash. Colliding with a fish mid-dash, the slime will immediately catch it."
+infinite = true
+junk = false

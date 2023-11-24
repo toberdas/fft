@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/items/LootTable.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/items/specificItems/bait/ChocolateSprinkles.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/items/specificItems/rods/BeginnersRod.tres" type="Resource" id=4]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+guaranteedItem = ExtResource( 4 )
+guaranteedRarity = ""
+itemList = [ ExtResource( 4 ), ExtResource( 2 ) ]
+amount = 3

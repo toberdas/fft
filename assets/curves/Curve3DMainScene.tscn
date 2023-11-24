@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/curves/castcurves/castcurve_2.tres" type="Curve3D" id=1]
+
+[node name="Spatial" type="Path"]
+curve = ExtResource( 1 )

@@ -1,0 +1,55 @@
+[gd_resource type="Resource" load_steps=11 format=2]
+
+[ext_resource path="res://assets/resources/music/Music.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/music/TotalInstrument.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/music/sounds/wind2.wav" type="AudioStream" id=3]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.503049, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.0859375, 0.984091 ), 0.0, 0.0, 0, 0, Vector2( 0.269531, 0.472727 ), 0.0, 0.0, 0, 0, Vector2( 0.492187, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 0.769531, 0.445455 ), 0.0, 0.0, 0, 0, Vector2( 0.988281, 0.9 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0.0909091, 0.554545 ), 0.0, 0.0, 0, 0, Vector2( 0.488636, 0.654545 ), 0.0, 0.0, 0, 0, Vector2( 0.787879, 0.427273 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+desiredTone = 110.0
+intervalRange = 12
+movementLength = 8
+curveDynamic = SubResource( 3 )
+cutoffCurve = SubResource( 7 )
+fractionArray = [ 1.33 ]
+sound = ExtResource( 3 )
+soundTone = 110.0
+volatility = 0.5
+swing = 0.001
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0.5, 0.281818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0.522727, 0.527273 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+desiredTone = 110.0
+intervalRange = 12
+movementLength = 8
+curveDynamic = SubResource( 8 )
+cutoffCurve = SubResource( 9 )
+fractionArray = [ 2.0 ]
+sound = ExtResource( 3 )
+soundTone = 110.0
+volatility = 0.1
+swing = 0.001
+
+[resource]
+script = ExtResource( 1 )
+BPM = 30
+totalInstruments = [ SubResource( 6 ), SubResource( 10 ) ]
+dynamicFalloffCurve = SubResource( 1 )
+noiseCutoff = 0.6
+movements = 10
+spatial = false

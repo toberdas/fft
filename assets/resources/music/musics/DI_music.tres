@@ -1,0 +1,44 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://assets/resources/music/Music.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/music/TotalInstrument.gd" type="Script" id=3]
+[ext_resource path="res://assets/resources/music/sounds/A2_uppingdeungeon.wav" type="AudioStream" id=4]
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.240854, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="OpenSimplexNoise" id=18]
+period = 70.1
+persistence = 0.0
+
+[sub_resource type="NoiseTexture" id=19]
+noise = SubResource( 18 )
+
+[sub_resource type="Curve" id=21]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.545455, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=16]
+_data = [ Vector2( 0.0189394, 0.518182 ), 0.0, 0.0, 0, 0, Vector2( 0.246212, 0.945455 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 0.927273 ), 0.0, 0.0, 0, 0, Vector2( 0.715909, 0.509091 ), 0.0, 0.0, 0, 0, Vector2( 0.825758, 0.9 ), 0.0, 0.0, 0, 0, Vector2( 0.94697, 0.518182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+desiredTone = 440.0
+intervalRange = 12
+movementLength = 16
+curveDynamic = SubResource( 21 )
+cutoffCurve = SubResource( 16 )
+fractionArray = [ 1.25, 0.5, 0.33 ]
+sound = ExtResource( 4 )
+soundTone = 440.0
+volatility = 1.0
+swing = 0.001
+
+[resource]
+script = ExtResource( 2 )
+BPM = 60
+totalInstruments = [ SubResource( 3 ) ]
+dynamicFalloffCurve = SubResource( 7 )
+noiseTex = SubResource( 19 )
+noiseCutoff = 0.5
+movements = 10
+spatial = false

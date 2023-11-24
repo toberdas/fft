@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://assets/resources/fish/states/BrainState.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/fish/responses/angry/AttackResponse.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/fish/responses/neutral/RelocateResponse.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resources/fish/responses/angry/AttackFishResponse.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/fish/brainstateexpressions/AngryExpression.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/resources/fish/responses/neutral/NothingResponse.tres" type="Resource" id=6]
+[ext_resource path="res://assets/resources/fish/responses/neutral/HungrySeekResponse.tres" type="Resource" id=7]
+
+[resource]
+script = ExtResource( 1 )
+stateType = ""
+stateExpressionScene = ExtResource( 5 )
+fishResponse = ExtResource( 4 )
+foodResponse = ExtResource( 7 )
+unidentifiedResponse = ExtResource( 6 )
+threatResponse = ExtResource( 2 )
+relocateResponse = ExtResource( 3 )

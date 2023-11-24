@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=1]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+node = null
+time = 0.0
+factor = 0.0
+distance = 0.0
+slowdown = 0.0
+stop = 0.0
+type = 0
+unique = false
+priority = 0
+clears = false
+persistent = false

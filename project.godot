@@ -1,0 +1,1512 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "BaitResource",
+"language": "GDScript",
+"path": "res://assets/resources/items/BaitData.gd"
+}, {
+"base": "Node",
+"class": "Beach",
+"language": "GDScript",
+"path": "res://DEPRECATED/Beach.gd"
+}, {
+"base": "Resource",
+"class": "BrainState",
+"language": "GDScript",
+"path": "res://assets/resources/fish/states/BrainState.gd"
+}, {
+"base": "Resource",
+"class": "Buff",
+"language": "GDScript",
+"path": "res://assets/resources/fish/buffs/Buff.gd"
+}, {
+"base": "Resource",
+"class": "BuffCollection",
+"language": "GDScript",
+"path": "res://assets/resources/player/BuffCollection.gd"
+}, {
+"base": "Node",
+"class": "BuffNode",
+"language": "GDScript",
+"path": "res://scenes/fish/BuffNode.gd"
+}, {
+"base": "Follower",
+"class": "CameraGetup",
+"language": "GDScript",
+"path": "res://scenes/maingame/camera/CameraGetup.gd"
+}, {
+"base": "Resource",
+"class": "CastResource",
+"language": "GDScript",
+"path": "res://assets/resources/cast/CastResource.gd"
+}, {
+"base": "Resource",
+"class": "Cell",
+"language": "GDScript",
+"path": "res://scripts/generation/ca/Cell.gd"
+}, {
+"base": "Resource",
+"class": "CellAddition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/CellAddition.gd"
+}, {
+"base": "Spatial",
+"class": "CellAdditionScene",
+"language": "GDScript",
+"path": "res://scenes/environment/CellAdditionScene.gd"
+}, {
+"base": "Resource",
+"class": "CellAdditions",
+"language": "GDScript",
+"path": "res://scripts/generation/ca/CellAdditions.gd"
+}, {
+"base": "Node",
+"class": "CellState",
+"language": "GDScript",
+"path": "res://scripts/generation/ca/CellState.gd"
+}, {
+"base": "Resource",
+"class": "CellularAddition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/cellularadditions/CellularAddition.gd"
+}, {
+"base": "Resource",
+"class": "CellularAdditionDefinition",
+"language": "GDScript",
+"path": "res://assets/resources/cellularadditions/CellularAdditionDefinition.gd"
+}, {
+"base": "Resource",
+"class": "CellularAutomata3D",
+"language": "GDScript",
+"path": "res://scripts/generation/ca/CellularAutomata3D.gd"
+}, {
+"base": "Resource",
+"class": "CellularRule",
+"language": "GDScript",
+"path": "res://scripts/generation/ca/CellularRule.gd"
+}, {
+"base": "Spatial",
+"class": "Chain",
+"language": "GDScript",
+"path": "res://scenes/helper/Chain.gd"
+}, {
+"base": "Resource",
+"class": "ChoiceResource",
+"language": "GDScript",
+"path": "res://assets/resources/choices/ChoiceResource.gd"
+}, {
+"base": "Node",
+"class": "ConditionCheck",
+"language": "GDScript",
+"path": "res://scenes/helper/conditionchecker/ConditionCheck.gd"
+}, {
+"base": "Node",
+"class": "ConditionChecker",
+"language": "GDScript",
+"path": "res://scenes/helper/conditionchecker/ConditionChecker.gd"
+}, {
+"base": "Resource",
+"class": "ConditionResource",
+"language": "GDScript",
+"path": "res://scenes/helper/conditionchecker/ConditionResource.gd"
+}, {
+"base": "Node",
+"class": "Connection",
+"language": "GDScript",
+"path": "res://DEPRECATED/Connection.gd"
+}, {
+"base": "Polygon2D",
+"class": "CurvePolygon",
+"language": "GDScript",
+"path": "res://scripts/generation/fishface/CurvePolygon.gd"
+}, {
+"base": "Node",
+"class": "DFS",
+"language": "GDScript",
+"path": "res://scripts/DFS.gd"
+}, {
+"base": "Resource",
+"class": "Dialog",
+"language": "GDScript",
+"path": "res://scripts/generation/island/Dialog.gd"
+}, {
+"base": "Reference",
+"class": "Dice",
+"language": "GDScript",
+"path": "res://scripts/stochastic/Dice.gd"
+}, {
+"base": "Spatial",
+"class": "DifferenceMeasurer",
+"language": "GDScript",
+"path": "res://scenes/helper/DifferenceMeasurer.gd"
+}, {
+"base": "Resource",
+"class": "ElementalResource",
+"language": "GDScript",
+"path": "res://assets/resources/elemental/ElementalResource.gd"
+}, {
+"base": "Spatial",
+"class": "Emitter",
+"language": "GDScript",
+"path": "res://scenes/helper/Emitter.gd"
+}, {
+"base": "Spatial",
+"class": "EndlessSea",
+"language": "GDScript",
+"path": "res://scenes/environment/EndlessSea.gd"
+}, {
+"base": "Resource",
+"class": "EndlessSeaResource",
+"language": "GDScript",
+"path": "res://scenes/environment/EndlessSeaResource.gd"
+}, {
+"base": "Resource",
+"class": "EquipCollectionResource",
+"language": "GDScript",
+"path": "res://assets/resources/helper/EquipCollectionResource.gd"
+}, {
+"base": "Resource",
+"class": "EquipResource",
+"language": "GDScript",
+"path": "res://assets/resources/items/EquipResource.gd"
+}, {
+"base": "Node2D",
+"class": "EquipSlot",
+"language": "GDScript",
+"path": "res://scenes/inventory/EquipSlot.gd"
+}, {
+"base": "Resource",
+"class": "EquipSlotResource",
+"language": "GDScript",
+"path": "res://scenes/inventory/EquipSlotResource.gd"
+}, {
+"base": "Spatial",
+"class": "ExpressionReceiverNode",
+"language": "GDScript",
+"path": "res://scenes/fish/ExpressionReceiverNode.gd"
+}, {
+"base": "Node",
+"class": "FaceElement",
+"language": "GDScript",
+"path": "res://DEPRECATED/FaceElement.gd"
+}, {
+"base": "Moved",
+"class": "Fish",
+"language": "GDScript",
+"path": "res://scenes/fish/Fish.gd"
+}, {
+"base": "Resource",
+"class": "FishBrain",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishBrain.gd"
+}, {
+"base": "Resource",
+"class": "FishCaptureResource",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishCaptureResource.gd"
+}, {
+"base": "Resource",
+"class": "FishCharacter",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishCharacter.gd"
+}, {
+"base": "Resource",
+"class": "FishCollection",
+"language": "GDScript",
+"path": "res://assets/resources/player/FishCollection.gd"
+}, {
+"base": "Resource",
+"class": "FishData",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishData.gd"
+}, {
+"base": "Spatial",
+"class": "FishIsland",
+"language": "GDScript",
+"path": "res://scenes/fishisland/FishIslandScene.gd"
+}, {
+"base": "MeshInstance",
+"class": "FishIslandChallengeMeshNode",
+"language": "GDScript",
+"path": "res://scenes/fishisland/islandlevels/FishIslandChallengeMeshNode.gd"
+}, {
+"base": "MeshInstance",
+"class": "FishIslandMeshNode",
+"language": "GDScript",
+"path": "res://scenes/fishisland/bigfishscenes/FishIslandMeshNode.gd"
+}, {
+"base": "Resource",
+"class": "FishIslandResource",
+"language": "GDScript",
+"path": "res://assets/resources/fishisland/FishIslandResource.gd"
+}, {
+"base": "MovingMapEntitySave",
+"class": "FishIslandSave",
+"language": "GDScript",
+"path": "res://assets/resources/fishisland/FishIslandSave.gd"
+}, {
+"base": "Resource",
+"class": "FishMemory",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishMemory.gd"
+}, {
+"base": "Resource",
+"class": "FishMeshCurveData",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishMeshCurves.gd"
+}, {
+"base": "Node",
+"class": "FishName",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishName.gd"
+}, {
+"base": "Resource",
+"class": "FishResponse",
+"language": "GDScript",
+"path": "res://assets/resources/fish/responses/FishResponse.gd"
+}, {
+"base": "Resource",
+"class": "FishSave",
+"language": "GDScript",
+"path": "res://assets/resources/saving/FishSave.gd"
+}, {
+"base": "Node",
+"class": "FishTalkManager",
+"language": "GDScript",
+"path": "res://scenes/fish/TalkManager.gd"
+}, {
+"base": "Resource",
+"class": "FlockData",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FlockData.gd"
+}, {
+"base": "Spatial",
+"class": "FlockManager",
+"language": "GDScript",
+"path": "res://scenes/helper/FlockManager.gd"
+}, {
+"base": "Path",
+"class": "FlockPath",
+"language": "GDScript",
+"path": "res://scenes/ship/FlockPath.gd"
+}, {
+"base": "TargetedMapEntitySave",
+"class": "FlockSave",
+"language": "GDScript",
+"path": "res://assets/resources/flock/FlockSave.gd"
+}, {
+"base": "Node",
+"class": "FlowField",
+"language": "GDScript",
+"path": "res://scenes/maingame/worlds/FlowField.gd"
+}, {
+"base": "Spatial",
+"class": "Follower",
+"language": "GDScript",
+"path": "res://scenes/helper/Follower.gd"
+}, {
+"base": "ColorRect",
+"class": "Fragment",
+"language": "GDScript",
+"path": "res://scenes/ship/Fragment.gd"
+}, {
+"base": "Resource",
+"class": "FruitSpawnerResource",
+"language": "GDScript",
+"path": "res://assets/resources/island/FruitSpawnerResource.gd"
+}, {
+"base": "Control",
+"class": "GameController",
+"language": "GDScript",
+"path": "res://scenes/minigames/GameController.gd"
+}, {
+"base": "Node",
+"class": "Global",
+"language": "GDScript",
+"path": "res://scripts/GlobalSingleton.gd"
+}, {
+"base": "Node",
+"class": "GridRock",
+"language": "GDScript",
+"path": "res://scripts/generation/rocks/GridRock.gd"
+}, {
+"base": "Node",
+"class": "Helper",
+"language": "GDScript",
+"path": "res://scripts/HelperScripts.gd"
+}, {
+"base": "Resource",
+"class": "HookResource",
+"language": "GDScript",
+"path": "res://assets/resources/items/hookData.gd"
+}, {
+"base": "Follower",
+"class": "IndependentFollower",
+"language": "GDScript",
+"path": "res://scenes/helper/IndependentFollower.gd"
+}, {
+"base": "Resource",
+"class": "Instrument",
+"language": "GDScript",
+"path": "res://assets/resources/music/Instrument.gd"
+}, {
+"base": "Resource",
+"class": "InstrumentCollection",
+"language": "GDScript",
+"path": "res://assets/resources/music/InstrumentCollection.gd"
+}, {
+"base": "MeshInstance",
+"class": "InteractableComponent",
+"language": "GDScript",
+"path": "res://scenes/interacts/Component.gd"
+}, {
+"base": "SteeringAgent2D",
+"class": "InventoryItem",
+"language": "GDScript",
+"path": "res://scenes/inventory/InventoryItem.gd"
+}, {
+"base": "TwoDPointer",
+"class": "InventoryPointer",
+"language": "GDScript",
+"path": "res://scenes/ui/InventoryPointer.gd"
+}, {
+"base": "Resource",
+"class": "InventoryResource",
+"language": "GDScript",
+"path": "res://assets/resources/items/InventoryResource.gd"
+}, {
+"base": "Resource",
+"class": "IslandBranch",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandBranch.gd"
+}, {
+"base": "Resource",
+"class": "IslandCellular",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandCellular.gd"
+}, {
+"base": "Resource",
+"class": "IslandCharacter",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandCharacter.gd"
+}, {
+"base": "Resource",
+"class": "IslandDialog",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandDialog.gd"
+}, {
+"base": "Node",
+"class": "IslandElement",
+"language": "GDScript",
+"path": "res://DEPRECATED/IslandElement.gd"
+}, {
+"base": "Resource",
+"class": "IslandFruitData",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandFruitData.gd"
+}, {
+"base": "Node",
+"class": "IslandLocationPicker",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandLocationPicker.gd"
+}, {
+"base": "Spatial",
+"class": "IslandNode",
+"language": "GDScript",
+"path": "res://scenes/island/IslandNode.gd"
+}, {
+"base": "Node",
+"class": "IslandPhysical",
+"language": "GDScript",
+"path": "res://DEPRECATED/IslandPhysical.gd"
+}, {
+"base": "Node",
+"class": "IslandPlatform",
+"language": "GDScript",
+"path": "res://DEPRECATED/IslandPlatform.gd"
+}, {
+"base": "Resource",
+"class": "IslandResource",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandResource.gd"
+}, {
+"base": "MapEntitySave",
+"class": "IslandSave",
+"language": "GDScript",
+"path": "res://assets/resources/island/IslandSave.gd"
+}, {
+"base": "CellAddition",
+"class": "IslandTree",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandTree.gd"
+}, {
+"base": "CellularAddition",
+"class": "IslandTreeAddition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/cellularadditions/IslandTreeAddition.gd"
+}, {
+"base": "Resource",
+"class": "IslandTreeData",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandTreeData.gd"
+}, {
+"base": "Resource",
+"class": "IslandVibeResource",
+"language": "GDScript",
+"path": "res://scripts/generation/island/IslandVibeResource.gd"
+}, {
+"base": "Resource",
+"class": "Item",
+"language": "GDScript",
+"path": "res://assets/resources/items/BaseItem.gd"
+}, {
+"base": "Resource",
+"class": "ItemAtlas",
+"language": "GDScript",
+"path": "res://assets/resources/items/ItemAtlas.gd"
+}, {
+"base": "Object",
+"class": "Key",
+"language": "GDScript",
+"path": "res://assets/resources/ship/Key.gd"
+}, {
+"base": "Control",
+"class": "LineDraw",
+"language": "GDScript",
+"path": "res://scenes/minigames/Maze/LineDraw.gd"
+}, {
+"base": "ImmediateGeometry",
+"class": "LineRenderer",
+"language": "GDScript",
+"path": "res://scenes/helper/LineRenderer.gd"
+}, {
+"base": "Resource",
+"class": "LineResource",
+"language": "GDScript",
+"path": "res://assets/resources/items/LineData.gd"
+}, {
+"base": "Resource",
+"class": "LootTable",
+"language": "GDScript",
+"path": "res://assets/resources/items/LootTable.gd"
+}, {
+"base": "Resource",
+"class": "MapEntityChange",
+"language": "GDScript",
+"path": "res://assets/resources/map/MapEntityChange.gd"
+}, {
+"base": "Node",
+"class": "MapEntityManager",
+"language": "GDScript",
+"path": "res://scenes/maingame/worlds/MapEntityManager.gd"
+}, {
+"base": "Resource",
+"class": "MapEntitySave",
+"language": "GDScript",
+"path": "res://assets/resources/map/MapEntitySave.gd"
+}, {
+"base": "Spatial",
+"class": "MedianCalculator",
+"language": "GDScript",
+"path": "res://scenes/island/MedianCalculator.gd"
+}, {
+"base": "Node",
+"class": "Memory",
+"language": "GDScript",
+"path": "res://assets/resources/fish/Memory.gd"
+}, {
+"base": "Node",
+"class": "Menu",
+"language": "GDScript",
+"path": "res://scenes/ui/Menu.gd"
+}, {
+"base": "Path",
+"class": "MeshAlongPath",
+"language": "GDScript",
+"path": "res://testiing/MeshAlongPath.gd"
+}, {
+"base": "MeshInstance",
+"class": "MeshDeform",
+"language": "GDScript",
+"path": "res://scenes/platforming/MeshDeform.gd"
+}, {
+"base": "MeshInstance",
+"class": "MeshMerger",
+"language": "GDScript",
+"path": "res://scripts/helper/MeshMerger.gd"
+}, {
+"base": "Node",
+"class": "MeshPicker",
+"language": "GDScript",
+"path": "res://scenes/helper/MeshPicker.gd"
+}, {
+"base": "Node2D",
+"class": "MiniGame",
+"language": "GDScript",
+"path": "res://scenes/minigames/MiniGame.gd"
+}, {
+"base": "Resource",
+"class": "MiniGameResource",
+"language": "GDScript",
+"path": "res://assets/resources/minigames/MinigameResource.gd"
+}, {
+"base": "Resource",
+"class": "Motif",
+"language": "GDScript",
+"path": "res://assets/resources/music/Motif.gd"
+}, {
+"base": "Resource",
+"class": "MotifCollection",
+"language": "GDScript",
+"path": "res://assets/resources/music/MotifCollection.gd"
+}, {
+"base": "Spatial",
+"class": "MotifCollectionPlayer",
+"language": "GDScript",
+"path": "res://scripts/stochastic/MotifCollectionPlayer.gd"
+}, {
+"base": "Spatial",
+"class": "MotifPlayer",
+"language": "GDScript",
+"path": "res://scenes/island/music/MotifPlayer.gd"
+}, {
+"base": "Reference",
+"class": "MotifPlayerProperties",
+"language": "GDScript",
+"path": "res://scenes/island/music/MotifPlayerProperties.gd"
+}, {
+"base": "SteeringAgent3D",
+"class": "Moved",
+"language": "GDScript",
+"path": "res://scenes/helper/Moved.gd"
+}, {
+"base": "Resource",
+"class": "MoverInstance",
+"language": "GDScript",
+"path": "res://assets/resources/fish/responses/MoverInstance.gd"
+}, {
+"base": "Resource",
+"class": "MoverResource",
+"language": "GDScript",
+"path": "res://assets/resources/fish/MoverResource.gd"
+}, {
+"base": "MapEntitySave",
+"class": "MovingMapEntitySave",
+"language": "GDScript",
+"path": "res://assets/resources/map/MovingMapEntitySave.gd"
+}, {
+"base": "Resource",
+"class": "Music",
+"language": "GDScript",
+"path": "res://assets/resources/music/Music.gd"
+}, {
+"base": "Resource",
+"class": "Neighbourhood",
+"language": "GDScript",
+"path": "res://scripts/generation/ca/Neighbourhood.gd"
+}, {
+"base": "Resource",
+"class": "Nerve",
+"language": "GDScript",
+"path": "res://assets/resources/fish/Nerve.gd"
+}, {
+"base": "Node",
+"class": "NodeTracker",
+"language": "GDScript",
+"path": "res://scenes/helper/NodeTracker.gd"
+}, {
+"base": "Node",
+"class": "NormalDistribution",
+"language": "GDScript",
+"path": "res://scripts/stochastic/NormalDistribution.gd"
+}, {
+"base": "Resource",
+"class": "Note",
+"language": "GDScript",
+"path": "res://assets/resources/music/Note.gd"
+}, {
+"base": "Spatial",
+"class": "NotePlayer",
+"language": "GDScript",
+"path": "res://scenes/island/music/NotePlayer.gd"
+}, {
+"base": "TriggerCondition",
+"class": "OrderedTriggerCondition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/triggers/OrderedTriggerCondition.gd"
+}, {
+"base": "PathFollow",
+"class": "PathWalker",
+"language": "GDScript",
+"path": "res://scenes/helper/PathWalker.gd"
+}, {
+"base": "Resource",
+"class": "PickupItemResource",
+"language": "GDScript",
+"path": "res://assets/resources/items/PickupItemResource.gd"
+}, {
+"base": "Node",
+"class": "PlatformPath",
+"language": "GDScript",
+"path": "res://DEPRECATED/PlatformPath.gd"
+}, {
+"base": "KinematicBody",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/maingame/player/PlayerMovement.gd"
+}, {
+"base": "Resource",
+"class": "PlayerResource",
+"language": "GDScript",
+"path": "res://assets/resources/player/PlayerResource.gd"
+}, {
+"base": "Node",
+"class": "Point",
+"language": "GDScript",
+"path": "res://DEPRECATED/Point.gd"
+}, {
+"base": "Reference",
+"class": "ProcessTimer",
+"language": "GDScript",
+"path": "res://scripts/helper/ProcessTimer.gd"
+}, {
+"base": "Control",
+"class": "PromptMatcher",
+"language": "GDScript",
+"path": "res://scenes/helper/PromptMatcher.gd"
+}, {
+"base": "Reference",
+"class": "RandomPickArray",
+"language": "GDScript",
+"path": "res://scripts/helper/RandomPickArray.gd"
+}, {
+"base": "Node",
+"class": "RandomWalk",
+"language": "GDScript",
+"path": "res://scripts/stochastic/RandomWalk.gd"
+}, {
+"base": "Node",
+"class": "ReplacementGrammar",
+"language": "GDScript",
+"path": "res://scenes/helper/ReplacementGrammar.gd"
+}, {
+"base": "Resource",
+"class": "ResourceList",
+"language": "GDScript",
+"path": "res://assets/resources/helper/ResourceList.gd"
+}, {
+"base": "Resource",
+"class": "ResponseInstance",
+"language": "GDScript",
+"path": "res://assets/resources/fish/responses/ResponseInstance.gd"
+}, {
+"base": "Node",
+"class": "Rock",
+"language": "GDScript",
+"path": "res://DEPRECATED/Rock.gd"
+}, {
+"base": "Resource",
+"class": "RockList",
+"language": "GDScript",
+"path": "res://scripts/generation/rocks/RockList.gd"
+}, {
+"base": "Node",
+"class": "RockSurface",
+"language": "GDScript",
+"path": "res://DEPRECATED/RockSurface.gd"
+}, {
+"base": "Resource",
+"class": "RodResource",
+"language": "GDScript",
+"path": "res://assets/resources/items/RodData.gd"
+}, {
+"base": "Node",
+"class": "RollCollection",
+"language": "GDScript",
+"path": "res://scripts/helper/RollArray.gd"
+}, {
+"base": "Resource",
+"class": "Rule",
+"language": "GDScript",
+"path": "res://assets/resources/replacementgrammar/Rule.gd"
+}, {
+"base": "Resource",
+"class": "RuleSet",
+"language": "GDScript",
+"path": "res://assets/resources/replacementgrammar/RuleSet.gd"
+}, {
+"base": "Resource",
+"class": "SaveGame",
+"language": "GDScript",
+"path": "res://assets/resources/saving/SaveGame.gd"
+}, {
+"base": "Resource",
+"class": "Scale",
+"language": "GDScript",
+"path": "res://assets/resources/music/Scale.gd"
+}, {
+"base": "Node",
+"class": "ScreenTransition",
+"language": "GDScript",
+"path": "res://scenes/ui/ScreenTransition.gd"
+}, {
+"base": "Spatial",
+"class": "SeaBobber",
+"language": "GDScript",
+"path": "res://scenes/helper/SeaBobberNode.gd"
+}, {
+"base": "Area",
+"class": "SeaHeightComponent",
+"language": "GDScript",
+"path": "res://scenes/helper/SeaHeightComponent.gd"
+}, {
+"base": "Node",
+"class": "SecondOrderDynamics",
+"language": "GDScript",
+"path": "res://testiing/SecondOrderDynamics.gd"
+}, {
+"base": "Node",
+"class": "SecondOrderDynamicsFloat",
+"language": "GDScript",
+"path": "res://testiing/SecondOrderDynamicsFloat.gd"
+}, {
+"base": "Resource",
+"class": "ShipResource",
+"language": "GDScript",
+"path": "res://assets/resources/ship/ShipResource.gd"
+}, {
+"base": "Resource",
+"class": "ShipUpgrade",
+"language": "GDScript",
+"path": "res://assets/resources/ship/upgrades/ShipUpgrade.gd"
+}, {
+"base": "Resource",
+"class": "SkyResource",
+"language": "GDScript",
+"path": "res://assets/resources/elemental/sky/SkyResource.gd"
+}, {
+"base": "Node",
+"class": "SoundEffectPlayer",
+"language": "GDScript",
+"path": "res://scenes/helper/SoundEffectPlayer.gd"
+}, {
+"base": "Spatial",
+"class": "StateDependentPlayerEventNode",
+"language": "GDScript",
+"path": "res://scenes/maingame/player/StateDependentPlayerEventNode.gd"
+}, {
+"base": "Spatial",
+"class": "SteeringAgent",
+"language": "GDScript",
+"path": "res://scenes/helper/SteeringAgent.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "SteeringAgent2D",
+"language": "GDScript",
+"path": "res://scenes/helper/SteeringAgent2D.gd"
+}, {
+"base": "KinematicBody",
+"class": "SteeringAgent3D",
+"language": "GDScript",
+"path": "res://scenes/helper/SteeringAgent3D.gd"
+}, {
+"base": "Node",
+"class": "Surface",
+"language": "GDScript",
+"path": "res://DEPRECATED/Surface.gd"
+}, {
+"base": "Spatial",
+"class": "SurfacePointFinder",
+"language": "GDScript",
+"path": "res://scenes/fish/SurfacePointFinder.gd"
+}, {
+"base": "Reference",
+"class": "Switch",
+"language": "GDScript",
+"path": "res://scripts/helper/Switch.gd"
+}, {
+"base": "Resource",
+"class": "Tag",
+"language": "GDScript",
+"path": "res://assets/resources/replacementgrammar/Tag.gd"
+}, {
+"base": "Resource",
+"class": "TagSet",
+"language": "GDScript",
+"path": "res://assets/resources/replacementgrammar/TagSet.gd"
+}, {
+"base": "MovingMapEntitySave",
+"class": "TargetedMapEntitySave",
+"language": "GDScript",
+"path": "res://assets/resources/map/TargetedMapEntitySave.gd"
+}, {
+"base": "Spatial",
+"class": "Test",
+"language": "GDScript",
+"path": "res://testiing/Test.gd"
+}, {
+"base": "Node",
+"class": "ThreadLoader",
+"language": "GDScript",
+"path": "res://scenes/island/ThreadLoader.gd"
+}, {
+"base": "Spatial",
+"class": "ThreeDItem",
+"language": "GDScript",
+"path": "res://scenes/item/3DItem.gd"
+}, {
+"base": "Spatial",
+"class": "ThreeDPickable",
+"language": "GDScript",
+"path": "res://scenes/helper/3DPickable.gd"
+}, {
+"base": "Node",
+"class": "TimedInput",
+"language": "GDScript",
+"path": "res://scenes/helper/TimedInput.gd"
+}, {
+"base": "OrderedTriggerCondition",
+"class": "TimedTriggerCondition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/triggers/TimedTriggerCondition.gd"
+}, {
+"base": "Reference",
+"class": "TimerDictionary",
+"language": "GDScript",
+"path": "res://scripts/helper/TimerDictionary.gd"
+}, {
+"base": "Resource",
+"class": "TotalInstrument",
+"language": "GDScript",
+"path": "res://assets/resources/music/TotalInstrument.gd"
+}, {
+"base": "Reference",
+"class": "Trait",
+"language": "GDScript",
+"path": "res://assets/resources/fish/Trait.gd"
+}, {
+"base": "Reference",
+"class": "TraitCollection",
+"language": "GDScript",
+"path": "res://assets/resources/fish/FishTraits.gd"
+}, {
+"base": "CellularAddition",
+"class": "TreasureAddition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/cellularadditions/TreasureAddition.gd"
+}, {
+"base": "CellAddition",
+"class": "TreasureResource",
+"language": "GDScript",
+"path": "res://assets/resources/interacts/TreasureResource.gd"
+}, {
+"base": "CellularAddition",
+"class": "TriggerAddition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/cellularadditions/TriggerAddition.gd"
+}, {
+"base": "Resource",
+"class": "TriggerCondition",
+"language": "GDScript",
+"path": "res://scripts/generation/island/triggers/TriggerCondition.gd"
+}, {
+"base": "CellAddition",
+"class": "TriggerResource",
+"language": "GDScript",
+"path": "res://scripts/generation/island/triggers/TriggerResource.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "TwoDKinematicPlayerMover",
+"language": "GDScript",
+"path": "res://scenes/helper/2DKinematicMover.gd"
+}, {
+"base": "Area2D",
+"class": "TwoDPickable",
+"language": "GDScript",
+"path": "res://scenes/helper/2DPickable.gd"
+}, {
+"base": "Reference",
+"class": "TwoDPlayerMovementData",
+"language": "GDScript",
+"path": "res://scenes/minigames/2dplayer/2DPlayerMovementData.gd"
+}, {
+"base": "Node2D",
+"class": "TwoDPlayerMover",
+"language": "GDScript",
+"path": "res://scenes/helper/2DPlayerMover.gd"
+}, {
+"base": "TwoDPlayerMover",
+"class": "TwoDPointer",
+"language": "GDScript",
+"path": "res://scenes/ui/2DPointer.gd"
+}, {
+"base": "Reference",
+"class": "UniqueArray",
+"language": "GDScript",
+"path": "res://scripts/helper/UniqueArray.gd"
+}, {
+"base": "Resource",
+"class": "UpgradeCollectionResource",
+"language": "GDScript",
+"path": "res://assets/resources/upgrades/UpgradeCollectionResource.gd"
+}, {
+"base": "Resource",
+"class": "UpgradeProgressResource",
+"language": "GDScript",
+"path": "res://assets/resources/upgrades/UpgradeProgressResource.gd"
+}, {
+"base": "Resource",
+"class": "UpgradeResource",
+"language": "GDScript",
+"path": "res://assets/resources/upgrades/UpgradeResource.gd"
+}, {
+"base": "Control",
+"class": "UpgradeScene",
+"language": "GDScript",
+"path": "res://scenes/ship/UpgradeCollectionScene.gd"
+}, {
+"base": "Node",
+"class": "Walk",
+"language": "GDScript",
+"path": "res://DEPRECATED/Walk.gd"
+}, {
+"base": "Node",
+"class": "WalkPoint",
+"language": "GDScript",
+"path": "res://DEPRECATED/WalkPoint.gd"
+}, {
+"base": "Node",
+"class": "Warning",
+"language": "GDScript",
+"path": "res://scenes/ui/warnings/Warning.gd"
+}, {
+"base": "Resource",
+"class": "WarningResource",
+"language": "GDScript",
+"path": "res://scenes/ui/warnings/WarningResource.gd"
+}, {
+"base": "Node",
+"class": "WeightedDistribution",
+"language": "GDScript",
+"path": "res://scripts/stochastic/WeightedDistribution.gd"
+}, {
+"base": "Resource",
+"class": "WorldMap",
+"language": "GDScript",
+"path": "res://assets/resources/saving/WorldMap.gd"
+} ]
+_global_script_class_icons={
+"BaitResource": "",
+"Beach": "",
+"BrainState": "",
+"Buff": "",
+"BuffCollection": "",
+"BuffNode": "",
+"CameraGetup": "",
+"CastResource": "",
+"Cell": "",
+"CellAddition": "",
+"CellAdditionScene": "",
+"CellAdditions": "",
+"CellState": "",
+"CellularAddition": "",
+"CellularAdditionDefinition": "",
+"CellularAutomata3D": "",
+"CellularRule": "",
+"Chain": "",
+"ChoiceResource": "",
+"ConditionCheck": "",
+"ConditionChecker": "",
+"ConditionResource": "",
+"Connection": "",
+"CurvePolygon": "",
+"DFS": "",
+"Dialog": "",
+"Dice": "",
+"DifferenceMeasurer": "",
+"ElementalResource": "",
+"Emitter": "",
+"EndlessSea": "",
+"EndlessSeaResource": "",
+"EquipCollectionResource": "",
+"EquipResource": "",
+"EquipSlot": "",
+"EquipSlotResource": "",
+"ExpressionReceiverNode": "",
+"FaceElement": "",
+"Fish": "",
+"FishBrain": "",
+"FishCaptureResource": "",
+"FishCharacter": "",
+"FishCollection": "",
+"FishData": "",
+"FishIsland": "",
+"FishIslandChallengeMeshNode": "",
+"FishIslandMeshNode": "",
+"FishIslandResource": "",
+"FishIslandSave": "",
+"FishMemory": "",
+"FishMeshCurveData": "",
+"FishName": "",
+"FishResponse": "",
+"FishSave": "",
+"FishTalkManager": "",
+"FlockData": "",
+"FlockManager": "",
+"FlockPath": "",
+"FlockSave": "",
+"FlowField": "",
+"Follower": "",
+"Fragment": "",
+"FruitSpawnerResource": "",
+"GameController": "",
+"Global": "",
+"GridRock": "",
+"Helper": "",
+"HookResource": "",
+"IndependentFollower": "",
+"Instrument": "",
+"InstrumentCollection": "",
+"InteractableComponent": "",
+"InventoryItem": "",
+"InventoryPointer": "",
+"InventoryResource": "",
+"IslandBranch": "",
+"IslandCellular": "",
+"IslandCharacter": "",
+"IslandDialog": "",
+"IslandElement": "",
+"IslandFruitData": "",
+"IslandLocationPicker": "",
+"IslandNode": "",
+"IslandPhysical": "",
+"IslandPlatform": "",
+"IslandResource": "",
+"IslandSave": "",
+"IslandTree": "",
+"IslandTreeAddition": "",
+"IslandTreeData": "",
+"IslandVibeResource": "",
+"Item": "",
+"ItemAtlas": "",
+"Key": "",
+"LineDraw": "",
+"LineRenderer": "",
+"LineResource": "",
+"LootTable": "",
+"MapEntityChange": "",
+"MapEntityManager": "",
+"MapEntitySave": "",
+"MedianCalculator": "",
+"Memory": "",
+"Menu": "",
+"MeshAlongPath": "",
+"MeshDeform": "",
+"MeshMerger": "",
+"MeshPicker": "",
+"MiniGame": "",
+"MiniGameResource": "",
+"Motif": "",
+"MotifCollection": "",
+"MotifCollectionPlayer": "",
+"MotifPlayer": "",
+"MotifPlayerProperties": "",
+"Moved": "",
+"MoverInstance": "",
+"MoverResource": "",
+"MovingMapEntitySave": "",
+"Music": "",
+"Neighbourhood": "",
+"Nerve": "",
+"NodeTracker": "",
+"NormalDistribution": "",
+"Note": "",
+"NotePlayer": "",
+"OrderedTriggerCondition": "",
+"PathWalker": "",
+"PickupItemResource": "",
+"PlatformPath": "",
+"Player": "",
+"PlayerResource": "",
+"Point": "",
+"ProcessTimer": "",
+"PromptMatcher": "",
+"RandomPickArray": "",
+"RandomWalk": "",
+"ReplacementGrammar": "",
+"ResourceList": "",
+"ResponseInstance": "",
+"Rock": "",
+"RockList": "",
+"RockSurface": "",
+"RodResource": "",
+"RollCollection": "",
+"Rule": "",
+"RuleSet": "",
+"SaveGame": "",
+"Scale": "",
+"ScreenTransition": "",
+"SeaBobber": "",
+"SeaHeightComponent": "",
+"SecondOrderDynamics": "",
+"SecondOrderDynamicsFloat": "",
+"ShipResource": "",
+"ShipUpgrade": "",
+"SkyResource": "",
+"SoundEffectPlayer": "",
+"StateDependentPlayerEventNode": "",
+"SteeringAgent": "",
+"SteeringAgent2D": "",
+"SteeringAgent3D": "",
+"Surface": "",
+"SurfacePointFinder": "",
+"Switch": "",
+"Tag": "",
+"TagSet": "",
+"TargetedMapEntitySave": "",
+"Test": "",
+"ThreadLoader": "",
+"ThreeDItem": "",
+"ThreeDPickable": "",
+"TimedInput": "",
+"TimedTriggerCondition": "",
+"TimerDictionary": "",
+"TotalInstrument": "",
+"Trait": "",
+"TraitCollection": "",
+"TreasureAddition": "",
+"TreasureResource": "",
+"TriggerAddition": "",
+"TriggerCondition": "",
+"TriggerResource": "",
+"TwoDKinematicPlayerMover": "",
+"TwoDPickable": "",
+"TwoDPlayerMovementData": "",
+"TwoDPlayerMover": "",
+"TwoDPointer": "",
+"UniqueArray": "",
+"UpgradeCollectionResource": "",
+"UpgradeProgressResource": "",
+"UpgradeResource": "",
+"UpgradeScene": "",
+"Walk": "",
+"WalkPoint": "",
+"Warning": "",
+"WarningResource": "",
+"WeightedDistribution": "",
+"WorldMap": ""
+}
+
+[application]
+
+config/name="LootFishing"
+run/main_scene="res://scenes/maingame/MainGame.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+GlobalSignals="*res://scripts/singletons/GlobalSignals.gd"
+HelperScripts="*res://scripts/HelperScripts.gd"
+GameData="*res://scripts/GameData.gd"
+ItemData="*res://scripts/ItemData.gd"
+GlobalInventory="*res://scripts/singletons/GlobalInventory.gd"
+GameplayConstants="*res://scripts/singletons/GameplayConstants.gd"
+FishEnums="*res://scripts/singletons/FishEnums.gd"
+GlobalSingleton="*res://scripts/GlobalSingleton.gd"
+FishConstants="*res://scripts/singletons/FishConstants.gd"
+CellularAutomataData="*res://scripts/singletons/CellularAutomataData.gd"
+GlobalTimer="*res://scripts/singletons/GlobalTimer.gd"
+TimePiece="*res://scripts/singletons/TimePiece.gd"
+WarningSingleton="*res://scenes/ui/warnings/WarningSingleton.gd"
+
+[debug]
+
+settings/fps/force_fps=60
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[input]
+
+action={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+moveleft={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+moveright={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+moveup={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
+}
+movedown={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+camleft={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+camright={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+camup={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+camdown={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+aligncam={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+cast={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+x={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+y={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+cancelinteract={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+a={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+b={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+rb={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+lb={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+rt={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+lt={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+deinteract={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+focus={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+toggle_inventory={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777217,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rummage_inventory={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+inventory_pick={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+inventory_drop={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+reelin={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ship_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ship_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ship_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ship_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+lunge={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+recall={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+dash={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+accept_fish={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+deny_fish={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+cycle_menu_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777218,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+cycle_menu_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+save_game={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777248,"unicode":0,"echo":false,"script":null)
+ ]
+}
+quick_load={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777249,"unicode":0,"echo":false,"script":null)
+ ]
+}
+r3={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+l3={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":8,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+3d_physics/layer_1="Walls"
+3d_physics/layer_2="Fish"
+3d_physics/layer_3="Player"
+3d_physics/layer_4="Interactable"
+3d_physics/layer_5="InteractComponents"
+3d_physics/layer_6="Pickups"
+3d_physics/layer_7="Island"
+3d_physics/layer_8="Doodads"
+3d_physics/layer_10="Attackable"
+3d_physics/layer_11="Camera"
+3d_physics/layer_12="Items"
+2d_physics/layer_13="UIFocusable"
+3d_physics/layer_13="UIFocusable"
+3d_physics/layer_14="Underwaterable"
+3d_physics/layer_15="ParentAreas"
+3d_physics/layer_16="3DPickable"
+
+[physics]
+
+3d/smooth_trimesh_collision=true
+common/enable_pause_aware_picking=true
+3d/active_soft_world=false
+
+[rendering]
+
+threads/thread_model=2
+quality/filters/msaa=3
+environment/default_environment="res://default_env.tres"

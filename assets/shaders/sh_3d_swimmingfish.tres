@@ -1,0 +1,55 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+
+uniform float time_scale = 0.8;
+uniform float side_to_side = 0.2;
+uniform float pivot = 2.5;
+uniform float wave = 0.2;
+uniform float fish_length = .7;
+uniform float mask_black = 1.0;
+uniform float mask_white = 0.0;
+uniform float time = 0.0;
+
+render_mode async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform sampler2D texture_normal : hint_normal;
+uniform float normal_scale : hint_range(-16,16);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	float body = (VERTEX.z + 1.0) / fish_length;
+
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+	NORMALMAP = texture(texture_normal,base_uv).rgb;
+	NORMALMAP_DEPTH = normal_scale;
+}
+
+
+void vertex(){
+	float pivot_angle = cos(time) * 0.1 * pivot;
+	float body = (VERTEX.z + (fish_length * 0.5)) / fish_length;
+	float mask = smoothstep(mask_black, mask_white, 1.0 - body);
+	mask = pow(mask,2.0);
+	mat2 rotation_matrix = mat2(vec2(cos(pivot_angle), -sin(pivot_angle)), vec2(sin(pivot_angle), cos(pivot_angle)));
+	vec2 rotatedVertex = rotation_matrix * VERTEX.xz;
+	VERTEX.xz = mix(VERTEX.xz, rotatedVertex, mask);
+	VERTEX.x += cos(time) * mask * side_to_side;
+//	VERTEX.xz = rotation_matrix * VERTEX.xz;
+	VERTEX.x += cos(time + body) * wave * mask;
+}"

@@ -1,0 +1,351 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://scenes/maingame/player/PlayerNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/platforming/PlatformRecht.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/img/textures/rock_1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/interacts/specific/Chest.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/fish/FishNode.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/environment/TreeNode.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/img/textures/seaweed_2.png" type="Texture" id=7]
+[ext_resource path="res://assets/resources/sea/CalmSea.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/environment/EndlessSea.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/levels/IntroLevel.gd" type="Script" id=10]
+[ext_resource path="res://assets/resources/interacts/TreasureResource.gd" type="Script" id=11]
+[ext_resource path="res://assets/resources/items/specificItems/KEYS/BlueKey.tres" type="Resource" id=12]
+[ext_resource path="res://scenes/item/3DItem.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/resources/items/specificItems/rods/BeginnersRod.tres" type="Resource" id=14]
+[ext_resource path="res://scenes/environment/Kelp.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=16]
+
+[sub_resource type="Shader" id=11]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.5.2.stable's SpatialMaterial.
+
+shader_type spatial;
+render_mode async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float distance_fade_min;
+uniform float distance_fade_max;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+uniform sampler2D texture_noise;
+
+void vertex() {
+	vec4 worldVert = WORLD_MATRIX * vec4(VERTEX, 1.0);
+	vec4 noise_tex = texture(texture_noise,worldVert.xz) * 0.2;
+	UV=UV*uv1_scale.xy+uv1_offset.xy+noise_tex.xy;
+}
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+	{
+		float fade_distance=-VERTEX.z;
+		float fade=clamp(smoothstep(distance_fade_min,distance_fade_max,fade_distance),0.0,1.0);
+		int x = int(FRAGCOORD.x) % 4;
+		int y = int(FRAGCOORD.y) % 4;
+		int index = x + y * 4;
+		float limit = 0.0;
+
+		if (x < 8) {
+			if (index == 0) limit = 0.0625;
+			if (index == 1) limit = 0.5625;
+			if (index == 2) limit = 0.1875;
+			if (index == 3) limit = 0.6875;
+			if (index == 4) limit = 0.8125;
+			if (index == 5) limit = 0.3125;
+			if (index == 6) limit = 0.9375;
+			if (index == 7) limit = 0.4375;
+			if (index == 8) limit = 0.25;
+			if (index == 9) limit = 0.75;
+			if (index == 10) limit = 0.125;
+			if (index == 11) limit = 0.625;
+			if (index == 12) limit = 1.0;
+			if (index == 13) limit = 0.5;
+			if (index == 14) limit = 0.875;
+			if (index == 15) limit = 0.375;
+		}
+
+	if (fade < limit)
+		discard;
+	}
+
+}
+"
+
+[sub_resource type="OpenSimplexNoise" id=13]
+
+[sub_resource type="NoiseTexture" id=14]
+noise = SubResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=15]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=16]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=18]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=20]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 11 )
+key = ExtResource( 12 )
+lootItem = ExtResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 16 )
+time = -1.0
+factor = 0.4
+distance = 256.0
+slowdown = 36.0
+stop = 3.0
+type = 0
+unique = false
+priority = 0
+clears = false
+persistent = true
+
+[sub_resource type="SpatialMaterial" id=22]
+resource_local_to_scene = true
+albedo_texture = ExtResource( 7 )
+distance_fade_mode = 2
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 10.0
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/distance_fade_min = 1340.51
+shader_param/distance_fade_max = 1127.09
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/texture_noise = SubResource( 14 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 10 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -10.7252, 1.3253, 39.8287 )
+
+[node name="Platform" parent="." instance=ExtResource( 2 )]
+transform = Transform( 23.5176, 0, 1.28175, 0, 13.898, 0, -2.43991, 0, 28.0327, -9.83402, -6.85101, 30.7473 )
+material/0 = SubResource( 12 )
+
+[node name="Platform2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 22.5219, 0, 0, 0, 15.2722, 0, 0, 0, 15.2722, -9.83402, -0.795587, 12.8902 )
+material/0 = SubResource( 15 )
+
+[node name="Platform3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 10.5004, 0, 0, 0, 4.42181, 0, 0, 0, 6.69142, -13.9216, 1.19957, 21.3901 )
+material/0 = SubResource( 16 )
+
+[node name="Platform4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 22.0551, 0, -5.0911, 0, 15.2807, 0, 5.52635, 0, 20.318, -5.26328, -0.795587, -16.0888 )
+material/0 = SubResource( 17 )
+
+[node name="Platform5" parent="." instance=ExtResource( 2 )]
+transform = Transform( 23.4522, 0, -12.5218, 0, 26.5858, 0, 12.5218, 0, 23.4522, -11.857, 9.23923, -36.3317 )
+material/0 = SubResource( 18 )
+
+[node name="Platform6" parent="." instance=ExtResource( 2 )]
+transform = Transform( 12.4275, 0, -8.21408, 0, 14.8968, 0, 8.21408, 0, 12.4275, -17.7657, 7.20716, -23.8305 )
+material/0 = SubResource( 19 )
+
+[node name="Platform7" parent="." instance=ExtResource( 2 )]
+transform = Transform( 25.4485, 0, 15.645, 0, 29.873, 0, -15.645, 0, 25.4485, 32.8192, -0.795587, -84.3147 )
+material/0 = SubResource( 20 )
+
+[node name="Chest" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.950395, 0, 0.311042, 0, 0.999999, 0, -0.311042, 0, 0.950395, -15.44, 24.4368, -44.8397 )
+treasureResource = SubResource( 24 )
+
+[node name="Platform8" parent="." instance=ExtResource( 2 )]
+transform = Transform( 17.849, -2.56278, -4.45903, 2.29323, 18.381, -1.38473, 4.60347, 0.780098, 17.9788, 27.1993, 0.543981, 2.9659 )
+material/0 = SubResource( 21 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -1.49293, 1.19485e-07, -1.91156e-07, 0, 1.26597, 0.791311, 2.25427e-07, 0.791311, -1.26597, -1.08222e-05, 13.4364, -123.791 )
+shadow_enabled = true
+
+[node name="Fish" parent="." instance=ExtResource( 5 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 27.8086, 16.3146, -85.7374 )
+centerPoint = NodePath("../Spatial")
+initialMoverResource = SubResource( 25 )
+
+[node name="TreeNode" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.0254, 9.26374, -80.0652 )
+meshMaterial = SubResource( 22 )
+
+[node name="EndlessSea" parent="." instance=ExtResource( 9 )]
+endlessSeaResource = ExtResource( 8 )
+
+[node name="Platform9" parent="." instance=ExtResource( 2 )]
+transform = Transform( 18.6599, 0, 0, 0, 6.44203, 0, 0, 0, 12.7578, 0, -7.10295, 44.7736 )
+material/0 = SubResource( 23 )
+
+[node name="3DItem" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6528, 10.9997, 0 )
+itemResource = ExtResource( 12 )
+
+[node name="VerticalKelp" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.938058, 0, 0.346477, 0, 1, 0, -0.346477, 0, 0.938058, 0, 6.61041, -22.3221 )
+segmentCount = 4
+
+[node name="VerticalKelp2" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.938058, 0, 0.346477, 0, 1, 0, -0.346477, 0, 0.938058, -2.93815, 6.61041, -21.3866 )
+segmentCount = 4
+
+[node name="VerticalKelp3" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.938058, 0, 0.346477, 0, 1, 0, -0.346477, 0, 0.938058, -0.49484, 6.61041, -20.302 )
+segmentCount = 4
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8547, 17.5925, -81.087 )

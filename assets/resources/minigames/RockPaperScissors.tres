@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/minigames/MinigameResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/minigames/RockPaperScissors/RockPaperScissors.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Rock, paper, scissors"
+scene = ExtResource( 2 )
+tutorialText = "It' s a very human game, but also fun for fish. NO cheating!"
+winText = "Ah, you win fair and square."
+loseText = "Bad luck for you!"

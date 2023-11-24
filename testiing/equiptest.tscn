@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/inventory/Equip.tscn" type="PackedScene" id=1]
+[ext_resource path="res://testiing/equiptest.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/items/EquipResource.gd" type="Script" id=3]
+[ext_resource path="res://scenes/inventory/EquipSlotResource.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+type = "component"
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+equipDict = {
+"Step1": SubResource( 2 )
+}
+
+[node name="equiptest" type="Node"]
+script = ExtResource( 2 )
+equipResource = SubResource( 1 )
+
+[node name="Equip" parent="." instance=ExtResource( 1 )]

@@ -1,0 +1,23 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "// License: MIT
+// Author: P-Seebauer
+// ported by gre from https://gist.github.com/P-Seebauer/2a5fa2f77c883dd661f9
+
+shader_type canvas_item;
+uniform float progress;
+uniform float power; // = 5.0
+
+void fragment() {
+	vec2 uv = vec2(UV.x, 1.0 - UV.y);
+	vec4 fTex = texture(TEXTURE, UV);
+	vec4 tTex = texture(SCREEN_TEXTURE, uv);
+	float m = step(distance(fTex, tTex), progress);
+	COLOR = mix(
+		mix(fTex, tTex, m),
+		tTex,
+		pow(progress, 5.0)
+	);
+}
+"

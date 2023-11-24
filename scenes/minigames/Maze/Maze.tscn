@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/minigames/Maze/Maze.gd" type="Script" id=1]
+[ext_resource path="res://scenes/minigames/Maze/MazePlayer.gd" type="Script" id=2]
+[ext_resource path="res://assets/img/light.png" type="Texture" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/img/textures/sand_1.jpg" type="Texture" id=5]
+
+[sub_resource type="QuadMesh" id=2]
+
+[node name="Maze" type="Node2D"]
+script = ExtResource( 1 )
+targetFish = NodePath("TargetFish")
+player = NodePath("Player")
+timer = NodePath("Timer")
+
+[node name="BackGroundSprite" type="Sprite" parent="."]
+scale = Vector2( 12.467, 8.32459 )
+texture = ExtResource( 5 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 0, -2 )
+script = ExtResource( 2 )
+moveSpeed = 6000.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+scale = Vector2( 0.3, 0.3 )
+polygon = PoolVector2Array( 32, 32, -32, 32, -32, -32, 32, -32 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+z_index = 1
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="Light2D" type="Light2D" parent="Player"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+shadow_enabled = true
+
+[node name="TargetFish" type="Node2D" parent="."]
+position = Vector2( 150, 98 )
+
+[node name="Area2D" type="Area2D" parent="TargetFish"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TargetFish/Area2D"]
+scale = Vector2( 0.3, 0.3 )
+polygon = PoolVector2Array( 32, 32, -32, 32, -32, -32, 32, -32 )
+
+[node name="Sprite" type="Sprite" parent="TargetFish"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2( 8, 104 )
+mesh = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]

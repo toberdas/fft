@@ -1,0 +1,158 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://scenes/fish/FishNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/island/IslandNode.gd" type="Script" id=2]
+[ext_resource path="res://scenes/island/IslandDialogNode.gd" type="Script" id=3]
+[ext_resource path="res://scenes/island/PlayerTracker.gd" type="Script" id=4]
+[ext_resource path="res://scenes/island/DialogManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/island/CellAdditionSplitter.gd" type="Script" id=6]
+[ext_resource path="res://scenes/island/ColorNode.gd" type="Script" id=7]
+[ext_resource path="res://scenes/platforming/BeachScene.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/island/VibeManager.gd" type="Script" id=9]
+[ext_resource path="res://scenes/island/IslandMiddlePoint.gd" type="Script" id=10]
+[ext_resource path="res://scenes/island/IslandFishNode.gd" type="Script" id=11]
+[ext_resource path="res://scenes/island/music/MusicPlayer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/island/IslandResourceNode.gd" type="Script" id=13]
+[ext_resource path="res://scenes/island/music/MotifCollectionPlayer.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/island/IslandDataGeneratorNode.gd" type="Script" id=16]
+[ext_resource path="res://scenes/helper/conditionchecker/ConditionChecker.gd" type="Script" id=17]
+[ext_resource path="res://scenes/fish/Flock.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scripts/helper/MeshMerger.gd" type="Script" id=19]
+[ext_resource path="res://scenes/platforming/PlatformRecht.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/island/IslandCellularNode.gd" type="Script" id=21]
+[ext_resource path="res://scenes/island/IslandDoodadNode.gd" type="Script" id=22]
+[ext_resource path="res://scenes/island/IslandInteractableNode.gd" type="Script" id=23]
+[ext_resource path="res://scenes/island/WholeIslandBox.gd" type="Script" id=24]
+[ext_resource path="res://scenes/helper/Rotator.tscn" type="PackedScene" id=25]
+[ext_resource path="res://env_world.tres" type="Environment" id=26]
+[ext_resource path="res://scenes/island/IslandTriggerNode.gd" type="Script" id=27]
+[ext_resource path="res://scenes/island/IslandTreasureNode.gd" type="Script" id=28]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.893678, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.769737, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="OpenSimplexNoise" id=10]
+
+[sub_resource type="NoiseTexture" id=11]
+noise = SubResource( 10 )
+
+[sub_resource type="ArrayMesh" id=8]
+
+[sub_resource type="BoxShape" id=7]
+
+[node name="IslandNode" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="ConditionChecker" type="Node" parent="."]
+script = ExtResource( 17 )
+
+[node name="OffsetNode" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
+
+[node name="IslandDialogNode" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 3 )
+
+[node name="DialogManager" parent="OffsetNode/IslandDialogNode" instance=ExtResource( 5 )]
+
+[node name="PlayerTracker" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 4 )
+
+[node name="TrackTimer" type="Timer" parent="OffsetNode/PlayerTracker"]
+autostart = true
+
+[node name="VibeManager" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 9 )
+playerTracker = NodePath("../PlayerTracker")
+
+[node name="ColorNode" type="Spatial" parent="OffsetNode/VibeManager"]
+script = ExtResource( 7 )
+falloffCurve = SubResource( 3 )
+
+[node name="UpdateTimer" type="Timer" parent="OffsetNode/VibeManager"]
+wait_time = 0.4
+autostart = true
+
+[node name="MusicPlayer" parent="OffsetNode/VibeManager" instance=ExtResource( 12 )]
+myMusic = null
+
+[node name="MotifCollectionPlayer" parent="OffsetNode/VibeManager" instance=ExtResource( 14 )]
+falloffCurve = SubResource( 1 )
+
+[node name="IslandFishNode" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 11 )
+flockScene = ExtResource( 18 )
+fishScene = ExtResource( 1 )
+
+[node name="IslandCellularNode" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 21 )
+cube = ExtResource( 20 )
+colcube = ExtResource( 8 )
+noise = SubResource( 11 )
+
+[node name="CellAdditionSplitter" type="Spatial" parent="OffsetNode/IslandCellularNode"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
+script = ExtResource( 6 )
+
+[node name="IslandTriggerNode" type="Node" parent="OffsetNode/IslandCellularNode/CellAdditionSplitter"]
+script = ExtResource( 27 )
+
+[node name="IslandTreasureNode" type="Node" parent="OffsetNode/IslandCellularNode/CellAdditionSplitter"]
+script = ExtResource( 28 )
+
+[node name="MeshInstance" type="MeshInstance" parent="OffsetNode/IslandCellularNode"]
+mesh = SubResource( 8 )
+script = ExtResource( 19 )
+
+[node name="HighestPoint" type="Spatial" parent="OffsetNode/IslandCellularNode"]
+
+[node name="SpawnNode" type="Spatial" parent="OffsetNode/IslandCellularNode/HighestPoint"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.7999, 0 )
+
+[node name="IslandDoodadNode" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 22 )
+
+[node name="MeshMerger" type="MeshInstance" parent="OffsetNode/IslandDoodadNode"]
+script = ExtResource( 19 )
+
+[node name="IslandInteractableNode" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 23 )
+
+[node name="WholeIslandBox" type="Area" parent="OffsetNode"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource( 24 )
+
+[node name="CollisionShape" type="CollisionShape" parent="OffsetNode/WholeIslandBox"]
+shape = SubResource( 7 )
+
+[node name="IslandMiddlePoint" type="Spatial" parent="OffsetNode"]
+script = ExtResource( 10 )
+
+[node name="Rotator" parent="OffsetNode/IslandMiddlePoint" instance=ExtResource( 25 )]
+transform = Transform( -0.0109278, 0, -1.05005, 0, 1, 0, 1.05005, 0, -0.0109278, 0, 0, 0 )
+targetSpeed = 0.4
+
+[node name="Camera" type="Camera" parent="OffsetNode/IslandMiddlePoint/Rotator"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 54.3696, 116.791 )
+environment = ExtResource( 26 )
+far = 1000.0
+
+[node name="IslandDataGeneratorNode" type="Node" parent="."]
+script = ExtResource( 16 )
+
+[node name="IslandResourceNode" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[connection signal="start_initialize" from="." to="OffsetNode/IslandCellularNode" method="_on_IslandNode_start_initialize"]
+[connection signal="start_initialize" from="." to="IslandResourceNode" method="_on_IslandNode_start_initialize"]
+[connection signal="player_distance_out" from="OffsetNode/PlayerTracker" to="OffsetNode/IslandFishNode" method="_on_PlayerTracker_player_distance_out"]
+[connection signal="timeout" from="OffsetNode/PlayerTracker/TrackTimer" to="OffsetNode/PlayerTracker" method="_on_TrackTimer_timeout"]
+[connection signal="update_mood" from="OffsetNode/VibeManager" to="OffsetNode/VibeManager/ColorNode" method="_on_VibeManager_update_mood"]
+[connection signal="update_mood" from="OffsetNode/VibeManager" to="OffsetNode/VibeManager/MotifCollectionPlayer" method="_on_VibeManager_update_mood"]
+[connection signal="timeout" from="OffsetNode/VibeManager/UpdateTimer" to="OffsetNode/VibeManager" method="_on_UpdateTimer_timeout"]
+[connection signal="body_entered" from="OffsetNode/WholeIslandBox" to="OffsetNode/WholeIslandBox" method="_on_WholeIslandBox_body_entered"]
+[connection signal="player_entered" from="OffsetNode/WholeIslandBox" to="OffsetNode/IslandDialogNode" method="_on_WholeIslandBox_player_entered"]

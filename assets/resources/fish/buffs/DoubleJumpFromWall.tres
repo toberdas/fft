@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/fish/buffs/Buff.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+duration = -1.0
+strength = 1.0
+property = "doubleJumpFromWall"
+name = "Double jump from wall"
+description = "After grabbing hold of a wall, this slime can double jump again."
+infinite = true
+junk = false

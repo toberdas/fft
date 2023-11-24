@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://assets/resources/music/InstrumentCollection.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/music/instruments/A2_Dungeon.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/music/instruments/A1_Dungeon.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resources/music/instruments/A0_Dungeon.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+name = "Dungeon"
+instrumentArray = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]

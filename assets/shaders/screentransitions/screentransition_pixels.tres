@@ -1,0 +1,22 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "// Author: gre
+// License: MIT
+// forked from https://gist.github.com/benraziel/c528607361d90a072e98
+shader_type canvas_item;
+
+uniform float progress;
+float rand (vec2 co) {
+  return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	vec2 uv = vec2(UV.x, 1.0 - UV.y);
+  float r = rand(floor(vec2(10.0, 10.0) * uv));
+  float m = smoothstep(0.0, -0.5, r - (progress * (1.0 + 0.5)));
+  COLOR = mix(texture(TEXTURE, UV), texture(SCREEN_TEXTURE, uv), m);
+}
+
+
+"

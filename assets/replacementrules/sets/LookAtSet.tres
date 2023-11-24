@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://assets/replacementrules/adjectives/StyleAdjectives.tres" type="Resource" id=1]
+[ext_resource path="res://assets/replacementrules/nouns/SkillN.tres" type="Resource" id=2]
+[ext_resource path="res://assets/replacementrules/marker/DiscourseMarkers.tres" type="Resource" id=3]
+[ext_resource path="res://assets/replacementrules/adverbs/Ad.tres" type="Resource" id=4]
+[ext_resource path="res://assets/replacementrules/nouns/FishN.tres" type="Resource" id=5]
+[ext_resource path="res://assets/replacementrules/adverbs/AdverbSentences.tres" type="Resource" id=6]
+[ext_resource path="res://assets/replacementrules/sentences/S.tres" type="Resource" id=7]
+[ext_resource path="res://assets/replacementrules/verbs/LookV.tres" type="Resource" id=8]
+[ext_resource path="res://assets/replacementrules/nouns/PersonN.tres" type="Resource" id=9]
+[ext_resource path="res://assets/replacementrules/adjectives/AquaticAdjectives.tres" type="Resource" id=10]
+[ext_resource path="res://assets/resources/replacementgrammar/RuleSet.gd" type="Script" id=11]
+[ext_resource path="res://assets/replacementrules/verbs/LookAtV.tres" type="Resource" id=12]
+
+[resource]
+script = ExtResource( 11 )
+ruleArray = [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 12 ) ]
+startRule = ExtResource( 7 )

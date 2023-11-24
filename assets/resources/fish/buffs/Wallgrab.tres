@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/fish/buffs/Buff.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+duration = -1.0
+strength = 1.0
+property = "wallgrab"
+name = "Wallgrabbing"
+description = "This slime can jump from the ground and grab a hold of a wall and jump off it's surface."
+infinite = true
+junk = false

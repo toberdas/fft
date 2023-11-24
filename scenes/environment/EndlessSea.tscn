@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/environment/EndlessSea.gd" type="Script" id=1]
+[ext_resource path="res://scenes/environment/UnderWaterChecker.gd" type="Script" id=4]
+[ext_resource path="res://scenes/environment/ResourceUpdater.gd" type="Script" id=7]
+
+[node name="EndlessSea" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="UnderWaterChecker" type="Spatial" parent="."]
+script = ExtResource( 4 )
+
+[node name="ResourceUpdater" type="Node" parent="."]
+script = ExtResource( 7 )

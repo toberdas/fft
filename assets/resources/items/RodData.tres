@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/items/RodData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+depthPower = 1.0
+rodMeshName = "BeginnerRod"
+predictLen = 48
+predictMaxTry = 128
+maxCast = 32
+grav = 0.1
+castSpeed = 10

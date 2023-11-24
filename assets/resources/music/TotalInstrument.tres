@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/music/TotalInstrument.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.508621, 0.5 ), 0.0, 0.0, 0, 0 ]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+desiredTone = 0.0
+intervalRange = 12
+movementLength = 8
+curveDynamic = SubResource( 1 )
+fractionArray = [  ]
+soundTone = 0.0
+volatility = 0.1
+swing = 0.001

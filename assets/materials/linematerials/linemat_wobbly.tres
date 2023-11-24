@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://assets/shaders/sh_displacementwobbly.tres" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=6]
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 0.372549, 0.419608, 0.113725, 1 )
+shader_param/uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+shader_param/uv1_offset = Vector3( 1, 1, 0 )
+shader_param/brightness = 8.0
+shader_param/disp_scale = Vector2( 1, 1 )
+shader_param/strength = 1.0
+shader_param/speed = 0.2
+shader_param/albedo_texture = SubResource( 6 )
+shader_param/flowMap = SubResource( 4 )

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/fish/responses/FishResponse.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/fish/buffs/AttackBurst.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resources/fish/buffs/Focus.tres" type="Resource" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 1 )
+node = null
+time = 36.0
+factor = 3.5
+distance = 256.0
+slowdown = 6.0
+stop = 0.0
+type = 4
+unique = true
+priority = 100
+clears = false
+persistent = false
+
+[resource]
+script = ExtResource( 2 )
+expressionOutcomes = [ "attack" ]
+moverResource = SubResource( 1 )
+buffs = [ ExtResource( 3 ), ExtResource( 4 ) ]
+nerveStrain = 0.0

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/fish/states/BrainState.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/fish/responses/neutral/NothingResponse.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/fish/responses/neutral/FlockResponse.tres" type="Resource" id=4]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+stateType = ""
+fishResponse = ExtResource( 2 )
+foodResponse = ExtResource( 2 )
+unidentifiedResponse = ExtResource( 2 )
+threatResponse = ExtResource( 4 )
+relocateResponse = ExtResource( 2 )

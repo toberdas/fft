@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/img/expressions/DALL·E 2023-04-10 12.24.06 - cartoon scared exclamation mark.png" type="Texture" id=1]
+
+[node name="FleeingRoot" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.0831854, 0.000988218, -7.19693e-05, -0.000988254, 0.0831854, -4.01665e-05, 7.14871e-05, 4.10185e-05, 0.0831913, 0, 1.55232, 0 )
+modulate = Color( 0.639216, 1, 0, 1 )
+billboard = 1
+texture = ExtResource( 1 )

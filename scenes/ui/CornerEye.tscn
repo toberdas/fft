@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/materials/SubtleWave.tres" type="Material" id=1]
+[ext_resource path="res://assets/img/ui/reelinFingerUI.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ui/ProgressBarLabeled.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Sprite"]
+material = ExtResource( 1 )
+texture = ExtResource( 2 )
+
+[node name="LabeledProgressBar" parent="." instance=ExtResource( 3 )]
+use_parent_material = true
+margin_left = -95.0
+margin_top = -29.0
+margin_right = -9.99999
+margin_bottom = -5.0
+rect_rotation = 5.69006
+text = "haaa"
+
+[node name="VBoxContainer" parent="LabeledProgressBar" index="0"]
+use_parent_material = true
+margin_right = 85.0
+
+[node name="ProgressBar" parent="LabeledProgressBar/VBoxContainer" index="0"]
+use_parent_material = true
+margin_right = 85.0
+
+[node name="Label" parent="LabeledProgressBar/VBoxContainer" index="1"]
+use_parent_material = true
+margin_right = 85.0
+text = "Hello"
+
+[editable path="LabeledProgressBar"]

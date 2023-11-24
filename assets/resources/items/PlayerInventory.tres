@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/items/InventoryResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+maxItemsPerLayer = 8
+minItemsPerLayer = 2
+itemDict = {
+}
+toInstantiateArray = [  ]
+topLayerCount = 0
+layerCount = 0

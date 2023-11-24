@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/items/BaseItem.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/light.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+icon = ExtResource( 3 )
+itemName = "Chocolate Sprinkles"
+itemID = "choc_sprinks"
+description = "Little beads of crunchy chocolate, why not just a slab of chocolate? Crunchy and sweet, turns into a chocolate sludge when cooked"
+toolTip = "Sweet and crunchy"
+itemType = "bait"
+rarity = "everyday"
+buffArray = [  ]
+id = ""
+currentScene = 0
+inEquip = false
+pickedUp = false

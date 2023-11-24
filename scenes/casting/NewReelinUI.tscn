@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/casting/NewReelinUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/shaders/sinbob.gdshader" type="Shader" id=2]
+[ext_resource path="res://scenes/ui/CornerEye.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/amount = 1.0
+shader_param/uvAmount = 1.0
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/amount = 1.0
+shader_param/uvAmount = 1.0
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/amount = 1.0
+shader_param/uvAmount = 1.0
+
+[node name="ReelinUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+catchProgress = NodePath("CatchEye/LabeledProgressBar")
+lineHealthProgress = NodePath("LineHealthEye/LabeledProgressBar")
+timeProgress = NodePath("TimeEye/LabeledProgressBar")
+
+[node name="CatchEye" parent="." instance=ExtResource( 3 )]
+material = SubResource( 1 )
+position = Vector2( 1161, 666 )
+
+[node name="LabeledProgressBar" parent="CatchEye" index="0"]
+text = "Catch"
+
+[node name="LineHealthEye" parent="." instance=ExtResource( 3 )]
+material = SubResource( 2 )
+position = Vector2( 123, 664 )
+flip_h = true
+
+[node name="LabeledProgressBar" parent="LineHealthEye" index="0"]
+margin_left = 10.0
+margin_top = -21.0
+margin_right = 95.0
+margin_bottom = 3.0
+rect_rotation = -8.13136
+text = "Line"
+
+[node name="TimeEye" parent="." instance=ExtResource( 3 )]
+material = SubResource( 3 )
+position = Vector2( 118, 54 )
+flip_h = true
+flip_v = true
+
+[node name="LabeledProgressBar" parent="TimeEye" index="0"]
+margin_left = 11.0
+margin_top = -4.0
+margin_right = 96.0
+margin_bottom = 20.0
+text = "Time Left"
+
+[editable path="CatchEye"]
+[editable path="CatchEye/LabeledProgressBar"]
+[editable path="LineHealthEye"]
+[editable path="LineHealthEye/LabeledProgressBar"]
+[editable path="TimeEye"]
+[editable path="TimeEye/LabeledProgressBar"]

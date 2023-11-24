@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ui/fishtalkui/FishTalkDialog.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/DialogScene.tscn" type="PackedScene" id=2]
+
+[node name="FishTalkWelcome" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+fishTalkLabel = NodePath("HBoxContainer/MarginContainer/MarginContainer/VBoxContainer/Label")
+memoryButton = NodePath("HBoxContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MemoryButton")
+
+[node name="HBoxContainer" parent="." instance=ExtResource( 2 )]
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MemoryButton" to="." method="_on_MemoryButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/GoodbyeButton" to="." method="_on_GoodbyeButton_pressed"]
+
+[editable path="HBoxContainer"]

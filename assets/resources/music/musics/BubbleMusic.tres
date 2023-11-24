@@ -1,0 +1,41 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://assets/resources/music/Music.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/music/TotalInstrument.gd" type="Script" id=3]
+[ext_resource path="res://assets/resources/music/Scale.gd" type="Script" id=5]
+[ext_resource path="res://assets/resources/music/sounds/bubbleA3.wav" type="AudioStream" id=6]
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0.100575, 0.954545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+name = "Bubble Tritonic"
+intervals = [ 5, 3, 4 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.492537, 0.485227 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0.9 ), 0.0, 0.0, 0, 0, Vector2( 0.954545, 0.0727272 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+desiredTone = 220.0
+intervalRange = 12
+movementLength = 8
+curveDynamic = SubResource( 2 )
+cutoffCurve = SubResource( 9 )
+fractionArray = [ 0.33, 0.25, 0.5 ]
+sound = ExtResource( 6 )
+soundTone = 220.0
+
+[resource]
+script = ExtResource( 1 )
+BPM = 30
+scale = SubResource( 1 )
+totalInstruments = [ SubResource( 7 ) ]
+dynamicFalloffCurve = SubResource( 8 )
+noiseCutoff = 0.5
+movements = 10
+spatial = false

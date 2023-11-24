@@ -1,0 +1,59 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+
+uniform float back_and_forth;
+uniform float time_scale;
+uniform float time_offset;
+uniform float wave;
+uniform float mask_black;
+uniform float mask_white;
+uniform float bloblength;
+uniform float side_expand_movement;
+uniform float side_expand_factor;
+uniform float vertical_expand_movement;
+uniform float vertical_expand_factor;
+
+render_mode async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform sampler2D texture_normal : hint_normal;
+uniform float normal_scale : hint_range(-16,16);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+	NORMALMAP = texture(texture_normal,base_uv).rgb;
+	NORMALMAP_DEPTH = normal_scale;
+}
+
+void vertex(){
+	
+	float time = TIME * time_scale + time_offset;
+	float halfBody = bloblength*.5;
+	float body = (VERTEX.y + halfBody) / bloblength;
+	float invmask = smoothstep(mask_white, mask_black, halfBody - body);
+	float mask = smoothstep(mask_black, mask_white, halfBody - body);
+	VERTEX.yz += cos(time + body) * wave * mask;
+	VERTEX.z += cos(time) * back_and_forth;
+	float newX = mix(VERTEX.x, VERTEX.x * (cos(time) + 2.0) * 0.5 * side_expand_movement, invmask);
+	VERTEX.x = mix(VERTEX.x, newX, side_expand_factor);
+	float newZ = mix(VERTEX.z, VERTEX.z * (-cos(time) + 2.0) * 0.5 * side_expand_movement, invmask);
+	VERTEX.z = mix(VERTEX.z, newZ, side_expand_factor);
+	float newy = mix(VERTEX.y, VERTEX.y * (-cos(time) + 2.0) * 0.5 * vertical_expand_movement, 1.0);
+	VERTEX.y = mix(VERTEX.y, newy, vertical_expand_factor);
+}"

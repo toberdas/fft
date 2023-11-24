@@ -1,0 +1,151 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/shaders/sinbob.gdshader" type="Shader" id=1]
+[ext_resource path="res://scenes/ui/TextEye.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/img/ui/nibbleOverheadUI.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/ChoiceUI.gd" type="Script" id=4]
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/amount = 1.0
+shader_param/uvAmount = 1.0
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/amount = 1.0
+shader_param/uvAmount = 1.0
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/amount = 1.0
+shader_param/uvAmount = 1.0
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("DenyEye:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AcceptEye:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PromptEye:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("DenyEye:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 580, 700 ), Vector2( 580, 432 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AcceptEye:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 216, 700 ), Vector2( 216, 432 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PromptEye:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 398, -200 ), Vector2( 398, 56 ) ]
+}
+
+[node name="CaughtUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="DenyEye" parent="." instance=ExtResource( 2 )]
+modulate = Color( 1, 0.494118, 0.494118, 1 )
+material = SubResource( 6 )
+position = Vector2( 970, 655 )
+
+[node name="Label" parent="DenyEye" index="0"]
+margin_left = -36.0
+margin_top = -48.0
+margin_right = 27.0
+margin_bottom = -34.0
+
+[node name="AcceptEye" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.517647, 0.980392, 0.94902, 1 )
+material = SubResource( 7 )
+position = Vector2( 428, 656 )
+flip_h = true
+
+[node name="Label" parent="AcceptEye" index="0"]
+margin_left = -24.0
+margin_top = -48.0
+margin_right = 39.0
+margin_bottom = -34.0
+
+[node name="PromptEye" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.996078, 0.882353, 1, 1 )
+material = SubResource( 8 )
+position = Vector2( 678, 56 )
+texture = ExtResource( 3 )
+
+[node name="Label" parent="PromptEye" index="0"]
+margin_top = 24.0
+margin_right = 38.0
+margin_bottom = 38.0
+text = "bon giorno"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/open = SubResource( 5 )
+
+[editable path="DenyEye"]
+[editable path="AcceptEye"]
+[editable path="PromptEye"]

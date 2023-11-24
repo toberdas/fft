@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "export(float) var islandLoadDistance
+export(float) var flockLoadDistance
+export(float) var fishIslandLoadDistance
+export(float) var flockMoveSpeed
+export(float) var fishIslandMoveSpeed
+export(float) var flockTimeAtTarget
+export(float) var fishIslandTimeAtTarget
+export(String) var flockSceneName
+export(String) var fishIslandSceneName
+export(String) var islandSceneName
+
+"
+
+[resource]
+script = SubResource( 1 )
+islandLoadDistance = 1000.0
+flockLoadDistance = 250.0
+fishIslandLoadDistance = 1000.0
+flockMoveSpeed = 0.0
+fishIslandMoveSpeed = 0.0
+flockTimeAtTarget = 0.0
+fishIslandTimeAtTarget = 0.0
+flockSceneName = "Flock"
+fishIslandSceneName = "FishIsland"
+islandSceneName = "Island"

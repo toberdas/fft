@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/fish/FlockData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+sepFactor = 0.7
+coheFactor = 0.3
+alignFactor = 0.3
+sepRange = 10
+coheRange = 10
+alignRange = 10
+slowdownRange = 1

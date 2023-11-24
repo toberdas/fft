@@ -1,0 +1,76 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/materials/linematerials/linemat_wobbly.tres" type="Material" id=1]
+[ext_resource path="res://scenes/helper/CurvyPath.gd" type="Script" id=2]
+[ext_resource path="res://scenes/helper/PathwalkerWithDetection.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/casting/Line.gd" type="Script" id=4]
+[ext_resource path="res://assets/shaders/sh_displacementwobbly.tres" type="Shader" id=5]
+[ext_resource path="res://scenes/casting/CastBobber.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/helper/Chain.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/casting/Casting.gd" type="Script" id=10]
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
+}
+
+[sub_resource type="SphereShape" id=8]
+margin = 0.127
+radius = 0.20265
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=6]
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 0.627451, 0.156863, 0.156863, 1 )
+shader_param/uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+shader_param/uv1_offset = Vector3( 0.1, 0.1, 0.1 )
+shader_param/brightness = 8.0
+shader_param/disp_scale = Vector2( 1, 1 )
+shader_param/strength = 1.0
+shader_param/speed = 0.2
+shader_param/albedo_texture = SubResource( 6 )
+shader_param/flowMap = SubResource( 4 )
+
+[node name="Casting" type="Spatial"]
+script = ExtResource( 10 )
+
+[node name="Chain" parent="." instance=ExtResource( 8 )]
+
+[node name="CastPath" type="Path" parent="."]
+curve = SubResource( 2 )
+script = ExtResource( 2 )
+
+[node name="DetectingPathwalker" parent="CastPath" instance=ExtResource( 3 )]
+walkSpeed = 24.0
+maskBit = 1
+
+[node name="CollisionShape" parent="CastPath/DetectingPathwalker/Area" index="0"]
+shape = SubResource( 8 )
+
+[node name="Bobber" parent="CastPath/DetectingPathwalker" instance=ExtResource( 6 )]
+
+[node name="CastLine" type="ImmediateGeometry" parent="."]
+material_override = ExtResource( 1 )
+script = ExtResource( 4 )
+drawCorners = false
+readyToJumpShader = SubResource( 7 )
+
+[connection signal="castdone" from="." to="CastPath/DetectingPathwalker/Bobber" method="_on_Casting_castdone"]
+[connection signal="castdone" from="." to="CastLine" method="_on_Casting_castdone"]
+[connection signal="fishhooked" from="CastPath/DetectingPathwalker/Bobber" to="." method="_on_Bobber_fishhooked"]
+[connection signal="ignore_nibble" from="CastPath/DetectingPathwalker/Bobber" to="." method="_on_Bobber_ignore_nibble"]
+[connection signal="nibble" from="CastPath/DetectingPathwalker/Bobber" to="." method="_on_Bobber_nibble"]
+
+[editable path="CastPath/DetectingPathwalker"]

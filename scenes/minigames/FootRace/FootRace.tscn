@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/minigames/FootRace/FootRace.gd" type="Script" id=1]
+[ext_resource path="res://scenes/minigames/FootRace/Contestant.gd" type="Script" id=2]
+[ext_resource path="res://assets/img/icons/runners/crouchingFigure.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/backgrounds/track.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+
+[sub_resource type="Animation" id=2]
+resource_name = "readysetgo"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "READY", "SET", "GO" ]
+}
+
+[node name="FootRace" type="Node2D"]
+script = ExtResource( 1 )
+DEBUG = true
+fishStepTime = 0.25
+fishStepTimeVariance = 0.1
+stepTotal = 50
+stepDistance = 8.0
+
+[node name="TrackCourtSprite" type="Sprite" parent="."]
+position = Vector2( 5, -470 )
+scale = Vector2( -5.23276, 4.51828 )
+texture = ExtResource( 5 )
+
+[node name="FinishLine" type="Polygon2D" parent="."]
+position = Vector2( -1, 0 )
+polygon = PoolVector2Array( -107, 7, 105, 7, 105, -8, -107, -7 )
+
+[node name="You" type="Node2D" parent="."]
+position = Vector2( -53, 0 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="You"]
+position = Vector2( -1, 0 )
+texture = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="You"]
+position = Vector2( 53, 0 )
+current = true
+limit_smoothed = true
+smoothing_enabled = true
+
+[node name="Fish" type="Node2D" parent="."]
+position = Vector2( 54, 0 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Fish"]
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "readysetgo"
+anims/RESET = SubResource( 1 )
+anims/readysetgo = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -21.0
+margin_top = -91.0
+margin_right = 19.0
+margin_bottom = -77.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

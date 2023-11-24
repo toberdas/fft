@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/items/BaseItem.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/icons/pointer_1.png" type="Texture" id=2]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+icon = ExtResource( 2 )
+itemName = "Unstable Line"
+itemID = "unst_line"
+description = "Tenuously connected to this world"
+toolTip = "It's hard to make out the details of this line..."
+itemType = "line"
+rarity = "unique"
+buffArray = [  ]
+iconModulate = Color( 1, 1, 1, 1 )
+id = ""
+currentScene = 0
+inEquip = false
+pickedUp = false

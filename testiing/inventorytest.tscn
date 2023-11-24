@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://testiing/inventorytest.gd" type="Script" id=1]
+[ext_resource path="res://scenes/inventory/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/inventory/EquipSlot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ship/UpgradeCollectionScene.tscn" type="PackedScene" id=4]
+
+[node name="Node2D" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="EquipSlot" parent="." instance=ExtResource( 3 )]
+position = Vector2( 654, 311 )
+equips = "bait"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Inventory" parent="VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 398.0
+margin_bottom = 500.0
+
+[node name="UpgradeCollectionScene" parent="VBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_right = 800.0
+margin_bottom = 500.0

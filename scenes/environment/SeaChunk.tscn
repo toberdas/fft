@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/materials/mat_SeaChunk.tres" type="Material" id=1]
+[ext_resource path="res://scenes/environment/SeaChunk.gd" type="Script" id=3]
+[ext_resource path="res://assets/materials/mat_SeaChunk_Under.tres" type="Material" id=4]
+
+[sub_resource type="PlaneMesh" id=22]
+size = Vector2( 100, 100 )
+subdivide_width = 4
+subdivide_depth = 4
+
+[sub_resource type="BoxShape" id=28]
+extents = Vector3( 50, 68.1689, 50 )
+
+[node name="SeaChunkRoot" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="SeaChunk" type="MeshInstance" parent="."]
+cast_shadow = 0
+extra_cull_margin = 3058.19
+mesh = SubResource( 22 )
+material/0 = ExtResource( 1 )
+
+[node name="SeaChunkUnder" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1, 0, 0, 0, 1, 0, -0.01, 0 )
+sorting_offset = -10.0
+cast_shadow = 0
+extra_cull_margin = 4342.75
+mesh = SubResource( 22 )
+material/0 = ExtResource( 4 )
+
+[node name="FollowArea" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 8192
+
+[node name="CollisionShape" type="CollisionShape" parent="FollowArea"]
+shape = SubResource( 28 )
+
+[connection signal="area_entered" from="FollowArea" to="." method="_on_FollowArea_area_entered"]
+[connection signal="area_exited" from="FollowArea" to="." method="_on_FollowArea_area_exited"]
+[connection signal="body_entered" from="FollowArea" to="." method="_on_FollowArea_body_entered"]
+[connection signal="body_exited" from="FollowArea" to="." method="_on_FollowArea_body_exited"]

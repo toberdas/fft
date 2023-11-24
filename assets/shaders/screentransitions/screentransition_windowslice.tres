@@ -1,0 +1,19 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "// Author: gre
+// License: MIT
+
+shader_type canvas_item;
+
+uniform float progress;
+uniform float count; // = 10.0
+uniform float smoothness; // = 0.5
+
+void fragment(){
+	vec2 uv = vec2(UV.x, 1.0 - UV.y);
+	float pr = smoothstep(-0.5, 0.0, UV.x - progress * (1.0 + 0.5));
+	float s = step(pr, fract(10.0 * UV.x));
+	COLOR = mix(texture(TEXTURE, UV), texture(SCREEN_TEXTURE, uv), s);
+}
+"

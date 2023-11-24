@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/minigames/MiniGameUI.gd" type="Script" id=1]
+[ext_resource path="res://scenes/helper/TypingLabel.tscn" type="PackedScene" id=2]
+
+[node name="MiniGameUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+textLabel = NodePath("CenterContainer/TypingLabel")
+lifeControl = NodePath("LifeControl")
+fishLives = NodePath("LifeControl/HBoxContainer/MarginContainer2/VBoxContainer/FishLives")
+playerLives = NodePath("LifeControl/HBoxContainer/MarginContainer/VBoxContainer/PlayerLives")
+
+[node name="LifeControl" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 38
+custom_constants/margin_top = 8
+custom_constants/margin_left = 27
+custom_constants/margin_bottom = 13
+
+[node name="CenterContainer" type="CenterContainer" parent="LifeControl"]
+margin_left = 27.0
+margin_top = 8.0
+margin_right = 762.0
+margin_bottom = 487.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LifeControl"]
+margin_left = 27.0
+margin_top = 8.0
+margin_right = 762.0
+margin_bottom = 487.0
+
+[node name="MarginContainer" type="MarginContainer" parent="LifeControl/HBoxContainer"]
+margin_right = 365.0
+margin_bottom = 479.0
+size_flags_horizontal = 3
+custom_constants/margin_top = 11
+custom_constants/margin_left = 33
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LifeControl/HBoxContainer/MarginContainer"]
+margin_left = 33.0
+margin_top = 11.0
+margin_right = 365.0
+margin_bottom = 479.0
+
+[node name="PlayerLifeLabel" type="Label" parent="LifeControl/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_right = 332.0
+margin_bottom = 14.0
+text = "your lives:"
+
+[node name="PlayerLives" type="Label" parent="LifeControl/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 332.0
+margin_bottom = 32.0
+text = "1"
+align = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="LifeControl/HBoxContainer"]
+margin_left = 369.0
+margin_right = 735.0
+margin_bottom = 479.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 21
+custom_constants/margin_top = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LifeControl/HBoxContainer/MarginContainer2"]
+margin_top = 14.0
+margin_right = 345.0
+margin_bottom = 479.0
+
+[node name="FishLifeLabel" type="Label" parent="LifeControl/HBoxContainer/MarginContainer2/VBoxContainer"]
+margin_right = 345.0
+margin_bottom = 14.0
+text = "fish's lives:"
+align = 1
+
+[node name="FishLives" type="Label" parent="LifeControl/HBoxContainer/MarginContainer2/VBoxContainer"]
+margin_top = 18.0
+margin_right = 345.0
+margin_bottom = 32.0
+align = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TypingLabel" parent="CenterContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 400.0
+margin_top = 234.0
+margin_right = 400.0
+margin_bottom = 265.0
+text = "
+"

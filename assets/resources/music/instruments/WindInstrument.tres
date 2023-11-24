@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/music/Instrument.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/music/sounds/wind1.wav" type="AudioStream" id=2]
+
+[resource]
+script = ExtResource( 1 )
+tone = 110.0
+audio = ExtResource( 2 )
+tuneScale = 0.0
+intervalRange = 12

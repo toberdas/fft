@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://assets/resources/items/BaseItem.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/items/BaitData.gd" type="Script" id=2]
+[ext_resource path="res://assets/img/icons/sweetFruit.png" type="Texture" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+taste = [ "umami", "sweet" ]
+texture = [ "crunchy", "squishy" ]
+subtlety = 0.5
+smellStrength = 0.5
+
+[resource]
+script = ExtResource( 1 )
+extendedResource = SubResource( 1 )
+icon = ExtResource( 3 )
+itemName = "Cauliflower Mushroom"
+itemID = "caul_mush"
+description = "Solitary mushroom, smells divine when dried"
+toolTip = "Umami and crunchy"
+itemType = "bait"
+rarity = "unique"
+buffArray = [  ]
+iconModulate = Color( 0.784314, 0.188235, 0.188235, 1 )
+id = ""
+currentScene = 0
+inEquip = false
+pickedUp = false

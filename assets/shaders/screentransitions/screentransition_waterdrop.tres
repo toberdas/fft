@@ -1,0 +1,24 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "// author: Paweł Płóciennik
+// license: MIT
+
+shader_type canvas_item;
+
+uniform float progress;
+
+void fragment(){
+	vec2 uv = vec2(UV.x, 1.0 - UV.y);
+	vec2 dir = UV - vec2(.5);
+	float dist = length(dir);
+
+	if (dist > progress) {
+		COLOR = mix(texture(TEXTURE, UV), texture(SCREEN_TEXTURE, uv), progress);
+		
+	} else {
+		vec2 offset = dir * sin(dist * 20.0 - progress * 20.0);
+		COLOR = mix(texture(TEXTURE, UV + offset), texture(SCREEN_TEXTURE, uv), progress);
+	}
+}
+"

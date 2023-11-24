@@ -1,0 +1,58 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/resources/elemental/StormResource.tres" type="Resource" id=1]
+[ext_resource path="res://assets/resources/elemental/CalmResource.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/music/musics/WaveMusic.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resources/music/musics/WindMusic.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/environment/EndlessSeaResource.gd" type="Script" id=5]
+[ext_resource path="res://scenes/maingame/worlds/ElementalNode.gd" type="Script" id=6]
+[ext_resource path="res://assets/environments/CloudyEnvironment.tres" type="Environment" id=7]
+[ext_resource path="res://assets/resources/elemental/sky/CurrentSkyResource.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/environment/EndlessSea.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/environment/WorldEndlessSea.gd" type="Script" id=10]
+[ext_resource path="res://scenes/island/music/MusicPlayer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/materials/mat_SeaChunk_Under.tres" type="Material" id=15]
+[ext_resource path="res://assets/materials/mat_SeaChunk.tres" type="Material" id=16]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+seaChunkMaterialAbove = ExtResource( 16 )
+seaChunkMaterialUnder = ExtResource( 15 )
+timeScale = 0.8
+worldWaveLength = 300.0
+wave = 6.0
+worldWaveAmp = 8.0
+worldWaveTimeScale = 0.6
+
+[node name="ElementalNode" type="Spatial"]
+script = ExtResource( 6 )
+stormResource = ExtResource( 1 )
+calmResource = ExtResource( 2 )
+usedEndlessSeaResource = SubResource( 1 )
+currentSkyResource = ExtResource( 8 )
+skyEnvironment = ExtResource( 7 )
+
+[node name="WindMusicPlayer" parent="." instance=ExtResource( 11 )]
+autoplay = true
+myMusic = ExtResource( 4 )
+bus = "Wind"
+
+[node name="SeaMusicPlayer" parent="." instance=ExtResource( 11 )]
+autoplay = true
+myMusic = ExtResource( 3 )
+bus = "Sea"
+
+[node name="EndlessSea" parent="." instance=ExtResource( 9 )]
+script = ExtResource( 10 )
+
+[node name="SunLight" type="DirectionalLight" parent="."]
+transform = Transform( -1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 5, 2 )
+shadow_enabled = true
+shadow_color = Color( 0.0627451, 0.0313726, 0.105882, 1 )
+directional_shadow_max_distance = 500.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

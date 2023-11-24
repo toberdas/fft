@@ -1,0 +1,415 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://scenes/fish/FishSpeedNode.gd" type="Script" id=1]
+[ext_resource path="res://scenes/helper/3DPickable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/fish/Fish.gd" type="Script" id=3]
+[ext_resource path="res://scenes/fish/FishInventory.gd" type="Script" id=4]
+[ext_resource path="res://scenes/fish/FishSense.gd" type="Script" id=5]
+[ext_resource path="res://scenes/fish/GroupNode.gd" type="Script" id=6]
+[ext_resource path="res://scenes/environment/BubbleEmitter.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sound/effects/fish_to_ship.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/fish/HungerNode.gd" type="Script" id=9]
+[ext_resource path="res://scenes/helper/ParentArea.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/fish/FishAttackNode.gd" type="Script" id=15]
+[ext_resource path="res://scenes/fish/WallSense.gd" type="Script" id=16]
+[ext_resource path="res://scenes/fish/FishMotifPlayer.gd" type="Script" id=17]
+[ext_resource path="res://scenes/fish/FishBrainNode.gd" type="Script" id=18]
+[ext_resource path="res://assets/shaders/sh_line_magic_orb.tres" type="Shader" id=19]
+[ext_resource path="res://scenes/fish/SenseBrain.gd" type="Script" id=20]
+[ext_resource path="res://scenes/fish/BrainStateExpressor.gd" type="Script" id=21]
+[ext_resource path="res://scenes/fish/DebugArea.gd" type="Script" id=22]
+[ext_resource path="res://scenes/helper/AttackingNode.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/fish/FishBuffNode.gd" type="Script" id=24]
+[ext_resource path="res://scenes/fish/BrainStateNode.gd" type="Script" id=25]
+[ext_resource path="res://scenes/fish/ResponseNode.gd" type="Script" id=27]
+[ext_resource path="res://scenes/fish/NerveNode.gd" type="Script" id=28]
+[ext_resource path="res://assets/resources/fish/buffs/AttackBurst.tres" type="Resource" id=29]
+[ext_resource path="res://scenes/helper/AttackableNode.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/fish/FishSingNode.gd" type="Script" id=31]
+[ext_resource path="res://scenes/fish/FishDanceNode.gd" type="Script" id=32]
+[ext_resource path="res://scenes/fish/FishFishTalkManager.gd" type="Script" id=33]
+[ext_resource path="res://assets/materials/mat_3d_fish.tres" type="Material" id=34]
+[ext_resource path="res://scenes/fish/FishAttackableNode.gd" type="Script" id=35]
+[ext_resource path="res://scenes/fish/FishMeshPath.gd" type="Script" id=38]
+
+[sub_resource type="CapsuleShape" id=20]
+radius = 0.561979
+height = 1.44702
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer3D:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ null ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "added_to_flock"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer3D:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("AudioStreamPlayer3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "dance"
+length = 0.5
+
+[sub_resource type="Animation" id=10]
+resource_name = "dissolve"
+length = 4.0
+
+[sub_resource type="SphereShape" id=37]
+radius = 9.33373
+
+[sub_resource type="SphereShape" id=38]
+radius = 1.78647
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+
+[sub_resource type="Animation" id=26]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackingNode/AttackingArea/MeshInstance:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.101, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 1, 1 ), Vector3( 0.7, 0.7, 0.7 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("AttackingNode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack"
+}, {
+"args": [  ],
+"method": "attack"
+} ]
+}
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = ExtResource( 19 )
+shader_param/base_color_shadow = Color( 0.5, 0, 0, 1 )
+shader_param/base_color_highlight = Color( 0, 0.5, 0, 1 )
+shader_param/base_color_blend = 1.2
+shader_param/color_modulate_frequency = 1.0
+shader_param/noise_displacement = 0.3
+shader_param/noise_scale = 1.9
+shader_param/noise_time_scale = 1.0
+shader_param/alpha_distance_min = 1.08
+shader_param/alpha_distance_max = 1.6
+shader_param/alpha_time_scale = 1.0
+shader_param/emission_intensity = 2.0
+shader_param/highlight_intensity = 0.7
+
+[sub_resource type="SphereMesh" id=31]
+material = SubResource( 30 )
+radius = 2.0
+height = 4.0
+radial_segments = 6
+rings = 4
+
+[sub_resource type="BoxShape" id=32]
+
+[sub_resource type="Curve3D" id=35]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
+}
+
+[sub_resource type="Curve" id=36]
+_data = [ Vector2( 0, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.387387, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.626126, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Fish" type="KinematicBody" groups=["Fish"]]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+collision_layer = 2
+collision_mask = 11
+script = ExtResource( 3 )
+debug = false
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00026682 )
+shape = SubResource( 20 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 11 )
+anims/added_to_flock = SubResource( 18 )
+anims/dance = SubResource( 33 )
+anims/dissolve = SubResource( 10 )
+
+[node name="HeadPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.890299 )
+
+[node name="Particles" parent="." instance=ExtResource( 7 )]
+
+[node name="WallSense" type="Spatial" parent="."]
+script = ExtResource( 16 )
+
+[node name="Timer" type="Timer" parent="WallSense"]
+wait_time = 0.5
+autostart = true
+
+[node name="RayCast" type="RayCast" parent="WallSense"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.451393, 0 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="RayCast2" type="RayCast" parent="WallSense"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.376547, 0 )
+enabled = true
+cast_to = Vector3( 0, 1, 0 )
+
+[node name="RayCast3" type="RayCast" parent="WallSense"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.456597, 0, 0 )
+enabled = true
+cast_to = Vector3( -1, 0, 0 )
+
+[node name="RayCast4" type="RayCast" parent="WallSense"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472139, 0, 0 )
+enabled = true
+cast_to = Vector3( 1, 0, 0 )
+
+[node name="RayCast5" type="RayCast" parent="WallSense"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.173111, -0.622407 )
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+
+[node name="FrontRayCast" type="RayCast" parent="WallSense"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364914, 0.850389 )
+enabled = true
+cast_to = Vector3( 0, 0, 1 )
+debug_shape_thickness = 5
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 8 )
+
+[node name="FishMotifPlayer" type="Spatial" parent="."]
+script = ExtResource( 17 )
+
+[node name="FishBrainNode" type="Spatial" parent="."]
+script = ExtResource( 18 )
+
+[node name="RelocateTimer" type="Timer" parent="FishBrainNode"]
+wait_time = 8.0
+autostart = true
+
+[node name="SenseBrain" type="Spatial" parent="."]
+script = ExtResource( 20 )
+
+[node name="HungerNode" type="Node" parent="SenseBrain"]
+script = ExtResource( 9 )
+
+[node name="SensedTimer" type="Timer" parent="SenseBrain"]
+autostart = true
+
+[node name="FishSense" type="Spatial" parent="."]
+script = ExtResource( 5 )
+
+[node name="SenseArea" type="Area" parent="FishSense"]
+collision_layer = 0
+collision_mask = 2084
+
+[node name="CollisionShape" type="CollisionShape" parent="FishSense/SenseArea"]
+shape = SubResource( 37 )
+
+[node name="Timer" type="Timer" parent="FishSense"]
+wait_time = 2.0
+
+[node name="FishAttackNode" type="Spatial" parent="."]
+script = ExtResource( 15 )
+attackBuff = ExtResource( 29 )
+
+[node name="DetectArea" type="Area" parent="FishAttackNode"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.29663 )
+collision_layer = 0
+collision_mask = 2054
+monitoring = false
+
+[node name="CollisionShape" type="CollisionShape" parent="FishAttackNode/DetectArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.561004 )
+shape = SubResource( 38 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FishAttackNode"]
+reset_on_save = false
+playback_speed = 2.0
+method_call_mode = 1
+anims/RESET = SubResource( 27 )
+anims/attack = SubResource( 26 )
+
+[node name="AttackingNode" parent="FishAttackNode" groups=["Fish"] instance=ExtResource( 23 )]
+
+[node name="AttackingArea" parent="FishAttackNode/AttackingNode" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.86104 )
+
+[node name="MeshInstance" type="MeshInstance" parent="FishAttackNode/AttackingNode/AttackingArea" index="1"]
+transform = Transform( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+mesh = SubResource( 31 )
+skeleton = NodePath("../../..")
+
+[node name="Timer" type="Timer" parent="FishAttackNode"]
+wait_time = 0.5
+one_shot = true
+
+[node name="BrainStateExpressionNode" type="Spatial" parent="."]
+script = ExtResource( 21 )
+
+[node name="DebugArea" type="Area" parent="."]
+script = ExtResource( 22 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DebugArea"]
+shape = SubResource( 32 )
+
+[node name="FishBuffNode" type="Node" parent="."]
+script = ExtResource( 24 )
+
+[node name="ResponseNode" type="Spatial" parent="."]
+script = ExtResource( 27 )
+
+[node name="FishDanceNode" type="Spatial" parent="."]
+script = ExtResource( 32 )
+
+[node name="FishSingNode" type="Spatial" parent="."]
+script = ExtResource( 31 )
+
+[node name="GroupNode" type="Spatial" parent="."]
+script = ExtResource( 6 )
+
+[node name="Timer" type="Timer" parent="GroupNode"]
+
+[node name="NerveNode" type="Node" parent="."]
+script = ExtResource( 28 )
+
+[node name="NerveTickTimer" type="Timer" parent="NerveNode"]
+autostart = true
+
+[node name="BrainStateNode" type="Node" parent="."]
+script = ExtResource( 25 )
+
+[node name="FishAttackableNode" type="Spatial" parent="." groups=["Fish"]]
+script = ExtResource( 35 )
+
+[node name="AttackableNode" parent="FishAttackableNode" groups=["Fish"] instance=ExtResource( 30 )]
+
+[node name="FishFishTalkManager" type="Node" parent="."]
+script = ExtResource( 33 )
+
+[node name="FishMeshPath" type="Path" parent="."]
+transform = Transform( 1.49562, 0, 0, 0, 1.49562, 0, 0, 0, 1.49562, 0, 0, 0 )
+curve = SubResource( 35 )
+script = ExtResource( 38 )
+tesselate_tolerance = 3
+smooth = false
+sides = 6
+meshMaterial = ExtResource( 34 )
+widthCurve2 = SubResource( 36 )
+
+[node name="ParentArea" parent="FishMeshPath" instance=ExtResource( 10 )]
+
+[node name="FishSpeedNode" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="FishInventory" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="3DPickable" parent="." instance=ExtResource( 2 )]
+collision_layer = 2
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.992248, 0 )
+light_energy = 0.2
+light_indirect_energy = 0.2
+
+[connection signal="brokefree" from="." to="FishMotifPlayer" method="_on_Fish_brokefree"]
+[connection signal="caught" from="." to="FishMotifPlayer" method="_on_Fish_caught"]
+[connection signal="caught" from="." to="BrainStateNode" method="_on_Fish_caught"]
+[connection signal="fish_activated" from="." to="FishSense" method="_on_Fish_fish_activated"]
+[connection signal="fish_deactivated" from="." to="FishSense" method="_on_Fish_fish_deactivated"]
+[connection signal="fishready" from="." to="FishMotifPlayer" method="_on_Fish_fishready"]
+[connection signal="fishready" from="." to="FishBrainNode" method="_on_Fish_fishready"]
+[connection signal="fishready" from="." to="FishBuffNode" method="_on_Fish_fishready"]
+[connection signal="fishready" from="." to="NerveNode" method="_on_Fish_fishready"]
+[connection signal="fishready" from="." to="BrainStateNode" method="_on_Fish_fishready"]
+[connection signal="fishready" from="." to="FishMeshPath" method="_on_Fish_fishready"]
+[connection signal="hooked" from="." to="FishMotifPlayer" method="_on_Fish_hooked"]
+[connection signal="start_play" from="." to="FishFishTalkManager" method="_on_Fish_start_play"]
+[connection signal="velocity_out" from="." to="FishSpeedNode" method="_on_Fish_velocity_out"]
+[connection signal="response_out" from="FishBrainNode" to="ResponseNode" method="_on_FishBrainNode_response_out"]
+[connection signal="response_out" from="FishBrainNode" to="NerveNode" method="_on_FishBrainNode_response_out"]
+[connection signal="timeout" from="FishBrainNode/RelocateTimer" to="FishBrainNode" method="_on_Timer_timeout"]
+[connection signal="situation_sense" from="SenseBrain" to="FishBrainNode" method="_on_SenseBrain_situation_sense"]
+[connection signal="timeout" from="SenseBrain/SensedTimer" to="SenseBrain" method="_on_SensedTimer_timeout"]
+[connection signal="dangersensed" from="FishSense" to="SenseBrain" method="_on_FishSense_dangersensed"]
+[connection signal="identifiedsensed" from="FishSense" to="SenseBrain" method="_on_FishSense_identifiedsensed"]
+[connection signal="body_entered" from="FishSense/SenseArea" to="FishSense" method="_on_SenseArea_body_entered"]
+[connection signal="timeout" from="FishSense/Timer" to="FishSense" method="_on_Timer_timeout"]
+[connection signal="food_eaten" from="FishAttackNode" to="SenseBrain/HungerNode" method="_on_FishAttackNode_food_eaten"]
+[connection signal="food_eaten" from="FishAttackNode" to="FishInventory" method="_on_FishAttackNode_food_eaten"]
+[connection signal="release_pressure_from_attack" from="FishAttackNode" to="NerveNode" method="_on_FishAttackNode_release_pressure_from_attack"]
+[connection signal="body_entered" from="FishAttackNode/DetectArea" to="FishAttackNode" method="_on_Area_body_entered"]
+[connection signal="body_attacked" from="FishAttackNode/AttackingNode" to="FishAttackNode" method="_on_AttackingNode_body_attacked"]
+[connection signal="timeout" from="FishAttackNode/Timer" to="FishAttackNode" method="_on_Timer_timeout"]
+[connection signal="mouse_entered" from="DebugArea" to="DebugArea" method="_on_DebugArea_mouse_entered"]
+[connection signal="buff_out" from="ResponseNode" to="FishBuffNode" method="_on_ResponseNode_buff_out"]
+[connection signal="expression_out" from="ResponseNode" to="FishAttackNode" method="receive_expression"]
+[connection signal="expression_out" from="ResponseNode" to="FishDanceNode" method="receive_expression"]
+[connection signal="expression_out" from="ResponseNode" to="FishSingNode" method="receive_expression"]
+[connection signal="expression_out" from="ResponseNode" to="GroupNode" method="receive_expression"]
+[connection signal="mover_out" from="ResponseNode" to="." method="_on_ResponseNode_mover_out"]
+[connection signal="do_dance" from="FishDanceNode" to="AnimationPlayer" method="play" binds= [ "dance" ]]
+[connection signal="sing" from="FishSingNode" to="FishMotifPlayer" method="_on_FishSingNode_sing"]
+[connection signal="timeout" from="GroupNode/Timer" to="GroupNode" method="_on_Timer_timeout"]
+[connection signal="nerve_restored" from="NerveNode" to="BrainStateNode" method="_on_NerveNode_nerve_restored"]
+[connection signal="nerve_snapped" from="NerveNode" to="BrainStateNode" method="_on_NerveNode_nerve_snapped"]
+[connection signal="timeout" from="NerveNode/NerveTickTimer" to="NerveNode" method="_on_NerveTickTimer_timeout"]
+[connection signal="brainstate_switched" from="BrainStateNode" to="BrainStateExpressionNode" method="_on_BrainStateNode_brainstate_switched"]
+[connection signal="attacked" from="FishAttackableNode/AttackableNode" to="FishAttackableNode" method="_on_AttackableNode_attacked"]
+[connection signal="talk_over" from="FishFishTalkManager" to="." method="_on_FishFishTalkManager_talk_over"]
+[connection signal="speed_out" from="FishSpeedNode" to="FishMeshPath" method="_on_FishSpeedNode_speed_out"]
+
+[editable path="FishAttackNode/AttackingNode"]
+[editable path="3DPickable"]

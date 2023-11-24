@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/ship/upgrades/Shupgrade_1.tres" type="Resource" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Resource
+
+export(Array, Resource) var upgradeArray
+"
+
+[resource]
+script = SubResource( 1 )
+upgradeArray = [ ExtResource( 1 ) ]

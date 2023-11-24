@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/replacementgrammar/Rule.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+startSign = "A"
+replacementString = "I gotta have the key.|This fragile egg will likely crack.|You don't wanna find out how this will go.|You deserve better.|I could say that nothing bad will happen, but that'd be a lie.|It can feel it coming in the air.|Every night it sees your face in the dark.|It's been waiting for this moment.|All it's life it has remembered, the first and last time it will meet you.|That I wanted more. That I wanted more.|That I wanted it so bad.|Here comes a sign in the form of a girl.|Show me how you do that trick."
+ruleSplit = "|"
+elementSplit = "~"
+tagSplit = "*"
+noSpaceChar = "`"

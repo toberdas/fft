@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/casting/CastBobber.gd" type="Script" id=1]
+[ext_resource path="res://scenes/helper/Emitter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/casting/HookScript.gd" type="Script" id=3]
+[ext_resource path="res://scenes/casting/Bait.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.2, 0.2, 0.2 )
+
+[node name="CastBobber" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+
+[node name="Hook" type="Spatial" parent="."]
+script = ExtResource( 3 )
+
+[node name="HookEmitter" parent="Hook" instance=ExtResource( 2 )]
+collision_mask = 2
+interval = 1
+maxRadius = 4.0
+
+[node name="Bait" parent="." instance=ExtResource( 4 )]
+
+[connection signal="ignore_nibble" from="Hook" to="." method="_on_Hook_ignore_nibble"]
+[connection signal="nibble" from="Hook" to="." method="_on_Hook_nibble"]

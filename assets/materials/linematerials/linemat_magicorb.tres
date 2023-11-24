@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://assets/shaders/sh_line_magic_orb.tres" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/base_color_shadow = Color( 0.5, 0, 0, 1 )
+shader_param/base_color_highlight = Color( 0, 0.5, 0, 1 )
+shader_param/base_color_blend = 1.2
+shader_param/color_modulate_frequency = 1.0
+shader_param/noise_displacement = 0.3
+shader_param/noise_scale = 7.0
+shader_param/noise_time_scale = 1.0
+shader_param/alpha_distance_min = 1.08
+shader_param/alpha_distance_max = 1.6
+shader_param/alpha_time_scale = 1.0
+shader_param/emission_intensity = 2.0
+shader_param/highlight_intensity = 3.0

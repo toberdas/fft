@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/inventory/EquipSlot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/inventory/EquipSlot.gd" type="Script" id=2]
+[ext_resource path="res://assets/img/ui/inventory_rod.png" type="Texture" id=3]
+
+[node name="MarginContainer" type="MarginContainer"]
+margin_left = 415.0
+margin_right = 775.0
+margin_bottom = 500.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 360.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 360, 0 )
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+margin_top = 70.0
+margin_right = 360.0
+margin_bottom = 430.0
+rect_min_size = Vector2( 150, 360 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="RodEquip" type="Node2D" parent="VBoxContainer/TextureRect" groups=["EquipSlot"] instance=ExtResource( 1 )]
+position = Vector2( 83, 215 )
+script = ExtResource( 2 )
+equips = "rod"
+
+[node name="BaitEquip" type="Node2D" parent="VBoxContainer/TextureRect" groups=["EquipSlot"] instance=ExtResource( 1 )]
+position = Vector2( 143, 241 )
+script = ExtResource( 2 )
+equips = "bait"
+
+[node name="LineEquip" type="Node2D" parent="VBoxContainer/TextureRect" groups=["EquipSlot"] instance=ExtResource( 1 )]
+position = Vector2( 212, 192 )
+script = ExtResource( 2 )
+equips = "line"
+
+[node name="NetEquip" type="Node2D" parent="VBoxContainer/TextureRect" groups=["EquipSlot"] instance=ExtResource( 1 )]
+position = Vector2( 227, 263 )
+script = ExtResource( 2 )
+equips = "net"
+
+[node name="MemoryEquip" type="Node2D" parent="VBoxContainer/TextureRect" groups=["EquipSlot"] instance=ExtResource( 1 )]
+position = Vector2( 166, 124 )
+script = ExtResource( 2 )
+equips = "memory"

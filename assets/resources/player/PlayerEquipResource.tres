@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://assets/resources/items/EquipResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/inventory/EquipSlotResource.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+name = "Bait"
+tooltip = ""
+equips = "bait"
+locks = true
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+name = "Rod"
+tooltip = ""
+equips = "rod"
+locks = false
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+name = "Net"
+tooltip = ""
+equips = "bait"
+locks = false
+locksPrevious = false
+locked = false
+
+[resource]
+script = ExtResource( 1 )
+name = "My equips"
+equipSlotResources = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ]

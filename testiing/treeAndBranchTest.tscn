@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://testiing/Test.gd" type="Script" id=2]
+[ext_resource path="res://testiing/meshpathtest.gd" type="Script" id=3]
+[ext_resource path="res://scenes/helper/Rotator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://env_world.tres" type="Environment" id=5]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="TreeNBranchTest" type="Spatial" parent="."]
+script = ExtResource( 3 )
+
+[node name="Tree" type="Spatial" parent="TreeNBranchTest"]
+
+[node name="Rotator" parent="." instance=ExtResource( 4 )]
+speed = 0.4
+
+[node name="Camera" type="Camera" parent="Rotator"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.16577, 33.9755 )
+environment = ExtResource( 5 )
+
+[connection signal="test1" from="." to="TreeNBranchTest" method="_on_Spatial_test1"]
+[connection signal="test2" from="." to="TreeNBranchTest" method="_on_Spatial_test2"]

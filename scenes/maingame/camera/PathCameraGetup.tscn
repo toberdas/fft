@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/maingame/camera/PathCameraGetup.gd" type="Script" id=1]
+
+[sub_resource type="Curve3D" id=3]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector3Array( 0.106472, 1.43141, 1.19792, -0.106472, -1.43141, -1.19792, 0, 8.1779, 17.2387, -0.335587, 1.02838, 2.0065, 0.335587, -1.02838, -2.0065, 2.71161, 3.90685, 11.2271, -0.055069, 0.498779, 2.64344, 0.055069, -0.498779, -2.64344, 2.92265, 2.11278, 5.57228, 0.0509335, 0.0837876, 1.40307, -0.0509335, -0.0837876, -1.40307, 2.4725, 1.39368, 0.187311 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[node name="PathCameraGetup" type="Spatial"]
+script = ExtResource( 1 )
+point = NodePath("Path/Follow/PathCameraPoint")
+
+[node name="Path" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0 )
+curve = SubResource( 3 )
+
+[node name="Follow" type="PathFollow" parent="Path"]
+transform = Transform( 0.999996, 0, 0, 0, 0.999999, 0, 0, 0, 0.999988, 0, 8.1779, 17.2387 )
+rotation_mode = 0
+
+[node name="PathCameraPoint" type="Spatial" parent="Path/Follow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 7.10543e-15, 1, 0.00882581, 0, 0 )

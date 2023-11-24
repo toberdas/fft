@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://assets/resources/helper/ResourceList.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/textures/rock_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/textures/seaweed_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/textures/sand_1.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/img/textures/text_rock_1.png" type="Texture" id=5]
+[ext_resource path="res://assets/img/textures/seaweed_1.png" type="Texture" id=6]
+[ext_resource path="res://assets/img/textures/rock_2.png" type="Texture" id=7]
+[ext_resource path="res://assets/img/textures/rocky1.png" type="Texture" id=8]
+[ext_resource path="res://assets/img/textures/rocky4.png" type="Texture" id=9]
+[ext_resource path="res://assets/img/textures/rocky3.png" type="Texture" id=10]
+[ext_resource path="res://assets/img/textures/rocky2.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+resourceList = [ ExtResource( 8 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ) ]

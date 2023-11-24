@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/helper/SeaBalanceNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/fishisland/FishIslandScene.gd" type="Script" id=2]
+[ext_resource path="res://scenes/helper/3DPickable.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 13.3121, 18.1682, 34.514 )
+
+[node name="FishIslandScene" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="SeaBalanceNode" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.64671, 0 )
+moveMod = 1.0
+
+[node name="AnchorFrontRight" parent="SeaBalanceNode" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9917, 0, -20.8006 )
+
+[node name="AnchorFrontLeft" parent="SeaBalanceNode" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9747, 0, -21.1701 )
+
+[node name="AnchorBackLeft" parent="SeaBalanceNode" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1136, 0, 47.6713 )
+
+[node name="AnchorBackRight" parent="SeaBalanceNode" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3382, 0, 47.6261 )
+
+[node name="LevelAddNode" type="Spatial" parent="SeaBalanceNode"]
+
+[node name="FishMeshAddNode" type="Spatial" parent="SeaBalanceNode"]
+transform = Transform( 119.447, 0, 0, 0, 119.447, 0, 0, 0, 119.447, 0, -11.9455, 28.5464 )
+
+[node name="3DPickable" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape" parent="3DPickable" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.7052 )
+shape = SubResource( 1 )
+
+[connection signal="emit_data" from="SeaBalanceNode" to="." method="_on_SeaBalanceNode_emit_data"]
+
+[editable path="SeaBalanceNode"]
+[editable path="3DPickable"]

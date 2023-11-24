@@ -1,0 +1,117 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible;
+
+uniform float sin_mult = 0.2;
+uniform float cos_mult = 0.1;
+uniform sampler2D tex_vtx_17;
+uniform vec4 ColorUniform : hint_color = vec4(0.000000, 1.000000, 0.074612, 1.000000);
+uniform sampler2D tex_frg_6;
+uniform float alpha = 0.8;
+
+
+
+void vertex() {
+// Input:6
+	vec3 n_out6p0 = VERTEX;
+
+// Input:26
+	vec3 n_out26p0 = COLOR.rgb;
+
+// VectorDecompose:27
+	float n_out27p0 = n_out26p0.x;
+	float n_out27p1 = n_out26p0.y;
+	float n_out27p2 = n_out26p0.z;
+
+// Input:23
+	float n_out23p0 = TIME;
+
+// ScalarUniform:38
+	float n_out38p0 = sin_mult;
+
+// ScalarOp:37
+	float n_out37p0 = n_out23p0 * n_out38p0;
+
+// ScalarFunc:24
+	float n_out24p0 = sin(n_out37p0);
+
+// Scalar:35
+	float n_out35p0 = 3.141590;
+
+// ScalarOp:29
+	float n_out29p0 = n_out24p0 * n_out35p0;
+
+// ScalarOp:33
+	float n_out33p0 = n_out27p0 * n_out29p0;
+
+// Input:30
+	float n_out30p0 = TIME;
+
+// ScalarUniform:39
+	float n_out39p0 = cos_mult;
+
+// ScalarOp:36
+	float n_out36p0 = n_out30p0 * n_out39p0;
+
+// ScalarFunc:31
+	float n_out31p0 = cos(n_out36p0);
+
+// ScalarOp:32
+	float n_out32p0 = n_out31p0 * n_out35p0;
+
+// ScalarOp:34
+	float n_out34p0 = n_out27p2 * n_out32p0;
+
+// VectorCompose:28
+	float n_in28p1 = 0.00000;
+	vec3 n_out28p0 = vec3(n_out33p0, n_in28p1, n_out34p0);
+
+// VectorOp:9
+	vec3 n_out9p0 = n_out6p0 + n_out28p0;
+
+// Texture:17
+	vec4 tex_vtx_17_read = texture(tex_vtx_17, n_out9p0.xy);
+	vec3 n_out17p0 = tex_vtx_17_read.rgb;
+	float n_out17p1 = tex_vtx_17_read.a;
+
+// VectorOp:16
+	vec3 n_out16p0 = n_out17p0 + n_out9p0;
+
+// VectorOp:12
+	vec3 n_in12p1 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out12p0 = n_out16p0 + n_in12p1;
+
+// Output:0
+	VERTEX = n_out12p0;
+
+}
+
+void fragment() {
+// ColorUniform:7
+	vec3 n_out7p0 = ColorUniform.rgb;
+	float n_out7p1 = ColorUniform.a;
+
+// Texture:6
+	vec4 tex_frg_6_read = texture(tex_frg_6, UV.xy);
+	vec3 n_out6p0 = tex_frg_6_read.rgb;
+	float n_out6p1 = tex_frg_6_read.a;
+
+// ColorOp:8
+	vec3 n_out8p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) / (n_out6p0);
+
+// ScalarUniform:3
+	float n_out3p0 = alpha;
+
+// Output:0
+	ALBEDO = n_out8p0;
+	ALPHA = n_out3p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"

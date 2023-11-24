@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/ui/2DPointer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/HeaderLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/MapScene.gd" type="Script" id=3]
+[ext_resource path="res://scenes/ui/PlayerMenuBackground.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+bg_color = Color( 0.44, 0.3168, 0.3168, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.831373, 0.588235, 0.588235, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+anti_aliasing_size = 2.0
+
+[node name="MapScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+mapRect = NodePath("MarginContainer2/VBoxContainer/Panel/MarginContainer/ColorRect")
+
+[node name="PlayerMenuBackground" parent="." instance=ExtResource( 4 )]
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 12
+custom_constants/margin_top = 12
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 1268.0
+margin_bottom = 708.0
+custom_constants/separation = 12
+
+[node name="Label" parent="MarginContainer2/VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 1256.0
+
+[node name="Panel" type="Panel" parent="MarginContainer2/VBoxContainer"]
+margin_top = 48.0
+margin_right = 1256.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 12
+custom_constants/margin_top = 12
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 12
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/VBoxContainer/Panel/MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 1244.0
+margin_bottom = 636.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.541176, 0.294118, 0.294118, 1 )
+
+[node name="2DPointer" parent="." instance=ExtResource( 1 )]
+position = Vector2( 643, 384 )

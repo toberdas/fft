@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/items/BaseItem.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/icons/netIcon.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+icon = ExtResource( 2 )
+itemName = "Net"
+itemID = "net"
+description = "The net is the second most important tool of the fishing slime."
+toolTip = "Equip the net! It allows the slime to dash. Press and hold X to charge a dash, release it to dash in any direction."
+itemType = "net"
+rarity = "stellar"
+buffArray = [  ]
+iconModulate = Color( 0.541176, 0.721569, 1, 1 )
+id = ""
+currentScene = 0
+inEquip = false
+pickedUp = false

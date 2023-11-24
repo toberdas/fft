@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/items/hookData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+hookSpeed = 0.5
+hookDrag = 0.5
+hookAcceleration = 0.5
+hookBrake = 0.5
+hookLives = 6

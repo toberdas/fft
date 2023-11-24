@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/ui/2DPointer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/maingame/player/Investigation.gd" type="Script" id=2]
+[ext_resource path="res://assets/materials/SubtleWave.tres" type="Material" id=3]
+[ext_resource path="res://assets/img/ui/bigEye.png" type="Texture" id=4]
+[ext_resource path="res://assets/img/ui/titelEye.png" type="Texture" id=5]
+[ext_resource path="res://scenes/helper/TypingLabel.tscn" type="PackedScene" id=7]
+
+[node name="Investigation" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="2DPointer" parent="Control" instance=ExtResource( 1 )]
+position = Vector2( 655, 346 )
+movementActive = false
+mode = 1
+rayDepth = 256.0
+allowPicking = false
+
+[node name="Sprite" type="Sprite" parent="Control"]
+modulate = Color( 0.619608, 0.717647, 1, 1 )
+material = ExtResource( 3 )
+position = Vector2( 1124, 510 )
+texture = ExtResource( 4 )
+
+[node name="TypingLabel" parent="Control/Sprite" instance=ExtResource( 7 )]
+
+[node name="Sprite2" type="Sprite" parent="Control"]
+modulate = Color( 0.396078, 0.784314, 0.952941, 1 )
+material = ExtResource( 3 )
+position = Vector2( 1091, 60 )
+texture = ExtResource( 5 )
+
+[node name="TypingLabel" parent="Control/Sprite2" instance=ExtResource( 7 )]
+
+[connection signal="picked" from="Control/2DPointer" to="." method="_on_2DPointer_picked"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/helper/ParentArea.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/fishisland/bigfishscenes/FishIslandMeshNode.gd" type="Script" id=2]
+[ext_resource path="res://import/fishfish.glb" type="PackedScene" id=3]
+
+[node name="CupboardMesh" type="MeshInstance"]
+script = ExtResource( 2 )
+
+[node name="ParentArea" parent="." instance=ExtResource( 1 )]
+shapeOrigin = 2
+
+[node name="fishfish" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="fish_1" parent="fishfish" index="0"]
+visible = false
+
+[node name="fish_2" parent="fishfish" index="1"]
+visible = false
+
+[node name="fish_3" parent="fishfish" index="2"]
+visible = false
+
+[node name="fish_4" parent="fishfish" index="3"]
+visible = false
+
+[node name="fish_5" parent="fishfish" index="4"]
+visible = false
+
+[editable path="fishfish"]

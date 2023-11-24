@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/island/music/MusicPlayer.gd" type="Script" id=1]
+[ext_resource path="res://scenes/island/music/NoteImproviser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/island/music/RythmNode.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/resources/music/musics/WindMusic.tres" type="Resource" id=4]
+
+[node name="MusicPlayer" type="Spatial"]
+script = ExtResource( 1 )
+autoplay = true
+myMusic = ExtResource( 4 )
+instrumentSpeler = ExtResource( 2 )
+rythmNode = ExtResource( 3 )

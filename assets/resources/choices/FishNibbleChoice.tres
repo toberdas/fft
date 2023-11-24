@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/choices/ChoiceResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+acceptInputName = "a"
+denyInputName = "b"
+time = 0.7
+hasUI = true
+promptLabel = "THE FISH NIBBLES"
+acceptLabel = "PULL"
+denyLabel = "IGNORE"
+openAnimationSpeed = 4.0

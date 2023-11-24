@@ -1,0 +1,119 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://scenes/helper/Follower.gd" type="Script" id=1]
+[ext_resource path="res://scenes/casting/CastScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/helper/SeaCheckComponent.tscn" type="PackedScene" id=4]
+[ext_resource path="res://env_underwater2.tres" type="Environment" id=5]
+[ext_resource path="res://env_world.tres" type="Environment" id=6]
+[ext_resource path="res://scripts/IndependentTransforms.gd" type="Script" id=11]
+[ext_resource path="res://scenes/maingame/player/FloorCheckers.gd" type="Script" id=12]
+[ext_resource path="res://scenes/karakters/nickdeblob/BlobScene.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/maingame/camera/CamMount.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/maingame/camera/RotatingCamera.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/maingame/camera/FirstPersonGetup.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/casting/CastManager.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/helper/MeshPivot.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/maingame/camera/ThirdPersonCamera.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/maingame/player/ParentFloorChecker.gd" type="Script" id=22]
+[ext_resource path="res://scenes/maingame/player/PlayerCamNode.gd" type="Script" id=24]
+[ext_resource path="res://scenes/helper/conditionchecker/ConditionChecker.gd" type="Script" id=25]
+
+[sub_resource type="SphereShape" id=16]
+radius = 1.29576
+
+[node name="IndependentTransform" type="Spatial"]
+script = ExtResource( 11 )
+
+[node name="ConditionChecker" type="Node" parent="."]
+script = ExtResource( 25 )
+
+[node name="RotatingCamGetup" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 112.364, 0 )
+target = NodePath("../..")
+camName = "RotatingCam"
+
+[node name="ThirdPersonCamGetup" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 114.364, 0 )
+target = NodePath("../../ThirdPersonCamPoint")
+followMultiplier = 2.0
+camName = "ThirdPersonCam"
+
+[node name="FirstPersonCamGetup" parent="." instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 112.364, 0 )
+target = NodePath("../..")
+mode = "origin"
+camName = "FirstPersonCam"
+maxAngle = 1.8
+
+[node name="PlayerFollower" type="Spatial" parent="."]
+script = ExtResource( 1 )
+MOVESPEED = 1.2
+target = NodePath("../..")
+followMultiplier = 4.0
+mode = "origin"
+
+[node name="MeshPivot" parent="PlayerFollower" instance=ExtResource( 18 )]
+targetZNode = NodePath("../../..")
+maxNormal = -1.0
+interpolateFloat = 6.0
+
+[node name="BlobScene" parent="PlayerFollower/MeshPivot" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00106505, 0 )
+
+[node name="FloorCheckers" type="Spatial" parent="PlayerFollower/MeshPivot"]
+transform = Transform( 0.572338, 0, 0, 0, 0.572338, 0, 0, 0, 0.572338, 0, 0.0948982, 0 )
+script = ExtResource( 12 )
+
+[node name="RayCast" type="RayCast" parent="PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46424, 0.671501, -0.485671 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="RayCast2" type="RayCast" parent="PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48567, 0.671501, 0.48567 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="RayCast3" type="RayCast" parent="PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.496386, 0.671501, 0.496386 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="RayCast4" type="RayCast" parent="PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48567, 0.671501, -0.44281 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="ParentFloorChecker" type="Spatial" parent="PlayerFollower/MeshPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.203179, 0 )
+script = ExtResource( 22 )
+
+[node name="Area" type="Area" parent="PlayerFollower/MeshPivot/ParentFloorChecker"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.442245, 0 )
+collision_layer = 0
+collision_mask = 16384
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerFollower/MeshPivot/ParentFloorChecker/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279578, 0 )
+shape = SubResource( 16 )
+
+[node name="CastManager" parent="PlayerFollower" instance=ExtResource( 17 )]
+castPoint = NodePath("../../../Follower/CastPoint")
+defaultCast = ExtResource( 2 )
+debug = true
+
+[node name="PlayerCamNode" type="Spatial" parent="PlayerFollower"]
+script = ExtResource( 24 )
+aboveWaterEnvironment = ExtResource( 6 )
+underWaterEnvironment = ExtResource( 5 )
+
+[node name="CamMount" parent="PlayerFollower/PlayerCamNode" instance=ExtResource( 14 )]
+target = NodePath("../../../ThirdPersonCamGetup")
+
+[node name="CamSeaCheck" parent="PlayerFollower/PlayerCamNode/CamMount" instance=ExtResource( 4 )]
+
+[connection signal="cast_cleared" from="PlayerFollower/CastManager" to="PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_cast_cleared"]
+[connection signal="start_cast" from="PlayerFollower/CastManager" to="PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_start_cast"]
+[connection signal="thrown" from="PlayerFollower/CastManager" to="PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_thrown"]
+[connection signal="emerged" from="PlayerFollower/PlayerCamNode/CamMount/CamSeaCheck" to="PlayerFollower/PlayerCamNode" method="_on_CamSeaCheck_emerged"]
+[connection signal="submerged" from="PlayerFollower/PlayerCamNode/CamMount/CamSeaCheck" to="PlayerFollower/PlayerCamNode" method="_on_CamSeaCheck_submerged"]

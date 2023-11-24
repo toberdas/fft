@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://assets/shaders/sh_3d_seaweed.tres" type="Shader" id=1]
+[ext_resource path="res://assets/img/textures/waterloggedwood_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/normalmaps/seaweed_1_nmap.png" type="Texture" id=3]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+period = 50.2
+persistence = 0.296
+
+[sub_resource type="NoiseTexture" id=2]
+seamless = true
+noise = SubResource( 1 )
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/sway_noise_factor = 0.052
+shader_param/swaydirection = Vector3( 0.03, 0.01, 0.03 )
+shader_param/sinmult = 1.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/world_location_add = 1.0
+shader_param/time_scale = 1.0
+shader_param/cosmult = 0.108
+shader_param/force = 0.2
+shader_param/radius = 2.0
+shader_param/PlayerPosition = null
+shader_param/pushdirection = Vector3( 0, -1, 0 )
+shader_param/BooleanUniform = true
+shader_param/tex_frg_2 = ExtResource( 2 )
+shader_param/tex_frg_5 = SubResource( 2 )
+shader_param/tex_frg_3 = ExtResource( 3 )

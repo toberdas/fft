@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/helper/SeaCheckComponent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/helper/Link.gd" type="Script" id=2]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.1
+
+[node name="Link" type="RigidBody"]
+collision_layer = 0
+collision_mask = 9
+mass = 0.0102041
+can_sleep = false
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0589805 )
+shape = SubResource( 1 )
+
+[node name="Joint" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.28035 )
+nodes/node_a = NodePath("..")
+linear_limit_x/enabled = false
+linear_limit_x/restitution = 0.01
+linear_limit_x/damping = 16.0
+angular_limit_x/force_limit = 0.012
+angular_spring_x/damping = 0.972
+linear_limit_y/upper_distance = 0.5
+linear_limit_y/restitution = 0.01
+linear_limit_y/damping = 16.0
+linear_limit_z/enabled = false
+linear_limit_z/upper_distance = 1.0
+linear_limit_z/restitution = 0.01
+linear_limit_z/damping = 16.0
+
+[node name="SeaCheckComponent" parent="." instance=ExtResource( 1 )]
+
+[connection signal="emerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_emerged"]
+[connection signal="submerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_submerged"]

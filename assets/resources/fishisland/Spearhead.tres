@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://assets/resources/fishisland/FishIslandResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/fishisland/islandlevels/SpearheadsChallenge.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/img/textures/caustics-generator2.png" type="Texture" id=3]
+[ext_resource path="res://assets/resources/items/specificItems/KEYS/RedKey.tres" type="Resource" id=4]
+[ext_resource path="res://assets/resources/interacts/TreasureResource.gd" type="Script" id=5]
+[ext_resource path="res://assets/resources/items/specificItems/rods/BeginnersRod.tres" type="Resource" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.560784, 0.0313726, 0.0313726, 1 )
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+key = ExtResource( 4 )
+lootItem = ExtResource( 6 )
+
+[resource]
+script = ExtResource( 1 )
+fishName = "Spearhead"
+description = "That I wanted more. That I wanted more. That I wanted it so bad. Here comes a sign in the form of a girl. Show me how you do that trick."
+levelScene = ExtResource( 2 )
+fishMeshName = "fish_4"
+fishIslandMaterial = SubResource( 1 )
+treasureResource = SubResource( 2 )

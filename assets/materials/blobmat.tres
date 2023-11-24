@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://assets/shaders/sh_3d_blobshader.tres" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/back_and_forth = 0.0
+shader_param/time_scale = 8.0
+shader_param/time_offset = 0.0
+shader_param/wave = 0.05
+shader_param/mask_black = 0.271
+shader_param/mask_white = 0.005
+shader_param/bloblength = 1.622
+shader_param/side_expand_movement = 1.02
+shader_param/side_expand_factor = 0.412
+shader_param/vertical_expand_movement = 0.867
+shader_param/vertical_expand_factor = 0.597
+shader_param/albedo = Color( 0, 0.992157, 1, 1 )
+shader_param/specular = 1.144
+shader_param/metallic = 1.203
+shader_param/roughness = 0.412
+shader_param/point_size = 1.0
+shader_param/normal_scale = 1.78
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )

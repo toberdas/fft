@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/generation/island/IslandVibeResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+panoramas = [  ]
+primaryColor = Color( 0.192157, 0.537255, 0.388235, 1 )
+secondaryColor = Color( 0.290196, 0.156863, 0.658824, 1 )

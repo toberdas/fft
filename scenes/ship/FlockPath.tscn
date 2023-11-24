@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/helper/PathWalker.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ship/FlockPath.gd" type="Script" id=3]
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=5]
+
+[sub_resource type="Curve3D" id=3]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector3Array( -2.52229, 1.73792, 2.62078, 2.52229, -1.73792, -2.62078, 1.73297, 1.87216, 6.43425, 1.85163, 0, 3.17422, -1.85163, 0, -3.17422, 5.07362, 4.87551, -2.45369, 3.10809, 0, -3.04196, -3.10809, 0, 3.04196, -4.48235, 4.68835, -4.22361, -2.5976, -0.696643, -1.5933, 2.5976, 0.696643, 1.5933, -2.42511, 2.63865, 6.45333, -1.52752, 0.855324, 2.08081, 1.52752, -0.855324, -2.08081, 1.73297, 1.87216, 6.43425 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Resource" id=4]
+resource_local_to_scene = true
+script = ExtResource( 5 )
+node = NodePath("PathFollow/FlockFollow")
+time = -1.0
+factor = 1.0
+distance = 256.0
+slowdown = 2.0
+stop = 0.0
+type = 0
+unique = false
+priority = 10
+clears = false
+persistent = false
+
+[node name="Path" type="Path"]
+curve = SubResource( 3 )
+script = ExtResource( 3 )
+moveResource = SubResource( 4 )
+
+[node name="PathFollow" type="PathFollow" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73297, 1.87216, 6.43425 )
+rotation_mode = 0
+script = ExtResource( 1 )
+auto = true
+looping = true
+walkSpeed = 4.0
+
+[node name="FlockFollow" type="Spatial" parent="PathFollow"]

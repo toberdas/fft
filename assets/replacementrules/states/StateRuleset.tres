@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://assets/resources/replacementgrammar/RuleSet.gd" type="Script" id=1]
+[ext_resource path="res://assets/replacementrules/states/ComplexStateRule.tres" type="Resource" id=2]
+[ext_resource path="res://assets/replacementrules/states/SnapStateRule.tres" type="Resource" id=3]
+[ext_resource path="res://assets/replacementrules/states/NeutralStateRule.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+ruleArray = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ]
+startRule = ExtResource( 4 )

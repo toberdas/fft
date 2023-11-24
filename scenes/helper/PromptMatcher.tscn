@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/helper/PromptMatcher.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/effects/crunchy_confirm.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/effects/dia_tog.wav" type="AudioStream" id=3]
+
+[node name="PromptMatcher" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="InputAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -12.0
+
+[node name="MatchAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -12.0
+
+[connection signal="inputaudio" from="." to="InputAudio" method="play"]
+[connection signal="promptsuccess" from="." to="MatchAudio" method="play"]

@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://import/ShipHeart.glb" type="PackedScene" id=1]
+[ext_resource path="res://scenes/helper/3DPickable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/interacts/specific/ShipHeart.gd" type="Script" id=3]
+[ext_resource path="res://scenes/interacts/specific/FishMenu.gd" type="Script" id=4]
+[ext_resource path="res://scenes/interacts/InteractableComponent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/ship/ShipHeartUpgradeScene.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.394523
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.290045, 0.281491, 0.312719 )
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.415686, 0.0745098, 0.0745098, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1, 0.879505, 1 )
+
+[node name="ShipHeart" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="3DPickable" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="CollisionShape" parent="3DPickable" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00527701, 0.760777, 0.643003 )
+shape = SubResource( 3 )
+
+[node name="OpenUpgradePickable" parent="." index="1" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.998514, 0, 0 )
+
+[node name="CollisionShape" parent="OpenUpgradePickable" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0027585, -0.0478951, 0.0123253 )
+shape = SubResource( 4 )
+
+[node name="ShipHeart" parent="." index="2"]
+transform = Transform( -2.20002, 0, -7.16858e-07, 0, 2.20002, 0, 7.16858e-07, 0, -2.20002, 0, 0.22934, 0.0711299 )
+material/0 = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="ShipHeart" index="0"]
+
+[node name="CollisionShape" type="CollisionShape" parent="ShipHeart/StaticBody" index="0"]
+transform = Transform( 0.352405, 0, 7.10543e-15, 0, 0.352405, 0, -7.10543e-15, 0, 0.352405, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="FishMenu" type="Node" parent="." index="3"]
+script = ExtResource( 4 )
+
+[node name="ShipHeartUpgradeScene" parent="FishMenu" index="0" instance=ExtResource( 6 )]
+
+[node name="InteractableComponent" parent="." index="4" instance=ExtResource( 5 )]
+shape = SubResource( 2 )
+
+[node name="KeyAddNode" type="Spatial" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.596979, 0.942393 )
+
+[connection signal="save_game_out" from="." to="FishMenu" method="_on_ShipHeart_save_game_out"]
+[connection signal="ship_resource_out" from="." to="FishMenu" method="_on_ShipHeart_ship_resource_out"]
+[connection signal="upgrade_collection_out" from="." to="FishMenu" method="_on_ShipHeart_upgrade_collection_out"]
+[connection signal="picked" from="3DPickable" to="FishMenu" method="_on_3DPickable_picked"]
+[connection signal="picked" from="OpenUpgradePickable" to="FishMenu" method="_on_OpenUpgradePickable_picked"]
+[connection signal="emit_key" from="FishMenu" to="." method="_on_FishMenu_emit_key"]
+[connection signal="menu_closed" from="FishMenu" to="." method="_on_Menu_menu_closed"]
+[connection signal="menu_opened" from="FishMenu" to="." method="_on_FishMenu_menu_opened"]
+[connection signal="interact_closed" from="InteractableComponent" to="FishMenu" method="_on_InteractableComponent_interact_closed"]
+
+[editable path="3DPickable"]
+[editable path="OpenUpgradePickable"]

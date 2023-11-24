@@ -1,0 +1,39 @@
+[gd_resource type="Theme" load_steps=3 format=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0.647059 )
+skew = Vector2( 0.062, 0 )
+border_width_right = 9
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 9
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0745098, 0.129412, 0.137255, 1 )
+skew = Vector2( 0.058, 0 )
+border_width_left = 9
+border_color = Color( 0.505882, 0.498039, 0.831373, 1 )
+corner_radius_top_left = 21
+corner_radius_bottom_left = 25
+corner_detail = 20
+expand_margin_left = 6.0
+shadow_size = 1
+shadow_offset = Vector2( 8.973, 7.828 )
+anti_aliasing = false
+
+[resource]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_focus = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = SubResource( 2 )
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+Panel/styles/panel = SubResource( 1 )

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/island/IslandNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/maingame/worlds/IslandManager.gd" type="Script" id=2]
+
+[node name="IslandManager" type="Node"]
+script = ExtResource( 2 )
+islandNode = ExtResource( 1 )

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/island/ThreadLoader.gd" type="Script" id=1]
+
+[node name="IslandLoader" type="Spatial"]
+script = ExtResource( 1 )

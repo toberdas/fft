@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/resources/fish/FishData.gd" type="Script" id=1]
+[ext_resource path="res://assets/curves/test_curve1.tres" type="Curve" id=2]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+fishCurve = ExtResource( 2 )

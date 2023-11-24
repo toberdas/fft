@@ -1,0 +1,57 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://scenes/inventory/EquipSlotResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/items/EquipResource.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/upgrades/UpgradeResource.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 1 )
+name = "Take off"
+tooltip = "The ship is now capable of taking off for brief periods. Make sure the slime is safe and press L3 to start flying."
+equips = "component"
+locks = true
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 1 )
+name = "Dividends"
+tooltip = "The slime now crafts two keys instead of one"
+equips = "component"
+locks = true
+unlocksOn = SubResource( 3 )
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 1 )
+name = "Fly higher"
+tooltip = "The flight period is extended"
+equips = "component"
+locks = true
+unlocksOn = SubResource( 4 )
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 1 )
+name = "Fly forever"
+tooltip = "The flight period is indefinite"
+equips = "component"
+locks = true
+unlocksOn = SubResource( 5 )
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+name = "default"
+equipSlotResources = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
+
+[resource]
+script = ExtResource( 3 )
+equipResource = SubResource( 2 )
+name = "ship"
+label = "Learn to fly"
+tooltip = "Upgrade the ship."
+parameters = [  ]

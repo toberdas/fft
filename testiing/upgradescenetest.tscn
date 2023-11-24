@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://testiing/upgradescenetest.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ship/UpgradeCollectionScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/resources/upgrades/specific/MainUpgradeCollection.tres" type="Resource" id=3]
+
+[node name="upgradescenetest" type="Node"]
+script = ExtResource( 1 )
+upgradeResource = ExtResource( 3 )
+
+[node name="UpgradeScene" parent="." instance=ExtResource( 2 )]

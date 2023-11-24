@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/minigames/DownTheHatchShapes.gd" type="Script" id=1]
+
+[node name="DownTheHatchShapes" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -14, -12, -58, 91, 59, 130, -36, 176, -8, 234, 20, 230, 17, 191, 113, 147, 120, 116, 11, 71, 41, -17 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D"]
+polygon = PoolVector2Array( -18, 231, 29, 219, 29, 238, -17, 245 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -10, -20, -79, 13, -132, 119, -84, 202, 35, 224, 89, 179, 110, 139, 66, 132, 37, 169, -43, 154, -62, 110, -38, 47, 36, 26, 41, -20 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D2"]
+polygon = PoolVector2Array( 58, 118, 45, 137, 113, 152, 123, 137 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -25, -22, -45, 59, -161, 63, -149, 207, 88, 200, 112, 317, 179, 313, 163, 143, -95, 144, -92, 127, 44, 120, 73, -20 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D3"]
+polygon = PoolVector2Array( 103, 307, 190, 294, 194, 328, 110, 336 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -24, -15, -86, 103, 48, 122, 81, 96, 132, 109, 78, 190, -39, 187, -38, 250, 95, 250, 181, 233, 224, 84, 99, 20, 29, 62, 14, 52, 57, -15 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D4"]
+polygon = PoolVector2Array( -25, 172, -28, 280, -60, 272, -49, 180 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -37, -25, -38, 60, 156, 159, 257, 145, 264, 81, 171, 84, 59, 14, 52, -36, -40, -30 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D5"]
+polygon = PoolVector2Array( 235, 68, 250, 167, 282, 161, 286, 72 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -29, -22, -32, 54, -153, 79, -124, 289, -88, 293, -91, 350, -22, 347, -38, 294, 272, 293, 219, 67, 33, 55, 27, -28 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D6"]
+polygon = PoolVector2Array( -107, 336, -8, 335, -13, 374, -113, 364 )

@@ -1,0 +1,88 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://testiing/MeshAlongPathInstance.tscn" type="PackedScene" id=1]
+[ext_resource path="res://testiing/Test.gd" type="Script" id=2]
+[ext_resource path="res://testiing/meshpathtest.gd" type="Script" id=3]
+[ext_resource path="res://scenes/helper/Rotator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://env_world.tres" type="Environment" id=5]
+[ext_resource path="res://scenes/fish/FishMeshPath.gd" type="Script" id=7]
+[ext_resource path="res://assets/materials/mat_3d_fish.tres" type="Material" id=8]
+
+[sub_resource type="Curve3D" id=1]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.00758362, 0, -9.09495e-13, 0, 0, 0, 0, 0, 0, -0.0227504, 0, 1.03134, 0, 0, 0, 0, 0, 0, -0.00758362, 0, 2.00961, 0, 0, 0, 0, 0, 0, -0.0303335, 0, 3.0182 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve3D" id=2]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 0, 1.8276, 0, 0, 0, 0, 0, 0, 1.09201, 0, 2.68453, 0, 0, 0, 0, 0, 0, 1.93377, 0, 3.39737, 0, 0, 0, 0, 0, 0, 2.82861, 0, 4.07988 ),
+"tilts": PoolRealArray( 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve3D" id=5]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 0, 0.030951, 0, 0, 0, 0, 0, 0, -0.25793, 0, 0.938861, 0, 0, 0, 0, 0, 0, -0.474589, 0, 1.67138 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0.618182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.154545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve3D" id=7]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
+}
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 0.274775, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.608108, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0636363 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="meshpathtest" type="Spatial" parent="."]
+script = ExtResource( 3 )
+
+[node name="Path" parent="meshpathtest" instance=ExtResource( 1 )]
+curve = SubResource( 1 )
+lengthCurve = SubResource( 3 )
+
+[node name="Path2" parent="meshpathtest" instance=ExtResource( 1 )]
+curve = SubResource( 2 )
+lengthCurve = SubResource( 4 )
+
+[node name="Path3" parent="meshpathtest" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59916, 0, 3.10547 )
+curve = SubResource( 5 )
+lengthCurve = SubResource( 6 )
+
+[node name="Tree" type="Spatial" parent="meshpathtest"]
+
+[node name="FishPath" type="Path" parent="meshpathtest"]
+curve = SubResource( 7 )
+script = ExtResource( 7 )
+tesselate_tolerance = 3
+smoothness = 2.5
+sides = 12
+meshMaterial = ExtResource( 8 )
+widthCurve2 = SubResource( 8 )
+
+[node name="Rotator" parent="." instance=ExtResource( 4 )]
+speed = 0.4
+
+[node name="Camera" type="Camera" parent="Rotator"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.54494 )
+environment = ExtResource( 5 )
+
+[connection signal="test1" from="." to="meshpathtest" method="_on_Spatial_test1"]
+[connection signal="test2" from="." to="meshpathtest" method="_on_Spatial_test2"]

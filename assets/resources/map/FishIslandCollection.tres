@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://assets/resources/fishisland/KingKoi.tres" type="Resource" id=1]
+[ext_resource path="res://assets/resources/fishisland/Cupboard.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/fishisland/Spearhead.tres" type="Resource" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Resource
+
+export(Array, Resource) var fishIslandResourceList
+"
+
+[resource]
+script = SubResource( 1 )
+fishIslandResourceList = [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ]

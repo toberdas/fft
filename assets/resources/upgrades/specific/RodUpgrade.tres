@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://assets/resources/upgrades/UpgradeResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/inventory/EquipSlotResource.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/items/EquipResource.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+name = "Rod jump"
+tooltip = "When the slime has a bobber out, press Y to leap towards the bobber!"
+equips = "component"
+locks = true
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+name = "Cast twice"
+tooltip = "The slime has learned to divide it's attention and can now cast twice!"
+equips = "component"
+locks = true
+unlocksOn = SubResource( 1 )
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+name = "rodtricks equip"
+equipSlotResources = [ SubResource( 1 ), SubResource( 2 ) ]
+
+[resource]
+script = ExtResource( 1 )
+equipResource = SubResource( 3 )
+name = "rodtricks"
+label = "Tricks of the rod"
+tooltip = "A rod is not only used for fishing. Unlock different tricks, like rodjumping."
+parameters = [  ]

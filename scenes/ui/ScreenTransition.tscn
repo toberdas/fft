@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ui/ScreenTransition.gd" type="Script" id=1]
+[ext_resource path="res://assets/shaders/screentransitions/screentransition_colordist.tres" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/progress = null
+shader_param/power = null
+
+[node name="ScreenTransition" type="TextureRect"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )

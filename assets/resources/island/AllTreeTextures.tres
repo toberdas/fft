@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/helper/ResourceList.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/textures/seaweed_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/textures/waterloggedwood_1.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+resourceList = [ ExtResource( 2 ), ExtResource( 4 ) ]

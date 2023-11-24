@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/huwea.wav-42ffce4ca6e2a334d0b7693f15b8f254.sample"
+
+[deps]
+
+source_file="res://assets/resources/music/sounds/huwea.wav"
+dest_files=[ "res://.import/huwea.wav-42ffce4ca6e2a334d0b7693f15b8f254.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

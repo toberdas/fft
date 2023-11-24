@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://assets/resources/elemental/ElementalResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/sea/StormySea.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resources/elemental/sky/SkyResource.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+coverage = 0.5
+cloudSpeedModifier = 0.4
+thickness = 10.0
+absorption = 3.0
+sunColor = Color( 1, 1, 1, 1 )
+skyLightColor = Color( 0.286275, 0.294118, 0.298039, 1 )
+skyDarkColor = Color( 0.180392, 0.180392, 0.180392, 1 )
+
+[resource]
+script = ExtResource( 1 )
+endlessSeaResource = ExtResource( 2 )
+skyResource = SubResource( 1 )
+windTimeModifier = 0.2
+seaTimeModifier = 0.2
+windDecibelAdd = 18
+seaDecibelAdd = 18
+sunPower = 0.5
+fogThickness = 0.7

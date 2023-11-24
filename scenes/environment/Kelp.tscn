@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://import/kelp.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/materials/mat_3d_kelp.tres" type="Material" id=2]
+[ext_resource path="res://scenes/environment/VerticalKelp.gd" type="Script" id=3]
+[ext_resource path="res://scenes/platforming/Seaweed.gd" type="Script" id=5]
+
+[node name="VerticalKelp" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="KelpSegment" parent="." index="0"]
+material/0 = ExtResource( 2 )
+script = ExtResource( 5 )
+
+[node name="Top" type="Spatial" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.9098, 0 )

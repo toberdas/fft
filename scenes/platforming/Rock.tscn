@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://import/fft_rocks.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/materials/mat_seaweed.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/mat_3d_rock.tres" type="Material" id=3]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="fft_rocks" parent="." instance=ExtResource( 1 )]
+
+[node name="mesh_rock_1_base" parent="fft_rocks" index="0"]
+material/0 = ExtResource( 3 )
+
+[node name="mesh_rock_1_collision" parent="fft_rocks/mesh_rock_1_base" index="0"]
+visible = false
+
+[node name="mesh_seaweed_1" parent="fft_rocks/mesh_rock_1_base" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="mesh_rock_2_base" parent="fft_rocks" index="1"]
+visible = false
+
+[editable path="fft_rocks"]

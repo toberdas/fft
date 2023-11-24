@@ -1,0 +1,140 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 1, 1 )
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="Shader" id=3]
+code = "shader_type spatial;
+
+
+uniform float _time;
+
+uniform vec4 wave_1;
+uniform vec4 wave_2;
+uniform vec4 wave_3;
+uniform float timescale;
+
+uniform float proximity_fade_distance;
+uniform float distance_fade_min;
+uniform float distance_fade_max;
+render_mode async_visible,blend_mix,cull_back,depth_draw_opaque,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform sampler2D texture_noise;
+uniform float specular;
+uniform float metallic;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform sampler2D texture_normal : hint_normal;
+uniform float normal_scale : hint_range(-16,16);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+const float PI = 3.14159265;
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+	NORMALMAP = texture(texture_normal,base_uv + TIME * 0.05 + (cos(TIME / PI)) * .05).rgb;
+	NORMALMAP_DEPTH = normal_scale;
+	float depth_tex = textureLod(DEPTH_TEXTURE,SCREEN_UV,0.0).r;
+	vec4 world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV*2.0-1.0,depth_tex*2.0-1.0,1.0);
+	world_pos.xyz/=world_pos.w;
+	ALPHA*=clamp(1.0-smoothstep(world_pos.z+proximity_fade_distance,world_pos.z,VERTEX.z),0.0,1.0);
+	{
+		float fade_distance=-VERTEX.z;
+		float fade=clamp(smoothstep(distance_fade_min,distance_fade_max,fade_distance),0.0,1.0);
+		int x = int(FRAGCOORD.x) % 4;
+		int y = int(FRAGCOORD.y) % 4;
+		int index = x + y * 4;
+		float limit = 0.0;
+
+		if (x < 8) {
+			if (index == 0) limit = 0.0625;
+			if (index == 1) limit = 0.5625;
+			if (index == 2) limit = 0.1875;
+			if (index == 3) limit = 0.6875;
+			if (index == 4) limit = 0.8125;
+			if (index == 5) limit = 0.3125;
+			if (index == 6) limit = 0.9375;
+			if (index == 7) limit = 0.4375;
+			if (index == 8) limit = 0.25;
+			if (index == 9) limit = 0.75;
+			if (index == 10) limit = 0.125;
+			if (index == 11) limit = 0.625;
+			if (index == 12) limit = 1.0;
+			if (index == 13) limit = 0.5;
+			if (index == 14) limit = 0.875;
+			if (index == 15) limit = 0.375;
+		}
+
+	if (fade < limit)
+		discard;
+	}
+}
+
+
+float wave(vec4 wave, vec3 vertex){
+	float _wavelength = wave.z;
+	float _steepness = wave.a;
+	vec2 _dir = wave.xy;
+	vec2 d = normalize(_dir);
+	
+	float dp = dot(d, vertex.xz);
+	float k = 2.0 * PI / _wavelength;
+	float c = sqrt(9.8 / k);
+	float f = k * (dp - c * (TIME * timescale));
+	
+	float _amplitude = _steepness / k;
+	return _amplitude * sin(f);
+}
+
+void vertex(){
+	vec3 worldVert = (WORLD_MATRIX * vec4(VERTEX, 1.0)).xyz;
+
+	VERTEX.y += wave(wave_1, worldVert);
+	VERTEX.y += wave(wave_2, worldVert);
+	VERTEX.y += wave(wave_3, worldVert);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 3 )
+shader_param/_time = null
+shader_param/wave_1 = Plane( 0, 1, 0.01, 12 )
+shader_param/wave_2 = Plane( 0.5, 0.5, 0.01, 4 )
+shader_param/wave_3 = Plane( 1, 0, 0.01, 24 )
+shader_param/timescale = 0.02
+shader_param/proximity_fade_distance = null
+shader_param/distance_fade_min = null
+shader_param/distance_fade_max = null
+shader_param/albedo = Color( 0.682353, 0.282353, 0.282353, 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = null
+shader_param/point_size = null
+shader_param/normal_scale = null
+shader_param/uv1_scale = null
+shader_param/uv1_offset = null
+shader_param/uv2_scale = null
+shader_param/uv2_offset = null
+
+[node name="Spatial" type="MeshInstance"]
+transform = Transform( -21.1408, -1.84819e-06, -1.61574e-13, 8.07869e-14, 9.24095e-07, -21.1408, 1.84819e-06, -21.1408, -9.24095e-07, 0, 0, 1.69317 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 8.74229e-08, 9.9476e-14, -1.35003e-13, -4.37114e-08, 1, 8.74227e-08, -1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 8.74229e-08, 9.9476e-14, -1.35003e-13, -4.37114e-08, 1, 8.74227e-08, -1, -4.37114e-08, 0, 1, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://assets/resources/upgrades/UpgradeResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/inventory/EquipSlotResource.gd" type="Script" id=2]
+[ext_resource path="res://assets/resources/items/EquipResource.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+name = "Learn to inspect"
+tooltip = "Unlock the inspector ability."
+equips = "component"
+locks = true
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+name = "Inspect and track"
+tooltip = "Inspecting some entities now allows you to track them on the map."
+equips = "component"
+locks = true
+unlocksOn = SubResource( 1 )
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+name = "inspector equipslots"
+equipSlotResources = [ SubResource( 1 ), SubResource( 2 ) ]
+
+[resource]
+script = ExtResource( 1 )
+equipResource = SubResource( 3 )
+name = "inspector"
+label = "Inspector"
+tooltip = "The slime learns to open it's eyes and see the world as it is. Press R3 to enter inspector mode. In this mode, click on an object to reveal information about them."
+parameters = [  ]

@@ -1,0 +1,142 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scenes/maingame/player/PlayerNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/platforming/Platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ship/Ship.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/fish/FishNode.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/resources/items/specificItems/bait/CauliflowerMushroom.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/platforming/PlatformRecht.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/img/textures/rock_1.png" type="Texture" id=7]
+[ext_resource path="res://scenes/platforming/platformtypes/RotatingPlatformLong.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/item/3DItem.tscn" type="PackedScene" id=10]
+[ext_resource path="res://testiing/attackthing.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/interacts/specific/Chest.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/fishisland/FishIslandScene.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/resources/items/specificItems/KEYS/BlueKey.tres" type="Resource" id=14]
+[ext_resource path="res://scenes/fish/Flock.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/helper/SeaHeightComponent.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/resources/interacts/TreasureResource.gd" type="Script" id=18]
+[ext_resource path="res://testiing/playertest.gd" type="Script" id=19]
+[ext_resource path="res://assets/resources/items/specificItems/rods/BeginnersRod.tres" type="Resource" id=20]
+[ext_resource path="res://scenes/environment/ElementalNode.tscn" type="PackedScene" id=21]
+
+[sub_resource type="SpatialMaterial" id=5]
+resource_local_to_scene = true
+flags_ensure_correct_normals = true
+albedo_color = Color( 0.807843, 0.364706, 0.364706, 1 )
+albedo_texture = ExtResource( 7 )
+metallic_specular = 0.15
+roughness = 0.89
+roughness_texture_channel = 4
+distance_fade_mode = 2
+distance_fade_min_distance = 1400.0
+distance_fade_max_distance = 1000.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 18 )
+key = ExtResource( 14 )
+lootItem = ExtResource( 20 )
+
+[node name="playertest" type="Spatial"]
+script = ExtResource( 19 )
+
+[node name="FishIslandScene" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 147.068 )
+
+[node name="RotatingPlatformRoot" parent="." instance=ExtResource( 9 )]
+transform = Transform( -0.722049, 0, -0.643659, 0, 1, 0, 0.643659, 0, -0.722049, 36.7464, 47.2417, 0 )
+axis = Vector3( 0, 1, 0 )
+direction = 1
+targetSpeed = 0.8
+on = true
+
+[node name="RotatingPlatformRoot2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 0.821437, 0.49841, 0, -0.49841, 0.821437, 57.7148, 48.1208, 0 )
+axis = Vector3( 1, 0, 0 )
+direction = -1
+targetSpeed = 0.6
+on = true
+
+[node name="RotatingPlatformRoot3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 76.8374, 44.0792, 0 )
+
+[node name="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 42.5409, 0, 0, 0, 1, 0, 0, 0, 47.7807, 0, 46.7288, -1.43024 )
+
+[node name="Spatial2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, 0, 50.2334, 6.24253 )
+
+[node name="Spatial3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, -9.03565, 52.7396, 5.79901 )
+
+[node name="Spatial4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, -9.03565, 55.0852, -1.99415 )
+
+[node name="Ship" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.7735, -65.9631 )
+heightDelta = 6.0
+quatDelta = 0.1
+
+[node name="Fish" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49.9616, -25.8588 )
+
+[node name="Fish2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 3.69204, 0, 0, 0, 3.69204, 0, 0, 0, 3.69204, 1.24087, 49.9616, -25.8588 )
+
+[node name="MeshInstance" parent="." instance=ExtResource( 6 )]
+transform = Transform( 2.12335, 0, 0, 0, 2.12335, 0, 0, 0, 2.12335, 0, 51.4531, 0 )
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 2.12335, 0, 0, 0, 2.12335, 0, 0, 0, 2.12335, 6.10973, 50.876, 0.0453196 )
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.10973, 53.1699, 11.5578 )
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 2.12335, 0, 0, 0, 2.12335, 0, 0, 0, 2.12335, 3.83168, 52.8952, 0.0453196 )
+material/0 = SubResource( 5 )
+
+[node name="Spatial5" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46712, 47.4024, -5.07049 )
+
+[node name="3DItem" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.06753, 48.9053, -1.4442 )
+itemResource = ExtResource( 5 )
+
+[node name="3DItem2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1075, 48.9053, -1.4442 )
+itemResource = ExtResource( 5 )
+
+[node name="3DItem3" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7688, 48.9053, -1.4442 )
+itemResource = ExtResource( 5 )
+
+[node name="3DItem4" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.56317, 48.2419, 7.36864 )
+itemResource = ExtResource( 14 )
+
+[node name="Chest" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6129, 48.9501, 10.9473 )
+treasureResource = SubResource( 6 )
+
+[node name="Flock" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0513, -12.3929 )
+
+[node name="Spatial" parent="Flock" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.66046, 0 )
+
+[node name="Spawnpoint" parent="Flock" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.138306, 0 )
+
+[node name="SeaHeightComponent" parent="." instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45.3953, -34.2114 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 55.9905, 0 )
+
+[node name="ElementalNode" parent="." instance=ExtResource( 21 )]
+
+[editable path="Flock"]

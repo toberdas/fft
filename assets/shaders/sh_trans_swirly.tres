@@ -1,0 +1,38 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+uniform float progress;
+// License: MIT
+// Author: Sergey Kosarevsky
+// ( http://www.linderdaum.com )
+// ported by gre from https://gist.github.com/corporateshark/cacfedb8cca0f5ce3f7c
+
+void fragment(){
+	float Radius = 1.0;
+
+	float T = progress;
+
+	vec2 newUV = UV - vec2( 0.5, 0.5 );
+
+	float Dist = length(newUV);
+
+	if ( Dist < Radius )
+	{
+		float Percent = (Radius - Dist) / Radius;
+		float A = ( T <= 0.5 ) ? mix( 0.0, 1.0, T/0.5 ) : mix( 1.0, 0.0, (T-0.5)/0.5 );
+		float Theta = Percent * Percent * A * 8.0 * 3.14159;
+		float S = sin( Theta );
+		float C = cos( Theta );
+		newUV = vec2( dot(newUV, vec2(C, -S)), dot(newUV, vec2(S, C)) );
+	}
+	newUV += vec2( 0.5, 0.5 );
+
+	vec4 C0 = vec4(0,0,0,0);
+	vec4 C1 = texture(TEXTURE,newUV);
+
+	COLOR = mix( C0, C1, T);
+}
+
+
+"

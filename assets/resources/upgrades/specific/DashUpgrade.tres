@@ -1,0 +1,47 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://assets/resources/upgrades/UpgradeResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/items/EquipResource.gd" type="Script" id=2]
+[ext_resource path="res://scenes/inventory/EquipSlotResource.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+name = "Overwhelming speed"
+tooltip = "Dashing into a fish with a net equipped now immediately catches the fish."
+equips = "component"
+locks = true
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+name = "Shattering speed"
+tooltip = "Dashing into a wall now destroys the wall, sending the slime flying back."
+equips = "component"
+locks = true
+unlocksOn = SubResource( 3 )
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+name = "Double dash"
+tooltip = "The slime can now dash twice."
+equips = "bait"
+locks = true
+unlocksOn = SubResource( 4 )
+locksPrevious = false
+locked = false
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+name = "dash equipslots"
+equipSlotResources = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ]
+
+[resource]
+script = ExtResource( 1 )
+equipResource = SubResource( 1 )
+name = "dash"
+label = "Dashing"
+tooltip = "Against all expectations, this slime can dash. Press and hold X to charge a dash, release to dash."
+parameters = [  ]

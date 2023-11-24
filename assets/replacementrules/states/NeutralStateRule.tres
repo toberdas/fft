@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/replacementgrammar/Rule.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+startSign = "N"
+replacementString = "fishy*cool*mute*ebuliant*`res://assets/resources/fish/states/NeutralState.tres~#S|fishy*`res://assets/resources/fish/states/ScaredState.tres~#S"
+ruleSplit = "|"
+elementSplit = "~"
+tagSplit = "*"
+noSpaceChar = "`"

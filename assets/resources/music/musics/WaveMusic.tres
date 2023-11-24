@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://assets/resources/music/Music.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/music/sounds/wave1.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/resources/music/TotalInstrument.gd" type="Script" id=4]
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0.494253, 0.509091 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.263636 ), 0.0, 0.0, 0, 0, Vector2( 0.257576, 0.654545 ), 0.0, 0.0, 0, 0, Vector2( 0.511364, 0.2 ), 0.0, 0.0, 0, 0, Vector2( 0.742424, 0.609091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.236364 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0.0820312, 0.556818 ), 0.0, 0.0, 0, 0, Vector2( 0.527344, 0.438636 ), 0.0, 0.0, 0, 0, Vector2( 0.875, 0.538636 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+desiredTone = 110.0
+intervalRange = 12
+movementLength = 32
+curveDynamic = SubResource( 2 )
+cutoffCurve = SubResource( 7 )
+fractionArray = [ 1.33, 1.66 ]
+sound = ExtResource( 3 )
+soundTone = 110.0
+volatility = 0.1
+swing = 0.001
+
+[resource]
+script = ExtResource( 1 )
+BPM = 30
+totalInstruments = [ SubResource( 5 ) ]
+dynamicFalloffCurve = SubResource( 6 )
+noiseCutoff = 0.5
+movements = 10
+spatial = false

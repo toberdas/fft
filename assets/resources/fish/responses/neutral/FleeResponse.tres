@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/resources/fish/responses/FishResponse.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 1 )
+time = 3.0
+factor = 3.3
+distance = 32.0
+slowdown = 16.0
+stop = 0.0
+type = 1
+unique = true
+priority = 8
+clears = true
+persistent = true
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 2 )
+expressionOutcomes = [ 0 ]
+moverResource = SubResource( 1 )
+buffs = [  ]
+nerveStrain = 0.5

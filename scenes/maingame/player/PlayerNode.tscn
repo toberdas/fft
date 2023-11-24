@@ -1,0 +1,431 @@
+[gd_scene load_steps=48 format=2]
+
+[ext_resource path="res://scenes/maingame/player/PlayerMovement.gd" type="Script" id=1]
+[ext_resource path="res://scenes/maingame/player/PlayerInteracter.gd" type="Script" id=2]
+[ext_resource path="res://scenes/helper/conditionchecker/ConditionChecker.gd" type="Script" id=3]
+[ext_resource path="res://scenes/maingame/player/FloorCheckers.gd" type="Script" id=4]
+[ext_resource path="res://scenes/interacts/InteractScene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/maingame/player/ThirdPersonCamPoint.gd" type="Script" id=6]
+[ext_resource path="res://scenes/helper/Follower.gd" type="Script" id=7]
+[ext_resource path="res://scripts/IndependentTransforms.gd" type="Script" id=8]
+[ext_resource path="res://scenes/karakters/nickdeblob/BlobScene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/helper/MeshPivot.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/casting/CastManager.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/casting/CastScene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/maingame/camera/ThirdPersonCamera.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/helper/ItemSenseNode.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/maingame/player/CombiJumpCounter.gd" type="Script" id=15]
+[ext_resource path="res://scenes/ui/2DPointer.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/ship/FlockPath.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/maingame/player/PlayerMenu.gd" type="Script" id=18]
+[ext_resource path="res://scenes/maingame/camera/CamMount.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/maingame/camera/FirstPersonGetup.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/maingame/player/PlayerCameraManager.gd" type="Script" id=21]
+[ext_resource path="res://scenes/maingame/camera/RotatingCamera.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/helper/AttackableNode.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/maingame/player/PlayerAttackbleNode.gd" type="Script" id=24]
+[ext_resource path="res://scenes/maingame/player/SavegameNode.gd" type="Script" id=25]
+[ext_resource path="res://assets/environments/CloudyEnvironment.tres" type="Environment" id=26]
+[ext_resource path="res://scenes/helper/AttackingNode.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/maingame/player/NetNode.gd" type="Script" id=28]
+[ext_resource path="res://scenes/maingame/player/CatchNode.gd" type="Script" id=29]
+[ext_resource path="res://scenes/maingame/player/ItemPickupNode.gd" type="Script" id=30]
+[ext_resource path="res://scenes/maingame/player/ParentFloorChecker.gd" type="Script" id=31]
+[ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=32]
+[ext_resource path="res://scenes/maingame/player/PlayerFlockManager.gd" type="Script" id=33]
+[ext_resource path="res://scenes/helper/SeaCheckComponent.tscn" type="PackedScene" id=34]
+[ext_resource path="res://scenes/ui/MapScene.tscn" type="PackedScene" id=37]
+[ext_resource path="res://scenes/maingame/player/PlayerInventory.tscn" type="PackedScene" id=38]
+[ext_resource path="res://scenes/maingame/player/InvestigatingNode.gd" type="Script" id=39]
+[ext_resource path="res://scenes/ship/UpgradeCollectionScene.tscn" type="PackedScene" id=40]
+[ext_resource path="res://assets/resources/upgrades/specific/MainUpgradeCollection.tres" type="Resource" id=41]
+[ext_resource path="res://assets/img/textures/seaweed_1.png" type="Texture" id=42]
+
+[sub_resource type="CapsuleShape" id=17]
+radius = 0.8
+height = 0.2
+
+[sub_resource type="PanoramaSky" id=1]
+
+[sub_resource type="Environment" id=18]
+resource_local_to_scene = true
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.764706, 0.568627, 0.94902, 1 )
+background_canvas_max_layer = 12
+background_camera_feed_id = 2
+ambient_light_color = Color( 0.788235, 0.639216, 0.639216, 1 )
+ambient_light_energy = 7.26
+fog_enabled = true
+fog_color = Color( 0.552941, 0.639216, 0.952941, 1 )
+fog_depth_begin = 200.0
+fog_depth_end = 1400.0
+fog_depth_curve = 2.0
+fog_transmit_enabled = true
+fog_transmit_curve = 0.57435
+dof_blur_far_distance = 100.0
+dof_blur_far_transition = 100.0
+dof_blur_far_amount = 1.0
+dof_blur_far_quality = 0
+glow_intensity = 3.49
+glow_strength = 1.07
+glow_bloom = 0.05
+
+[sub_resource type="SphereShape" id=16]
+radius = 1.29576
+
+[sub_resource type="Curve3D" id=11]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector3Array( -2.52229, 1.73792, 2.62078, 2.52229, -1.73792, -2.62078, 1.73297, 1.87216, 6.43425, 1.85163, 0, 3.17422, -1.85163, 0, -3.17422, 5.07362, 4.87551, -2.45369, 3.10809, 0, -3.04196, -3.10809, 0, 3.04196, -4.48235, 4.68835, -4.22361, -2.5976, -0.696643, -1.5933, 2.5976, 0.696643, 1.5933, -2.42511, 2.63865, 6.45333, -1.52752, 0.855324, 2.08081, 1.52752, -0.855324, -2.08081, 1.73297, 1.87216, 6.43425 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 32 )
+time = -1.0
+factor = 1.0
+distance = 1024.0
+slowdown = 2.0
+stop = 0.0
+type = 0
+unique = true
+priority = 1000
+clears = false
+persistent = false
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 1, 0.466952, 1 )
+
+[node name="Player" type="KinematicBody" groups=["Player", "ScaryToFish"]]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+collision_layer = 4
+collision_mask = 9
+script = ExtResource( 1 )
+strafeSpeed = 197
+turnSpeed = 6.0
+jumpSpeed = 12.0
+grav = 50.0
+debug = true
+moveFactor = 0.7
+maxVelocity = 6.0
+drag = 18.0
+jumpVelocityAdd = 2.0
+combiJumpAdd = 2.0
+camPoint = NodePath("ThirdPersonCamPoint")
+cam = NodePath("IndependentTransform/ThirdPersonCamGetup/Path")
+wallRay = NodePath("WallRay")
+
+[node name="ConditionChecker" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="SavegameNode" type="Node" parent="."]
+script = ExtResource( 25 )
+
+[node name="GroundRay" type="RayCast" parent="."]
+enabled = true
+
+[node name="CatchNode" type="Node" parent="."]
+script = ExtResource( 29 )
+
+[node name="WallRay" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698131, -0.335822 )
+enabled = true
+cast_to = Vector3( 0, 0, -0.5 )
+debug_shape_custom_color = Color( 0.486275, 0.121569, 0.121569, 1 )
+
+[node name="ThirdPersonCamPoint" type="Spatial" parent="."]
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.701813, 0 )
+shape = SubResource( 17 )
+
+[node name="DEBUGoverlay" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="FishTalkPoint" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 3.04429, -1.83013 )
+
+[node name="PlayerInteracter" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0836, -1.04499 )
+script = ExtResource( 2 )
+interactScene = ExtResource( 5 )
+
+[node name="RayCast" type="RayCast" parent="PlayerInteracter"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075542, 0.0321677 )
+enabled = true
+cast_to = Vector3( 0, 0, -4 )
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_thickness = 5
+
+[node name="Follower" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825142, 0 )
+script = ExtResource( 7 )
+target = NodePath("../IndependentTransform/PlayerFollower/MeshPivot/BlobScene/IKTargetRoot/IKTarget")
+mode = "origin"
+
+[node name="CastPoint" type="Spatial" parent="Follower"]
+transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0 )
+
+[node name="PlayerCameraManager" type="Node" parent="."]
+script = ExtResource( 21 )
+fpscam = NodePath("../IndependentTransform/FirstPersonCamGetup")
+tpscam = NodePath("../IndependentTransform/ThirdPersonCamGetup")
+rotcam = NodePath("../IndependentTransform/RotatingCamGetup")
+player = NodePath("..")
+cam = NodePath("../IndependentTransform/PlayerFollower/CamMount/Camera")
+camMount = NodePath("../IndependentTransform/PlayerFollower/CamMount")
+tpspoint = NodePath("../ThirdPersonCamPoint")
+
+[node name="IndependentTransform" type="Spatial" parent="."]
+script = ExtResource( 8 )
+
+[node name="ConditionChecker" type="Node" parent="IndependentTransform"]
+script = ExtResource( 3 )
+
+[node name="RotatingCamGetup" parent="IndependentTransform" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 112.364, 0 )
+target = NodePath("../..")
+camName = "RotatingCam"
+
+[node name="ThirdPersonCamGetup" parent="IndependentTransform" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 114.364, 0 )
+target = NodePath("../../ThirdPersonCamPoint")
+followMultiplier = 2.0
+camName = "ThirdPersonCam"
+
+[node name="FirstPersonCamGetup" parent="IndependentTransform" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 112.364, 0 )
+target = NodePath("../..")
+mode = "origin"
+camName = "FirstPersonCam"
+maxAngle = 1.8
+
+[node name="PlayerFollower" type="Spatial" parent="IndependentTransform"]
+script = ExtResource( 7 )
+MOVESPEED = 1.4
+target = NodePath("../..")
+followMultiplier = 4.0
+mode = "origin"
+instant = true
+
+[node name="CamMount" parent="IndependentTransform/PlayerFollower" instance=ExtResource( 19 )]
+target = NodePath("../../ThirdPersonCamGetup")
+instant = true
+aboveWaterEnvironment = SubResource( 18 )
+
+[node name="Camera" parent="IndependentTransform/PlayerFollower/CamMount" index="0"]
+environment = ExtResource( 26 )
+
+[node name="MeshPivot" parent="IndependentTransform/PlayerFollower" instance=ExtResource( 10 )]
+targetZNode = NodePath("../../..")
+maxNormal = -1.0
+interpolateFloat = 6.0
+
+[node name="BlobScene" parent="IndependentTransform/PlayerFollower/MeshPivot" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00106505, 0 )
+
+[node name="FloorCheckers" type="Spatial" parent="IndependentTransform/PlayerFollower/MeshPivot"]
+transform = Transform( 0.572338, 0, 0, 0, 0.572338, 0, 0, 0, 0.572338, 0, 0.0948982, 0 )
+script = ExtResource( 4 )
+
+[node name="RayCast" type="RayCast" parent="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46424, 0.671501, -0.485671 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="RayCast2" type="RayCast" parent="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48567, 0.671501, 0.48567 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="RayCast3" type="RayCast" parent="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.496386, 0.671501, 0.496386 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="RayCast4" type="RayCast" parent="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48567, 0.671501, -0.44281 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+
+[node name="ParentFloorChecker" type="Spatial" parent="IndependentTransform/PlayerFollower/MeshPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.203179, 0 )
+script = ExtResource( 31 )
+
+[node name="Area" type="Area" parent="IndependentTransform/PlayerFollower/MeshPivot/ParentFloorChecker"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.442245, 0 )
+collision_layer = 0
+collision_mask = 16384
+
+[node name="CollisionShape" type="CollisionShape" parent="IndependentTransform/PlayerFollower/MeshPivot/ParentFloorChecker/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279578, 0 )
+shape = SubResource( 16 )
+
+[node name="CastManager" parent="IndependentTransform/PlayerFollower" instance=ExtResource( 11 )]
+castPoint = NodePath("../../../Follower/CastPoint")
+defaultCast = ExtResource( 12 )
+debug = true
+
+[node name="CombiJumpCounter" type="Node" parent="."]
+script = ExtResource( 15 )
+
+[node name="Timer" type="Timer" parent="CombiJumpCounter"]
+autostart = true
+
+[node name="PlayerAttackbleNode" type="Spatial" parent="."]
+script = ExtResource( 24 )
+
+[node name="Timer" type="Timer" parent="PlayerAttackbleNode"]
+
+[node name="AttackableNode" parent="PlayerAttackbleNode" instance=ExtResource( 23 )]
+
+[node name="AttackingNode" parent="." groups=["Player"] instance=ExtResource( 27 )]
+
+[node name="CollisionShape" parent="AttackingNode/AttackingArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.233771, -0.430902 )
+
+[node name="NetNode" type="Spatial" parent="."]
+script = ExtResource( 28 )
+
+[node name="ItemPickupNode" type="Spatial" parent="."]
+script = ExtResource( 30 )
+
+[node name="ItemSenseNode" parent="ItemPickupNode" instance=ExtResource( 14 )]
+
+[node name="CollisionShape" parent="ItemPickupNode/ItemSenseNode/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0253574, 0.244665, 0.0212042 )
+
+[node name="PlayerMenu" type="Node" parent="."]
+script = ExtResource( 18 )
+
+[node name="PlayerInventory" parent="PlayerMenu" instance=ExtResource( 38 )]
+
+[node name="MapScene" parent="PlayerMenu" instance=ExtResource( 37 )]
+
+[node name="UpgradeCollectionScene" parent="PlayerMenu" instance=ExtResource( 40 )]
+upgradeCollection = ExtResource( 41 )
+
+[node name="TextureRect" type="TextureRect" parent="PlayerMenu/UpgradeCollectionScene"]
+modulate = Color( 0.3, 0.3, 0.3, 1 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 42 )
+expand = true
+
+[node name="2DPointer" parent="PlayerMenu/UpgradeCollectionScene" instance=ExtResource( 16 )]
+position = Vector2( 403, 271 )
+
+[node name="PlayerFlockManager" type="Spatial" parent="."]
+script = ExtResource( 33 )
+saves = false
+
+[node name="FlockPath" parent="PlayerFlockManager" instance=ExtResource( 17 )]
+curve = SubResource( 11 )
+moveResource = SubResource( 12 )
+
+[node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7292, 2.57236, 6.24659 )
+offset = 34.3613
+
+[node name="SeaCheckComponent" parent="." instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7152, 0 )
+
+[node name="CollisionShape" parent="SeaCheckComponent" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0773237, 0 )
+shape = SubResource( 14 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )
+layers = 2
+
+[node name="ItemDropPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36285, -1.22343 )
+
+[node name="InvestigatingNode" type="Spatial" parent="."]
+script = ExtResource( 39 )
+pathToPlayer = NodePath("..")
+allowedStates = [ 0, 2 ]
+
+[connection signal="cancelinteract" from="." to="PlayerInteracter" method="_on_Player_cancelinteract"]
+[connection signal="damaged" from="." to="PlayerMenu" method="_on_Player_damaged"]
+[connection signal="damaged" from="." to="PlayerMenu/PlayerInventory" method="_on_Player_damaged"]
+[connection signal="damaged" from="." to="PlayerFlockManager" method="_on_Player_damaged"]
+[connection signal="fly_end" from="." to="PlayerCameraManager" method="_on_Player_fly_end"]
+[connection signal="fly_start" from="." to="PlayerCameraManager" method="_on_Player_fly_start"]
+[connection signal="jumped" from="." to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_Player_jumped"]
+[connection signal="jumped" from="." to="CombiJumpCounter" method="_on_Player_jumped"]
+[connection signal="landed" from="." to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_Player_landed"]
+[connection signal="landed" from="." to="CombiJumpCounter" method="_on_Player_landed"]
+[connection signal="menutoggle" from="." to="PlayerMenu" method="_on_Player_menutoggle"]
+[connection signal="onwall" from="." to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_Player_onwall"]
+[connection signal="player_resource_ready" from="." to="IndependentTransform/PlayerFollower/CastManager" method="_on_Player_player_resource_ready"]
+[connection signal="player_resource_ready" from="." to="PlayerMenu/PlayerInventory" method="_on_Player_player_resource_ready"]
+[connection signal="player_resource_ready" from="." to="PlayerFlockManager" method="_on_Player_player_resource_ready"]
+[connection signal="playeraction" from="." to="PlayerInteracter" method="_on_Player_playeraction"]
+[connection signal="reelingin" from="." to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_Player_reelingin"]
+[connection signal="savegame_out_at_ready" from="." to="SavegameNode" method="_on_Player_savegame_out_at_ready"]
+[connection signal="savegame_out_at_ready" from="." to="NetNode" method="_on_Player_savegame_out_at_ready"]
+[connection signal="savegame_out_at_ready" from="." to="PlayerMenu/MapScene" method="_on_Player_savegame_out_at_ready"]
+[connection signal="standing" from="." to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_Player_standing"]
+[connection signal="startpredict" from="." to="IndependentTransform/PlayerFollower/CastManager" method="_on_Player_startpredict"]
+[connection signal="strafing" from="." to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_Player_strafing"]
+[connection signal="walking" from="." to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_Player_walking"]
+[connection signal="brokefree" from="CatchNode" to="PlayerCameraManager" method="_on_CatchNode_brokefree"]
+[connection signal="caught" from="CatchNode" to="PlayerCameraManager" method="_on_CatchNode_caught"]
+[connection signal="caught" from="CatchNode" to="PlayerFlockManager" method="_on_CatchNode_caught"]
+[connection signal="fish_netted" from="CatchNode" to="." method="_on_CatchNode_fish_netted"]
+[connection signal="fish_netted" from="CatchNode" to="PlayerCameraManager" method="_on_CatchNode_fish_netted"]
+[connection signal="release_fish" from="CatchNode" to="PlayerCameraManager" method="_on_CatchNode_release_fish"]
+[connection signal="start_play" from="CatchNode" to="PlayerCameraManager" method="_on_CatchNode_start_play"]
+[connection signal="cam_to_interact" from="PlayerInteracter" to="PlayerCameraManager" method="_on_PlayerInteracter_cam_to_interact"]
+[connection signal="cam_to_player" from="PlayerInteracter" to="PlayerCameraManager" method="_on_PlayerInteracter_cam_to_player"]
+[connection signal="interacted" from="PlayerInteracter" to="." method="_on_RaycastPivot_interacted"]
+[connection signal="interaction_cancelled" from="PlayerInteracter" to="." method="_on_RaycastPivot_interaction_cancelled"]
+[connection signal="interaction_cancelled" from="PlayerInteracter" to="PlayerMenu" method="_on_PlayerInteracter_interaction_cancelled"]
+[connection signal="not_on_floor" from="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers" to="." method="_on_FloorCheckers_not_on_floor"]
+[connection signal="on_floor" from="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers" to="." method="_on_FloorCheckers_on_floor"]
+[connection signal="cast_cleared" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_cast_cleared"]
+[connection signal="cast_cleared" from="IndependentTransform/PlayerFollower/CastManager" to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_cast_cleared"]
+[connection signal="fish_caught" from="IndependentTransform/PlayerFollower/CastManager" to="CatchNode" method="_on_CastManager_fish_caught"]
+[connection signal="fish_hooked" from="IndependentTransform/PlayerFollower/CastManager" to="." method="_on_CastManager_fish_hooked"]
+[connection signal="fish_hooked" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_fish_hooked"]
+[connection signal="fish_lost" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_fish_lost"]
+[connection signal="ignore_nibble" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_ignore_nibble"]
+[connection signal="nibble" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_nibble"]
+[connection signal="start_cast" from="IndependentTransform/PlayerFollower/CastManager" to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_start_cast"]
+[connection signal="thrown" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_thrown"]
+[connection signal="thrown" from="IndependentTransform/PlayerFollower/CastManager" to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_thrown"]
+[connection signal="timeout" from="CombiJumpCounter/Timer" to="CombiJumpCounter" method="_on_Timer_timeout"]
+[connection signal="playerattacked" from="PlayerAttackbleNode" to="." method="_on_PlayerAttackbleNode_playerattacked"]
+[connection signal="playerrecovered" from="PlayerAttackbleNode" to="." method="_on_PlayerAttackbleNode_playerrecovered"]
+[connection signal="timeout" from="PlayerAttackbleNode/Timer" to="PlayerAttackbleNode" method="_on_Timer_timeout"]
+[connection signal="attacked" from="PlayerAttackbleNode/AttackableNode" to="PlayerAttackbleNode" method="_on_AttackableNode_attacked"]
+[connection signal="body_attacked" from="AttackingNode" to="NetNode" method="_on_AttackingNode_body_attacked"]
+[connection signal="fish_caught" from="NetNode" to="CatchNode" method="_on_NetNode_fish_caught"]
+[connection signal="wall_bashed" from="NetNode" to="PlayerAttackbleNode" method="_on_NetNode_wall_bashed"]
+[connection signal="pick_up_item" from="ItemPickupNode" to="PlayerMenu/PlayerInventory" method="_on_ItemPickupNode_pick_up_item"]
+[connection signal="item_sensed" from="ItemPickupNode/ItemSenseNode" to="ItemPickupNode" method="_on_ItemSenseNode_item_sensed"]
+[connection signal="menu_closed" from="PlayerMenu" to="." method="_on_PlayerMenu_menu_closed"]
+[connection signal="menu_opened" from="PlayerMenu" to="." method="_on_PlayerMenu_menu_opened"]
+[connection signal="emerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_emerged"]
+[connection signal="submerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_submerged"]
+[connection signal="start_investigating" from="InvestigatingNode" to="." method="_on_InvestigatingNode_start_investigating"]
+[connection signal="start_investigating" from="InvestigatingNode" to="PlayerCameraManager" method="_on_InvestigatingNode_start_investigating"]
+[connection signal="stop_investigating" from="InvestigatingNode" to="." method="_on_InvestigatingNode_stop_investigating"]
+[connection signal="stop_investigating" from="InvestigatingNode" to="PlayerCameraManager" method="_on_InvestigatingNode_stop_investigating"]
+
+[editable path="IndependentTransform/PlayerFollower/CamMount"]
+[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene"]
+[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/nickdeblob"]
+[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/blobmetarmenenanimaties"]
+[editable path="AttackingNode"]
+[editable path="ItemPickupNode/ItemSenseNode"]
+[editable path="PlayerFlockManager/FlockPath"]
+[editable path="SeaCheckComponent"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/helper/Rotator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/helper/Pathwalker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/helper/ParentArea.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.00291157, 0, -0.0116467, 0, 0, 0, 0, 0, 0, 1.54027, 0, -9.09495e-13, 0, 0, 0, 0, 0, 0, 2.96699, 0, -0.0116467 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 2, 0.5, 2 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( -1, 0.25, 1, 1, 0.25, 1, -1, -0.25, 1, 1, 0.25, 1, 1, -0.25, 1, -1, -0.25, 1, 1, 0.25, -1, -1, 0.25, -1, 1, -0.25, -1, -1, 0.25, -1, -1, -0.25, -1, 1, -0.25, -1, 1, 0.25, 1, 1, 0.25, -1, 1, -0.25, 1, 1, 0.25, -1, 1, -0.25, -1, 1, -0.25, 1, -1, 0.25, -1, -1, 0.25, 1, -1, -0.25, -1, -1, 0.25, 1, -1, -0.25, 1, -1, -0.25, -1, 1, 0.25, 1, -1, 0.25, 1, 1, 0.25, -1, -1, 0.25, 1, -1, 0.25, -1, 1, 0.25, -1, -1, -0.25, 1, 1, -0.25, 1, -1, -0.25, -1, 1, -0.25, 1, 1, -0.25, -1, -1, -0.25, -1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 1 )
+
+[node name="Pathwalker" parent="Path" instance=ExtResource( 2 )]
+transform = Transform( 0.99879, 0, 0.0484647, 0, 1, 0, -0.0484647, 0, 0.99879, 1.89488, 0, -0.00289473 )
+offset = 1.89759
+auto = true
+looping = true
+walkSpeed = 1.0
+bounce = true
+
+[node name="Rotator" parent="Path/Pathwalker" instance=ExtResource( 1 )]
+transform = Transform( -0.661594, 0, 0.744556, 0, 1, 0, -0.744556, 0, -0.661594, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Path/Pathwalker/Rotator"]
+mesh = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Path/Pathwalker/Rotator/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Path/Pathwalker/Rotator/MeshInstance/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="ParentArea" parent="Path/Pathwalker/Rotator/MeshInstance/StaticBody/CollisionShape" instance=ExtResource( 3 )]
+
+[editable path="Path/Pathwalker/Rotator/MeshInstance/StaticBody/CollisionShape/ParentArea"]

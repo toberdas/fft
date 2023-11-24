@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/minigames/GameController.gd" type="Script" id=1]
+[ext_resource path="res://scenes/minigames/MiniGameUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/FishTheme.tres" type="Theme" id=3]
+
+[node name="GameController" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+UI = NodePath("MiniGameUI")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+margin_right = 800.0
+margin_bottom = 500.0
+custom_constants/margin_right = 31
+custom_constants/margin_top = 9
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 21
+
+[node name="Panel" type="Panel" parent="MarginContainer2"]
+margin_left = 25.0
+margin_top = 9.0
+margin_right = 769.0
+margin_bottom = 479.0
+theme = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 800.0
+margin_bottom = 500.0
+custom_constants/margin_right = 119
+custom_constants/margin_top = 81
+custom_constants/margin_left = 99
+custom_constants/margin_bottom = 56
+
+[node name="ViewportContainer" type="ViewportContainer" parent="MarginContainer"]
+margin_left = 99.0
+margin_top = 81.0
+margin_right = 681.0
+margin_bottom = 444.0
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="MarginContainer/ViewportContainer"]
+size = Vector2( 582, 363 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="MiniGameUI" parent="." instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 800.0
+margin_bottom = 500.0

@@ -1,0 +1,232 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/img/icons/fishy.png" type="Texture" id=1]
+[ext_resource path="res://scenes/minigames/SpinTheWheel.gd" type="Script" id=2]
+[ext_resource path="res://assets/img/icons/hooky.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/backgrounds/circle.png" type="Texture" id=4]
+
+[sub_resource type="Curve2D" id=1]
+bake_interval = 2.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, -150, -0.521422, -149.127, 0.521422, 149.127, 150, 0, 0, 0, 0, 0, 0, 150, -0.521422, 150.169, 0.521422, -150.169, -150, 0, 0, 0, 0, 0, 0, -150, 0, 0, 0, 0, 0, -150 )
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/HookFollow/HookArea:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Path2D/HookFollow/HookArea/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Path2D/HookFollow/HookArea:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Path2D/HookFollow/HookArea:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/HookFollow/HookArea/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Path2D/HookFollow/HookArea:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Path2D/HookFollow/HookArea:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hook"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/HookFollow/HookArea:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 66.6, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Path2D/HookFollow/HookArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.03, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -6 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "lose"
+
+[sub_resource type="Animation" id=6]
+resource_name = "miss"
+length = 0.4
+
+[sub_resource type="Animation" id=7]
+resource_name = "outro"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "win"
+
+[node name="SpinTheWheel" type="Node2D"]
+z_index = 3
+script = ExtResource( 2 )
+DEBUG = true
+
+[node name="CircleSprite" type="Sprite" parent="."]
+position = Vector2( 1, -3 )
+texture = ExtResource( 4 )
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 1, -4 )
+scale = Vector2( 0.941315, 0.923077 )
+curve = SubResource( 1 )
+
+[node name="HookFollow" type="PathFollow2D" parent="Path2D"]
+position = Vector2( -54.8721, -139.692 )
+rotation = -0.329262
+offset = 895.512
+lookahead = 2.0
+
+[node name="HookArea" type="Area2D" parent="Path2D/HookFollow"]
+
+[node name="Sprite" type="Sprite" parent="Path2D/HookFollow/HookArea"]
+scale = Vector2( 2.2923, 2.18228 )
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Path2D/HookFollow/HookArea"]
+scale = Vector2( 0.802358, 0.802358 )
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="FishFollow" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 62.1791, -136.625 )
+rotation = 0.394654
+offset = 63.938
+
+[node name="FishArea" type="Area2D" parent="Path2D/FishFollow"]
+position = Vector2( 3.8147e-06, 0 )
+rotation = -0.0609706
+
+[node name="Sprite" type="Sprite" parent="Path2D/FishFollow/FishArea"]
+position = Vector2( 0, -7.62939e-06 )
+scale = Vector2( 2.51694, 2.53556 )
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Path2D/FishFollow/FishArea"]
+scale = Vector2( 0.791088, 0.791088 )
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="WheelAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/hit = SubResource( 3 )
+anims/hook = SubResource( 4 )
+anims/lose = SubResource( 5 )
+anims/miss = SubResource( 6 )
+anims/outro = SubResource( 7 )
+anims/win = SubResource( 8 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[connection signal="area_entered" from="Path2D/HookFollow/HookArea" to="." method="_on_HookArea_area_entered"]
+[connection signal="area_exited" from="Path2D/HookFollow/HookArea" to="." method="_on_HookArea_area_exited"]

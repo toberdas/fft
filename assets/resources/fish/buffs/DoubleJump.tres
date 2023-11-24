@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/fish/buffs/Buff.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+duration = -1.0
+strength = 1.0
+property = "doubleJump"
+name = "Double jump"
+description = "This slime can jump and jump again in mid-air."
+infinite = true
+junk = false

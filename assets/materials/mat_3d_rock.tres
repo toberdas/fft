@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/img/normalmaps/rock_1_nmap.png" type="Texture" id=1]
+[ext_resource path="res://assets/img/textures/rock_2.png" type="Texture" id=2]
+
+[resource]
+resource_local_to_scene = true
+albedo_texture = ExtResource( 2 )
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource( 1 )
