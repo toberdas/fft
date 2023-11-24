@@ -148,7 +148,7 @@ func _on_Timer_timeout():
 				var newTarget = HelperScripts.random_value_from_array(topCells) + flockSave.targetSave.node.global_transform.origin
 				followSpatial.global_transform.origin = newTarget
 		else:
-			followSpatial.transform.origin = Vector3(0,43,0)
+			followSpatial.transform.origin = $DefaultFollowPoint.transform.origin
 		add_mover_to_fish(mover, followSpatial)
 
 

@@ -126,16 +126,19 @@ func handle_tick(time):
 		print("Fish not in sight!")
 
 func line_break():
+	castResource.got_away()
 #	GlobalSingleton.glob_unhook(reelinFish)
 	emit_signal("reel_fail", reelinFish)
 	stop()
 
 func fish_loose():
+	castResource.got_away()
 #	GlobalSingleton.glob_unhook(reelinFish)
 	emit_signal("reel_fail", reelinFish)
 	stop()
 
 func fish_caught():
+	castResource.reeled_in_fish()
 #	GlobalSingleton.glob_catch(reelinFish)
 	emit_signal("reel_succes", reelinFish)
 	stop()

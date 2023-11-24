@@ -6,8 +6,8 @@
 script = ExtResource( 1 )
 acceptInputName = "a"
 denyInputName = "b"
-time = 0.7
-hasUI = true
+time = 1.2
+hasUI = false
 promptLabel = "THE FISH NIBBLES"
 acceptLabel = "PULL"
 denyLabel = "IGNORE"

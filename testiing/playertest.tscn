@@ -44,14 +44,14 @@ script = ExtResource( 19 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 147.068 )
 
 [node name="RotatingPlatformRoot" parent="." instance=ExtResource( 9 )]
-transform = Transform( -0.722049, 0, -0.643659, 0, 1, 0, 0.643659, 0, -0.722049, 36.7464, 47.2417, 0 )
+transform = Transform( -0.963028, 0, -0.0867168, 0, 1, 0, 0.0867168, 0, -0.963028, 36.7464, 47.2417, 0 )
 axis = Vector3( 0, 1, 0 )
 direction = 1
 targetSpeed = 0.8
 on = true
 
 [node name="RotatingPlatformRoot2" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 0.821437, 0.49841, 0, -0.49841, 0.821437, 57.7148, 48.1208, 0 )
+transform = Transform( 1, 0, 0, 0, -0.958105, -0.0639775, 0, 0.0639775, -0.958105, 57.7148, 48.1208, 0 )
 axis = Vector3( 1, 0, 0 )
 direction = -1
 targetSpeed = 0.6
@@ -123,7 +123,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6129, 48.9501, 10.9473 )
 treasureResource = SubResource( 6 )
 
 [node name="Flock" parent="." instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0513, -12.3929 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 53.8116, -21.2073 )
 
 [node name="Spatial" parent="Flock" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.66046, 0 )
@@ -131,8 +131,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.66046, 0 )
 [node name="Spawnpoint" parent="Flock" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.138306, 0 )
 
+[node name="DefaultFollowPoint" parent="Flock" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0929451, 0 )
+
 [node name="SeaHeightComponent" parent="." instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45.3953, -34.2114 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51.1215, -34.2114 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 55.9905, 0 )

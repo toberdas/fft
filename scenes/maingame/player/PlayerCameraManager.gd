@@ -32,7 +32,7 @@ func _on_CastManager_fish_hooked(fish):
 
 func _on_CastManager_nibble(fish):
 	camMount.mission(fish, "lookat")
-	TimePiece.targetTimeScale = 0.1
+	TimePiece.targetTimeScale = 0.8
 
 func _on_CastManager_ignore_nibble(_fish):
 	camMount.mission(tpscam, "transform")

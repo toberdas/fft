@@ -6,10 +6,10 @@
 [ext_resource path="res://scenes/helper/3DPickable.tscn" type="PackedScene" id=4]
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 0.361618, 0.401374, 0.435312 )
+extents = Vector3( 0.22778, 0.220549, 0.213554 )
 
 [sub_resource type="BoxShape" id=6]
-extents = Vector3( 0.249949, 0.270498, 0.277288 )
+extents = Vector3( 0.141239, 0.187382, 0.17306 )
 
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.102465, 0.140852, 0.137434 )
@@ -38,6 +38,7 @@ billboard = 1
 texture = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00233704, 1.49012e-08, 6.7234e-05 )
 shape = SubResource( 6 )
 
 [node name="AttackableNode" parent="Body" instance=ExtResource( 2 )]

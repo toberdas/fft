@@ -298,7 +298,7 @@ script = ExtResource( 30 )
 [node name="ItemSenseNode" parent="ItemPickupNode" instance=ExtResource( 14 )]
 
 [node name="CollisionShape" parent="ItemPickupNode/ItemSenseNode/Area" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0253574, 0.244665, 0.0212042 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0253574, 0.0368633, 0.0212042 )
 
 [node name="PlayerMenu" type="Node" parent="."]
 script = ExtResource( 18 )
@@ -331,8 +331,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7292, 2.57236, 6.24659 )
-offset = 34.3613
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.21149, 4.86571, -2.20131 )
+offset = 10.8036
 
 [node name="SeaCheckComponent" parent="." instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7152, 0 )

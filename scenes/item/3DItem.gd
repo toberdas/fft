@@ -1,17 +1,12 @@
 extends Spatial
 class_name ThreeDItem
 
+var canBePickedUp = true
 export(Resource) var itemResource setget set_resource
 var itemID = ""
 #var pickupResource : PickupItemResource setget set_pickup_resource
 
 signal item_gone
-
-#func set_pickup_resource(_pickupResource : PickupItemResource):
-#	pickupResource = _pickupResource
-#	set_resource(pickupResource.itemResource)
-#	if pickupResource.get_type() == 'bait':
-#		set_as_food()
 
 func picked(_pickingPointer):
 	emit_signal("item_gone")

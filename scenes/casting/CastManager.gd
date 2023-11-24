@@ -39,28 +39,25 @@ func cast():
 	if debug:
 		if castPoint.get_child_count() < maxCasts:
 			var ccs = defaultCast.instance()
+			ccs.castResource = castResource
 			connect_and_add(ccs)
 
 func create_cast_resource_connected():
 	var castResource = CastResource.new()
-	castResource.connect("cast_done")
-	castResource.connect("cast_failed")
-	castResource.connect("cast_start")
-	castResource.connect("fish_hooked")
-	castResource.connect("fish_nibbled")
-	castResource.connect("fish_reeled_in")
-	castResource.connect("predict_start")
+#	castResource.connect("cast_done")
+#	castResource.connect("cast_failed")
+	castResource.connect("cast_start", self, "emit_signal", ["thrown"])
+	castResource.connect("fish_hooked", self, "hooked_fish")
+	castResource.connect("fish_nibbled", self, "fish_nibbled")
+	castResource.connect("fish_reeled_in", self, "fish_is_caught")
+	castResource.connect("nibble_ignored", self, "nibble_ignored")
+	castResource.connect("fish_got_away", self, "lost_fish")
+#	castResource.connect("predict_start")
 	return castResource
 
 func connect_and_add(instance):
 	currentCastScenes.append(instance)
 	instance.connect("cast_freed", self, "clear_cast")
-	instance.connect("throw", self, "emit_signal", ["thrown"])
-	instance.connect("fish_hooked", self, "hooked_fish")
-	instance.connect("fish_caught", self, "emit_signal_custom", ["fish_caught"])
-	instance.connect("fish_lost", self, "emit_signal_custom", ["fish_lost"])
-	instance.connect("nibble", self, "emit_signal_custom", ["nibble"])
-	instance.connect("ignore_nibble", self, "emit_signal_custom", ["ignore_nibble"])
 	instance.connect("tree_exiting", self, "remove_instance", [instance])
 	castPoint.add_child(currentCastScenes[-1])
 
@@ -70,6 +67,18 @@ func remove_instance(instance):
 func hooked_fish(fish):
 	equipResource.remove_slot_pickup("BaitSlot")
 	emit_signal("fish_hooked", fish)
+
+func fish_nibbled(fish):
+	emit_signal("nibble", fish)
+
+func fish_is_caught(fish):
+	emit_signal("fish_caught", fish)
+
+func nibble_ignored(fish):
+	emit_signal("ignore_nibble", fish)
+
+func lost_fish(fish):
+	emit_signal("fish_lost", fish)
 
 func clear_cast(castNode):
 	emit_signal("cast_cleared")

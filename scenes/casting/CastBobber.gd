@@ -3,39 +3,41 @@ extends Spatial
 var baitData = {}
 var castResource : CastResource
 
-onready var baitEmitter = $Bait/BaitEmitter
-onready var hookEmitter  = $Hook/HookEmitter
-
 var follow = null
 var nibble = false
 
-signal fishhooked
-signal nibble
-signal ignore_nibble
-
-func _ready():
-	var _ce = $Hook.connect("hook_fish", self, "fish_hooked")
-
+const itemScene = preload("res://scenes/item/3DItem.tscn")
 
 func _process(_delta):
 	if follow:
 		global_transform.origin = follow.global_transform.origin
 
-func _on_Casting_castdone():
-	baitEmitter.switch_state("out") #start emitting when done casting *PROBABLY want to chagne this to start emitting when a command is hit, eventually
-	hookEmitter.switch_state("out")
+func add_bait():
+	var baitPickup = castResource.equipResource.get_slot_pickup("Bait")
+	if baitPickup:
+		var baitInstance = itemScene.instance()
+		baitInstance.canBePickedUp = false
+		add_child(baitInstance)
+		baitInstance.freeze()
+		baitInstance.itemResource = baitPickup.itemResource
 
 func change_parent(newparent):
 	get_parent().remove_child(self)
 	newparent.add_child(self)
 
-func fish_hooked(fish):
-	emit_signal("fishhooked", fish)
+func fish_hooked():
+	castResource.hooked_fish()
+	
+func ignore_nibble():
+	castResource.ignore_nibbling()
+	nibble = false
 
-func _on_Hook_nibble(fish):
-	castResource.nibblingFish = fish
-	emit_signal("nibble", fish)
+func nibble(fish):
+	if nibble == false:
+		nibble = true
+		castResource.nibbled_fish(fish)
+		var _nibbleNode = TimedInput.new(preload("res://assets/resources/choices/FishNibbleChoice.tres"), self, "fish_hooked", "ignore_nibble")
 
-func _on_Hook_ignore_nibble(fish):
-	castResource.nibblingFish = null
-	emit_signal("ignore_nibble", fish)
+func _on_AttackableNode_attacked(bitingFish):
+	nibble(bitingFish.owner)
+	
