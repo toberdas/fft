@@ -133,7 +133,7 @@ shape = SubResource( 7 )
 script = ExtResource( 10 )
 
 [node name="Rotator" parent="OffsetNode/IslandMiddlePoint" instance=ExtResource( 25 )]
-transform = Transform( -0.203199, 0, 1.03095, 0, 1, 0, -1.03095, 0, -0.203199, 0, 0, 0 )
+transform = Transform( -0.120215, 0, -1.04396, 0, 1, 0, 1.04396, 0, -0.120215, 0, 0, 0 )
 targetSpeed = 0.4
 
 [node name="Camera" type="Camera" parent="OffsetNode/IslandMiddlePoint/Rotator"]

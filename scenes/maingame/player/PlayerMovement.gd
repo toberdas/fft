@@ -37,7 +37,7 @@ var velocity = Vector3(0,0,0)
 var fallVelocity = Vector3.ZERO
 var impulseVelocity = Vector3.ZERO
 var floorNorm = Vector3(0,1,0)
-var snap = Vector3(0,1,0)
+var snap = Vector3(0,-1,0)
 var grounded = true
 var jumpFrames = 0.0
 var doubleJumpFrames = 0
@@ -417,6 +417,7 @@ func start_jump():
 	
 
 func jump():
+	snap = Vector3.ZERO
 	velocity.y = 0
 	var veladd = (velocity.length() / maxVelocity * jumpVelocityAdd)
 	var combiadd = ($CombiJumpCounter.combiAmount * combiJumpAdd)
@@ -570,7 +571,7 @@ func _on_CastManager_fish_hooked(_fish):
 
 func _on_FloorCheckers_on_floor():
 	grounded = true;
-	snap = Vector3.UP
+	snap = Vector3(0,-1,0)
 
 
 func _on_FloorCheckers_not_on_floor():

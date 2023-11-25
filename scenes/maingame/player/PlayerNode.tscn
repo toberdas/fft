@@ -331,8 +331,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8807, 3.85116, 0.0890419 )
-offset = 27.0947
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97965, 4.84005, -4.68014 )
+offset = 14.172
 
 [node name="SeaCheckComponent" parent="." instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7152, 0 )
