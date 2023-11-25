@@ -20,7 +20,7 @@ func grow_fruit(time):
 
 func fruit_ready():
 	growing = false
-	var fruitData = defaultFruit
+	var fruitData = defaultFruit ##TODO fruit per eiland maken
 	currentFruit = $ItemSpawner.spawn_3d_item_from_resource(fruitData)
 	$Bush.grow_on_bush(currentFruit)
 	currentFruit.connect("item_gone", self, "fruit_dropped")

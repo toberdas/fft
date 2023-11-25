@@ -2,7 +2,7 @@
 extends Spatial
 
 const TICKANGLE = 90
-const MAXTIME = 0.5
+const MAXTIME = 1.0
 const AVERAGEAMOUNT = 8
 
 var active = false
@@ -35,9 +35,9 @@ func _process(delta):
 			oat = at #store current index as old index
 		timeBetween += delta #add up delta to timeBetween that keeps track of the amount of time that passes between ticks
 		if timeBetween >= MAXTIME: #if time exceeds a certain limit
-			reset()
 			tick(timeBetween) #also force a tick, to make it so that you dont get absurdly high time amounts
-
+			reset()
+			
 func tick(time):
 	if mode == "average":
 		help.limited_append(time,averageAr,AVERAGEAMOUNT) #add time to averageAr, limiting it to a certain size.

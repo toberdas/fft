@@ -53,7 +53,7 @@ func make_fruit_spawners(treeResource: IslandTree):
 		spawnerInstance.transform.origin = spawnerResource.location
 		spawnerInstance.look_at(spawnerResource.location + spawnerResource.upVector * 5.0,Vector3.UP)
 		spawnerInstance.scale *= spawnerResource.scale
-#		spawnerInstance.fruit_ready()
+		spawnerInstance.start_growing()
 		fruitSpawners.append(spawnerInstance)
 	pass
 

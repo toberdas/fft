@@ -44,14 +44,14 @@ script = ExtResource( 19 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 147.068 )
 
 [node name="RotatingPlatformRoot" parent="." instance=ExtResource( 9 )]
-transform = Transform( -0.753175, 0, 0.603537, 0, 1, 0, -0.603537, 0, -0.753175, 36.7464, 47.2417, 0 )
+transform = Transform( -0.224876, 0, -0.937119, 0, 1, 0, 0.937119, 0, -0.224876, 36.7464, 47.2417, 0 )
 axis = Vector3( 0, 1, 0 )
 direction = 1
 targetSpeed = 0.8
 on = true
 
 [node name="RotatingPlatformRoot2" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, -0.837222, 0.46535, 0, -0.46535, -0.837222, 57.7148, 48.1208, 0 )
+transform = Transform( 1, 0, 0, 0, -0.515895, -0.804951, 0, 0.804951, -0.515895, 57.7148, 48.1208, 0 )
 axis = Vector3( 1, 0, 0 )
 direction = -1
 targetSpeed = 0.6

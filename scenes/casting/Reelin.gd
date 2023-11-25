@@ -62,26 +62,10 @@ func _process(delta):
 			else: #otherwise
 				line.points = [global_transform.origin, reelinFish.get_node("HeadPoint").global_transform.origin] #just draw a line with 2 points
 			if inSight:
-				reelinSpeed = move_toward(reelinSpeed, targetReelinSpeed, 0.4)
-				var fishDot = $FishDotter.get_fish_dot(reelinFish)
-				var camDot = $FishDotter.get_cam_dot(reelinFish)
-				var dot = fishDot + camDot
-				idealTimeModifier = min(1.0, 1.0 - (fishDot * 0.5))
-				catchRate -= catchSpeed * (1.0+dot) * delta #subtract actual reelinspeed from catchrate
-				var damage = max(0.0, (reelinSpeed - 1.0)) * delta * 20.0
-				if damage > 0.0:
-					if currentLineBuffer > 0:
-						currentLineBuffer -= damage
-					else:
-						lineHealth -= damage
-				else:
-					currentLineBuffer = move_toward(currentLineBuffer, lineBuffer, delta * 4.0) 
 				var lineLength = calculate_line_length()
-				print(lineLength)
 				reelinFish.hookedAmount = lineLength #supply the fish with a normalized number, being the amount the fish is reeled in, it uses it to find the nearest point on a sphere around the player
-				GlobalSingleton.cam.targetFOV = minFOV + FOVdif * (catchRate / initialCatchRate) 
-				emit_signal("tick", {catchRate = catchRate, lineHealth = lineHealth, time = reelinSpeed}) #emit signal mostly to gui, to show off
 		decay_yank()
+		recover_line_buffer()
 		if Input.is_action_just_pressed("a"):
 			yank()
 		if catchRate <= 0:
@@ -123,28 +107,46 @@ func stop():
 func handle_tick(time):
 	if inSight: #if the fish is in sight
 		if time > 0:
-#			targetReelinSpeed = max(0, (targetTime * idealTimeModifier / time) - .5) 
+			var fishDot = get_dot() #-1-1
+			var idealTime = min(1.0, (1.0 - fishDot))
+			print('time is ' + str(time) + ' idealtime is ' + str(idealTime))
 			reelinSpeed = max(0, ((targetTime * idealTimeModifier) / time)) 
+			damage_line(time, idealTime)
 			catchSpeed = 1.0 - time
+			catchRate -= catchSpeed
+			emit_signal("tick", {catchRate = catchRate, lineHealth = lineHealth, time = reelinSpeed})
 #			print(str(time) + " " + str(targetTime * idealTimeModifier) + " " + str(reelinSpeed) + ', ' + str(idealTimeModifier))
 	else:
 		Warning.new(preload("res://scenes/ui/warnings/FishOutOfSightWarning.tres"))
 
+func damage_line(speed, idealSpeed):
+	var damage = max(0.0, (idealSpeed - speed)) * (1.0 + 3.0 * reelinFish.fishData.mass)
+	if damage > 0.0:
+		if currentLineBuffer > 0:
+			currentLineBuffer -= damage
+		else:
+			lineHealth -= damage
+
+func recover_line_buffer():
+	currentLineBuffer = move_toward(currentLineBuffer, lineBuffer, 0.0001) 
+
+func get_dot():
+	var fishDot = $FishDotter.get_fish_dot(reelinFish)
+	var camDot = $FishDotter.get_cam_dot(reelinFish)
+	return (fishDot + camDot) * 0.5
+
 func line_break():
 	castResource.got_away()
-#	GlobalSingleton.glob_unhook(reelinFish)
 	emit_signal("reel_fail", reelinFish)
 	stop()
 
 func fish_loose():
 	castResource.got_away()
-#	GlobalSingleton.glob_unhook(reelinFish)
 	emit_signal("reel_fail", reelinFish)
 	stop()
 
 func fish_caught():
 	castResource.reeled_in_fish()
-#	GlobalSingleton.glob_catch(reelinFish)
 	emit_signal("reel_succes", reelinFish)
 	stop()
 

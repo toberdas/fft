@@ -14,7 +14,7 @@ script = ExtResource( 3 )
 [node name="Tree" type="Spatial" parent="TreeNBranchTest"]
 
 [node name="Rotator" parent="." instance=ExtResource( 4 )]
-speed = 0.4
+transform = Transform( -0.967725, 0, 0.250938, 0, 1, 0, -0.250938, 0, -0.967725, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="Rotator"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.16577, 33.9755 )
