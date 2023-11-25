@@ -22,6 +22,7 @@ signal cast_failed
 signal fish_got_away
 
 func hooked_fish():
+	equipResource.remove_slot_pickup("Bait")
 	emit_signal("fish_hooked", nibblingFish)
 	reelinFish = nibblingFish
 

@@ -1,10 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/materials/linematerials/linemat_wobbly.tres" type="Material" id=1]
 [ext_resource path="res://scenes/helper/CurvyPath.gd" type="Script" id=2]
 [ext_resource path="res://scenes/helper/PathwalkerWithDetection.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/casting/Line.gd" type="Script" id=4]
-[ext_resource path="res://assets/shaders/sh_displacementwobbly.tres" type="Shader" id=5]
 [ext_resource path="res://scenes/casting/CastBobber.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/helper/Chain.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/casting/Casting.gd" type="Script" id=10]
@@ -19,29 +17,10 @@ _data = {
 margin = 0.127
 radius = 0.20265
 
-[sub_resource type="OpenSimplexNoise" id=1]
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.968627, 0.921569, 0.537255, 1 )
 
-[sub_resource type="NoiseTexture" id=6]
-seamless = true
-noise = SubResource( 1 )
-
-[sub_resource type="OpenSimplexNoise" id=3]
-
-[sub_resource type="NoiseTexture" id=4]
-seamless = true
-noise = SubResource( 3 )
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 5 )
-shader_param/albedo = Color( 0.627451, 0.156863, 0.156863, 1 )
-shader_param/uv1_scale = Vector3( 0.1, 0.1, 0.1 )
-shader_param/uv1_offset = Vector3( 0.1, 0.1, 0.1 )
-shader_param/brightness = 8.0
-shader_param/disp_scale = Vector2( 1, 1 )
-shader_param/strength = 1.0
-shader_param/speed = 0.2
-shader_param/albedo_texture = SubResource( 6 )
-shader_param/flowMap = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=10]
 
 [node name="Casting" type="Spatial"]
 script = ExtResource( 10 )
@@ -62,10 +41,10 @@ shape = SubResource( 8 )
 [node name="Bobber" parent="CastPath/DetectingPathwalker" instance=ExtResource( 6 )]
 
 [node name="CastLine" type="ImmediateGeometry" parent="."]
-material_override = ExtResource( 1 )
+material_override = SubResource( 9 )
 script = ExtResource( 4 )
 drawCorners = false
-readyToJumpShader = SubResource( 7 )
+readyToJumpShader = SubResource( 10 )
 
 [connection signal="castdone" from="." to="CastPath/DetectingPathwalker/Bobber" method="_on_Casting_castdone"]
 [connection signal="castdone" from="." to="CastLine" method="_on_Casting_castdone"]

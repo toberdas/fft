@@ -10,4 +10,4 @@ func attack():
 				emit_signal("body_attacked", area.owner.owner)
 			else:
 				emit_signal("body_attacked", area.owner)
-			break
+			

@@ -35,6 +35,7 @@ func _process(delta):
 			oat = at #store current index as old index
 		timeBetween += delta #add up delta to timeBetween that keeps track of the amount of time that passes between ticks
 		if timeBetween >= MAXTIME: #if time exceeds a certain limit
+			reset()
 			tick(timeBetween) #also force a tick, to make it so that you dont get absurdly high time amounts
 
 func tick(time):

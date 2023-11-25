@@ -11,9 +11,9 @@ export var catchRate = 36 #the "health" of the fish, declines most when player i
 export var catchHikeLength = 6
 export var catchHikeIndex = 0
 export var yankLineHealthDamage = 8
-export var yankAmount = .2
+export var yankAmount = 0.5
 export var currentYank = 0.0
-export var yankDecay = .05
+export var yankDecay = .01
 export var targetTime = 0.5 #the target amount of seconds between "tick" or checkpoints in rotating your joystick
 export var eyesOnTime = 24 #amount of time the fish is allowed to be out of screen
 export var lineInterpolateFrames = 12 #amount of frames to interpolate between castline and straight line to fish until setting it to a line of 2 points
@@ -68,7 +68,7 @@ func _process(delta):
 				var dot = fishDot + camDot
 				idealTimeModifier = min(1.0, 1.0 - (fishDot * 0.5))
 				catchRate -= catchSpeed * (1.0+dot) * delta #subtract actual reelinspeed from catchrate
-				var damage = max(0.0 ,(reelinSpeed - 1.0)) * delta * 20.0
+				var damage = max(0.0, (reelinSpeed - 1.0)) * delta * 20.0
 				if damage > 0.0:
 					if currentLineBuffer > 0:
 						currentLineBuffer -= damage
@@ -79,7 +79,7 @@ func _process(delta):
 				var lineLength = calculate_line_length()
 				print(lineLength)
 				reelinFish.hookedAmount = lineLength #supply the fish with a normalized number, being the amount the fish is reeled in, it uses it to find the nearest point on a sphere around the player
-				GlobalSingleton.cam.targetFOV = minFOV + FOVdif * catchRate / initialCatchRate 
+				GlobalSingleton.cam.targetFOV = minFOV + FOVdif * (catchRate / initialCatchRate) 
 				emit_signal("tick", {catchRate = catchRate, lineHealth = lineHealth, time = reelinSpeed}) #emit signal mostly to gui, to show off
 		decay_yank()
 		if Input.is_action_just_pressed("a"):
@@ -126,9 +126,9 @@ func handle_tick(time):
 #			targetReelinSpeed = max(0, (targetTime * idealTimeModifier / time) - .5) 
 			reelinSpeed = max(0, ((targetTime * idealTimeModifier) / time)) 
 			catchSpeed = 1.0 - time
-			print(str(time) + " " + str(targetTime * idealTimeModifier) + " " + str(reelinSpeed) + ', ' + str(idealTimeModifier))
+#			print(str(time) + " " + str(targetTime * idealTimeModifier) + " " + str(reelinSpeed) + ', ' + str(idealTimeModifier))
 	else:
-		print("Fish not in sight!")
+		Warning.new(preload("res://scenes/ui/warnings/FishOutOfSightWarning.tres"))
 
 func line_break():
 	castResource.got_away()
