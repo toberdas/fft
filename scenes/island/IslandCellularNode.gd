@@ -32,11 +32,12 @@ func _process(delta):
 	if loadingTopCubes:
 		for i in range(5):
 			var cell = islandCellular.topCells[cubeIndex]
-			var cube = make_cube(cell)
-			var node = $CellAdditionSplitter.load_cell_additions(cell, cube)
-			if node: 
-				node.transform.basis = node.transform.basis.scaled(Vector3(1.0/sc,1.0/sc,1.0/sc))
-				node.global_transform.origin.y += sc * 0.5
+			if !check_if_cell_surrounded(cell):
+				var cube = make_cube(cell)
+				var node = $CellAdditionSplitter.load_cell_additions(cell, cube)
+				if node: 
+					node.transform.basis = node.transform.basis.scaled(Vector3(1.0/sc,1.0/sc,1.0/sc))
+					node.global_transform.origin.y += sc * 0.5
 			cubeIndex += 1
 			if cubeIndex == islandCellular.topCells.size():
 				loadingTopCubes = false
@@ -50,18 +51,21 @@ func _process(delta):
 			return
 		for i in range(5):
 			var cell = islandCellular.bottomCells[cubeIndex]
-			var cube = make_cube(cell)
-			var node = $CellAdditionSplitter.load_cell_additions(cell, cube)
-			if node: 
-				node.transform.basis = node.transform.basis.scaled(Vector3(1.0/sc,1.0/sc,1.0/sc))
-				node.global_transform.origin.y += sc * 0.5
+			if !check_if_cell_surrounded(cell):
+				var cube = make_cube(cell)
+				var node = $CellAdditionSplitter.load_cell_additions(cell, cube)
+				if node: 
+					node.transform.basis = node.transform.basis.scaled(Vector3(1.0/sc,1.0/sc,1.0/sc))
+					node.global_transform.origin.y += sc * 0.5
 			cubeIndex += 1
 			if cubeIndex == islandCellular.bottomCells.size():
 				loadingRest = false
 				cubeIndex = 0
 				emit_signal("generation_done")
-#				$MeshInstance.merge_meshes_custom(0)
 				break
+
+func check_if_cell_surrounded(cell:Cell):
+	return islandCellular.surroundedCellsDict.has(cell.location)
 
 func make_cube(cell:Cell):
 	var c = cube.instance()

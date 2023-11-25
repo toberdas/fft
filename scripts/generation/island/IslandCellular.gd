@@ -17,6 +17,7 @@ var surfaceCells = []
 var triggerCells = []
 var insideCells = []
 var baseCells = []
+var surroundedCellsDict = {}
 var surfaceDict = {}
 var additionDict = {}
 var aStar : AStar
@@ -65,6 +66,7 @@ func generate_step():
 			surfaceCells = find_cellular_surface_cells()
 			surfaceDict = find_cellular_surface_cells_by_xy()
 			baseCells = find_base_cells()
+			surroundedCellsDict = find_surrounded_cells()
 			return true
 	
 
@@ -143,6 +145,12 @@ func find_base_cells():
 	if cellular:
 		var lf = IslandLocationPicker.new()
 		return lf.find_base_cells(cellular)
+	pass
+
+func find_surrounded_cells():
+	if cellular:
+		var lf = IslandLocationPicker.new()
+		return lf.find_surrounded_cells(cellular)
 	pass
 
 func put_in_dict_at_name(data, name):

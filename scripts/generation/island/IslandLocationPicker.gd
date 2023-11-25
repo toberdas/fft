@@ -110,6 +110,14 @@ func inverse_normal_distribution():
 	var y = sign(dy) - dy
 	return Vector2(x,y)
 
+func find_surrounded_cells(ca:CellularAutomata3D):
+	var neumannNeighbourhood = Neighbourhood.new(Neighbourhood.style.Neumann)
+	var surroundedCells = {}
+	for cell in ca.liveCells:
+		var neighbours = ca.get_neighbouring_cells(cell.location, neumannNeighbourhood, [Cell.state.alive, Cell.state.dying])
+		if neighbours.size() == neumannNeighbourhood.checkList.size():
+			surroundedCells[cell.location] = cell
+	return surroundedCells
 
 func find_base_cells(ca:CellularAutomata3D):
 	var baseCells = []
