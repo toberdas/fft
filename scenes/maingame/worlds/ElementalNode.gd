@@ -23,6 +23,7 @@ export(Environment) var skyEnvironment
 func _ready():
 	transitionTimer = ProcessTimer.new(100)
 	endless_sea.endlessSeaResource = usedEndlessSeaResource
+	start_transition()
 
 func _process(delta):
 	if transitioning:

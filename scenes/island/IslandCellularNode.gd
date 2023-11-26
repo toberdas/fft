@@ -24,7 +24,7 @@ func start_load(save:IslandSave):
 	sc = save.islandResource.islandCharacter.scale
 	loadingTopCubes = true
 	for cell in islandCellular.baseCells:
-		for i in range(5):
+		for i in range(2 + randi() % 6):
 			var cube = make_cube(cell)
 			cube.transform.origin.y -= i * sc
 

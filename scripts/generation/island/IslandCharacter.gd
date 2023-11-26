@@ -52,10 +52,10 @@ func run():
 	characterTagSet.make_tagset_from_enum(FishEnums.charactertags)
 	
 func make_cellural_members():
-	var total = 24 + (tier * 2)
-	var rand = rand_range(0.3,0.9)
-	cellularHeight = rand * total
-	cellularDepth = (1.0 - rand) * total
+	var total = 16 + (tier * 2)
+	var rand = rand_range(0.5,0.9)
+	cellularHeight = int(rand * total)
+	cellularDepth = int((1.0 - rand) * total)
 	cellularAmount = 6 + tier
 	cellularGenerations = 4 + randi() % tier
 	cellularRule = randi() % CellularAutomataData.presetArray.size()

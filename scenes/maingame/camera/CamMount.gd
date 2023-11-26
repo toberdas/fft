@@ -12,8 +12,10 @@ func _ready():
 
 
 func _on_SeaCheckComponent_emerged():
-	camera.environment = aboveWaterEnvironment
+#	camera.environment = aboveWaterEnvironment
+	pass
 
 
 func _on_SeaCheckComponent_submerged():
-	camera.environment = underWaterEnvironment
+#	camera.environment = underWaterEnvironment
+	pass

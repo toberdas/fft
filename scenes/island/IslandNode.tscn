@@ -50,7 +50,7 @@ script = ExtResource( 2 )
 script = ExtResource( 17 )
 
 [node name="OffsetNode" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0 )
 
 [node name="IslandDialogNode" type="Spatial" parent="OffsetNode"]
 script = ExtResource( 3 )
@@ -133,7 +133,7 @@ shape = SubResource( 7 )
 script = ExtResource( 10 )
 
 [node name="Rotator" parent="OffsetNode/IslandMiddlePoint" instance=ExtResource( 25 )]
-transform = Transform( -0.120215, 0, -1.04396, 0, 1, 0, 1.04396, 0, -0.120215, 0, 0, 0 )
+transform = Transform( 0.174275, 0, -1.03636, 0, 1, 0, 1.03636, 0, 0.174275, 0, 0, 0 )
 targetSpeed = 0.4
 
 [node name="Camera" type="Camera" parent="OffsetNode/IslandMiddlePoint/Rotator"]

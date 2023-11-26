@@ -44,6 +44,7 @@ func make_branch_mesh(branch : IslandBranch):
 	attackableInstance.set_shape(meshPathInstance.get_shape())
 	meshPathInstance.add_child(attackableInstance)
 	attackableInstance.add_to_group("Trees")
+	attackableInstance.scale *= 1.2
 	attackableInstance.connect("attacked", self, "tree_attacked")
 		
 func make_fruit_spawners(treeResource: IslandTree):

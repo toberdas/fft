@@ -36,6 +36,7 @@ var storedState = targetState
 var velocity = Vector3(0,0,0)
 var fallVelocity = Vector3.ZERO
 var impulseVelocity = Vector3.ZERO
+var rawMoveInput = Vector2.ZERO
 var floorNorm = Vector3(0,1,0)
 var snap = Vector3(0,-1,0)
 var grounded = true
@@ -347,7 +348,7 @@ func get_input():
 	var orthox = cam.global_transform.basis.x.normalized()
 	var orthoz = cam.global_transform.basis.z.normalized()
 	moveInput = orthox * (Input.get_action_strength("moveright") - Input.get_action_strength("moveleft")) + orthoz * (Input.get_action_strength("movedown") - Input.get_action_strength("moveup"))
-	
+	rawMoveInput = Vector2((Input.get_action_strength("moveright") - Input.get_action_strength("moveleft")), (Input.get_action_strength("movedown") - Input.get_action_strength("moveup")))
 	var moveDict ={
 		'moveInput' : moveInput.normalized(),
 		'jumpCommandStart' : Input.is_action_just_pressed("jump"),
@@ -398,9 +399,13 @@ func air_move(delta, moveInput):
 
 	
 func strafe(delta, moveInput):
-	velocity.x = moveInput.x * strafeSpeed * delta
-	velocity.z = moveInput.z * strafeSpeed * delta
-	velocity = velocity.normalized()
+#	var localMoveInput = get_parent().transform.affine_inverse().basis * moveInput
+#	velocity = localMoveInput * strafeSpeed * delta
+#	velocity = velocity.normalized()
+	var strafeVel = Vector3.ZERO
+	strafeVel += rawMoveInput.x * global_transform.basis.x
+	strafeVel += rawMoveInput.y * global_transform.basis.z
+	velocity = strafeVel.normalized()
 
 func fill_jump_buffer():
 	jumpFrames = jumpBuffer

@@ -122,8 +122,7 @@ func land():
 
 func check_if_can_fly():
 	if saveGame:
-#		return saveGame.upgradeCollectionResource.get_upgrade("ship").check_if_equip_full("Take off")
-		return true
+		return saveGame.upgradeCollectionResource.get_upgrade("ship").check_if_equip_full("Take off")
 	else:
 		return true
 

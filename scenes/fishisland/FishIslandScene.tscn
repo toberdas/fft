@@ -14,16 +14,16 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.64671, 0 )
 moveMod = 1.0
 
-[node name="AnchorFrontRight" parent="SeaBalanceNode" index="4"]
+[node name="AnchorFrontRight" parent="SeaBalanceNode" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9917, 0, -20.8006 )
 
-[node name="AnchorFrontLeft" parent="SeaBalanceNode" index="5"]
+[node name="AnchorFrontLeft" parent="SeaBalanceNode" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9747, 0, -21.1701 )
 
-[node name="AnchorBackLeft" parent="SeaBalanceNode" index="6"]
+[node name="AnchorBackLeft" parent="SeaBalanceNode" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1136, 0, 47.6713 )
 
-[node name="AnchorBackRight" parent="SeaBalanceNode" index="7"]
+[node name="AnchorBackRight" parent="SeaBalanceNode" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3382, 0, 47.6261 )
 
 [node name="LevelAddNode" type="Spatial" parent="SeaBalanceNode"]

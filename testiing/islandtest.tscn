@@ -11,7 +11,7 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Rotator" parent="." instance=ExtResource( 3 )]
-transform = Transform( -0.688475, 0, -0.721876, 0, 1, 0, 0.721876, 0, -0.688475, 0, 0, 0 )
+transform = Transform( 0.868112, 0, -0.491104, 0, 1, 0, 0.491104, 0, 0.868112, 0, 0, 0 )
 targetSpeed = 0.1
 
 [node name="Camera" type="Camera" parent="Rotator"]

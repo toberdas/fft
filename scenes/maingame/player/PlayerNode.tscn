@@ -211,11 +211,9 @@ MOVESPEED = 1.4
 target = NodePath("../..")
 followMultiplier = 4.0
 mode = "origin"
-instant = true
 
 [node name="CamMount" parent="IndependentTransform/PlayerFollower" instance=ExtResource( 19 )]
 target = NodePath("../../ThirdPersonCamGetup")
-instant = true
 aboveWaterEnvironment = SubResource( 18 )
 
 [node name="Camera" parent="IndependentTransform/PlayerFollower/CamMount" index="0"]
@@ -331,8 +329,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97965, 4.84005, -4.68014 )
-offset = 14.172
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17048, 1.90352, 3.61674 )
+offset = 3.83669
 
 [node name="SeaCheckComponent" parent="." instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7152, 0 )

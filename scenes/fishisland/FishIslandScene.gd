@@ -23,7 +23,7 @@ func _process(delta):
 		var dir = fishIslandSave.targetPoint - fishIslandSave.point
 		if !dir.is_equal_approx(Vector2.ZERO):
 			global_transform.basis = global_transform.looking_at(global_transform.origin + Vector3(dir.x,0.0,dir.y), Vector3.UP).basis
-			targetHeightAdd = -40.0
+			targetHeightAdd = 0.0
 		else:
 			targetHeightAdd = 0.0
 	transform.basis = transform.basis.slerp(targetBasis, delta * .2)
