@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scenes/maingame/player/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://scenes/maingame/player/PlayerInteracter.gd" type="Script" id=2]
@@ -34,6 +34,8 @@
 [ext_resource path="res://assets/resources/fish/MoverResource.gd" type="Script" id=32]
 [ext_resource path="res://scenes/maingame/player/PlayerFlockManager.gd" type="Script" id=33]
 [ext_resource path="res://scenes/helper/SeaCheckComponent.tscn" type="PackedScene" id=34]
+[ext_resource path="res://scenes/helper/SeaHeightComponent.tscn" type="PackedScene" id=35]
+[ext_resource path="res://scenes/maingame/player/PlayerWaterNode.gd" type="Script" id=36]
 [ext_resource path="res://scenes/ui/MapScene.tscn" type="PackedScene" id=37]
 [ext_resource path="res://scenes/maingame/player/PlayerInventory.tscn" type="PackedScene" id=38]
 [ext_resource path="res://scenes/maingame/player/InvestigatingNode.gd" type="Script" id=39]
@@ -95,7 +97,7 @@ clears = false
 persistent = false
 
 [sub_resource type="BoxShape" id=14]
-extents = Vector3( 1, 0.466952, 1 )
+extents = Vector3( 1, 0.836117, 1 )
 
 [node name="Player" type="KinematicBody" groups=["Player", "ScaryToFish"]]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -329,15 +331,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17048, 1.90352, 3.61674 )
-offset = 3.83669
-
-[node name="SeaCheckComponent" parent="." instance=ExtResource( 34 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7152, 0 )
-
-[node name="CollisionShape" parent="SeaCheckComponent" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0773237, 0 )
-shape = SubResource( 14 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.48095, 3.43515, 1.11154 )
+offset = 7.06489
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )
@@ -350,6 +345,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36285, -1.22343 )
 script = ExtResource( 39 )
 pathToPlayer = NodePath("..")
 allowedStates = [ 0, 2 ]
+
+[node name="PlayerWaterNode" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561216, 0 )
+script = ExtResource( 36 )
+
+[node name="SeaHeightComponent" parent="PlayerWaterNode" instance=ExtResource( 35 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+setsOwnHeight = false
+minHeight = -6.0
+maxHeight = 6.0
+active = false
+
+[node name="SeaCheckComponent" parent="PlayerWaterNode" instance=ExtResource( 34 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.8576, 0 )
+
+[node name="CollisionShape" parent="PlayerWaterNode/SeaCheckComponent" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.557958, 0 )
+shape = SubResource( 14 )
 
 [connection signal="cancelinteract" from="." to="PlayerInteracter" method="_on_Player_cancelinteract"]
 [connection signal="damaged" from="." to="PlayerMenu" method="_on_Player_damaged"]
@@ -412,12 +425,14 @@ allowedStates = [ 0, 2 ]
 [connection signal="item_sensed" from="ItemPickupNode/ItemSenseNode" to="ItemPickupNode" method="_on_ItemSenseNode_item_sensed"]
 [connection signal="menu_closed" from="PlayerMenu" to="." method="_on_PlayerMenu_menu_closed"]
 [connection signal="menu_opened" from="PlayerMenu" to="." method="_on_PlayerMenu_menu_opened"]
-[connection signal="emerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_emerged"]
-[connection signal="submerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_submerged"]
 [connection signal="start_investigating" from="InvestigatingNode" to="." method="_on_InvestigatingNode_start_investigating"]
 [connection signal="start_investigating" from="InvestigatingNode" to="PlayerCameraManager" method="_on_InvestigatingNode_start_investigating"]
 [connection signal="stop_investigating" from="InvestigatingNode" to="." method="_on_InvestigatingNode_stop_investigating"]
 [connection signal="stop_investigating" from="InvestigatingNode" to="PlayerCameraManager" method="_on_InvestigatingNode_stop_investigating"]
+[connection signal="emerged" from="PlayerWaterNode" to="." method="_on_PlayerWaterNode_emerged"]
+[connection signal="submerged" from="PlayerWaterNode" to="." method="_on_PlayerWaterNode_submerged"]
+[connection signal="emerged" from="PlayerWaterNode/SeaCheckComponent" to="PlayerWaterNode" method="_on_SeaCheckComponent_emerged"]
+[connection signal="submerged" from="PlayerWaterNode/SeaCheckComponent" to="PlayerWaterNode" method="_on_SeaCheckComponent_submerged"]
 
 [editable path="IndependentTransform/PlayerFollower/CamMount"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene"]
@@ -426,4 +441,4 @@ allowedStates = [ 0, 2 ]
 [editable path="AttackingNode"]
 [editable path="ItemPickupNode/ItemSenseNode"]
 [editable path="PlayerFlockManager/FlockPath"]
-[editable path="SeaCheckComponent"]
+[editable path="PlayerWaterNode/SeaCheckComponent"]

@@ -15,3 +15,9 @@ func submerged(b):
 			emit_signal("submerged")
 		else:
 			emit_signal("emerged")
+
+func is_submerged():
+	return switch.value == true
+
+func is_emerged():
+	return switch.value == false

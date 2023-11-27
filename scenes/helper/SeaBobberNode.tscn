@@ -1,15 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/helper/SeaCheckComponent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/helper/SeaBobberNode.gd" type="Script" id=2]
 [ext_resource path="res://scenes/helper/SeaHeightComponent.tscn" type="PackedScene" id=3]
 
 [node name="SeaBobberNode" type="Spatial"]
 script = ExtResource( 2 )
 
-[node name="SeaCheckComponent" parent="." instance=ExtResource( 1 )]
-
 [node name="SeaHeightComponent" parent="." instance=ExtResource( 3 )]
-
-[connection signal="emerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_emerged"]
-[connection signal="submerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_submerged"]

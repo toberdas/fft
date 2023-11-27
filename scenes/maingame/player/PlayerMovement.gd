@@ -23,11 +23,13 @@ export var combiJumpAdd = 0.6
 export var combiGravMinus = 2
 export var doubleJump = 1
 export var maxFallVelocityLength = 2.0
+export var emergeFrames = 6.0
+export var buoyancy = 60.0
 
 var playerResource : PlayerResource setget set_player_resource
 var saveGame 
 
-enum state{idle, accelerate, topspeed, brake, angling, strafing, jumping, reelinjump, dashload, dashing, inair, nibble, reelin, gaming, interacting, inmenu, inwater, limitless, onwall, walljumping, doublejump, reelinjump, attacked, investigating}
+enum state{idle, accelerate, topspeed, brake, angling, strafing, jumping, reelinjump, dashload, dashing, inair, nibble, reelin, gaming, interacting, inmenu, inwater, limitless, onwall, walljumping, doublejump, reelinjump, attacked, investigating, underwater}
 var immuneToAttackStates = [state.reelin, state.inmenu, state.nibble, state.gaming, state.interacting]
 var currentState = state.idle
 var targetState = 0
@@ -53,6 +55,8 @@ var wallGrabPosition = Vector3.ZERO
 var wallGraceFrameCounter = 0
 var inWaterModifier = 1.0
 var targetDirection = null
+var emergeBuffer : ProcessTimer
+
 
 export(NodePath) var ship
 export(NodePath) var camPoint
@@ -86,6 +90,7 @@ signal savegame_out_at_ready
 signal island_discovered
 
 func _ready():
+	emergeBuffer = ProcessTimer.new(emergeFrames)
 	if ship:
 		ship = get_node(ship)
 	cam = get_node(cam)
@@ -247,8 +252,7 @@ func _process(delta):
 			snap_to_target_direction()
 			emit_signal("jumped")
 			jump()
-			targetState = state.inair
-			coyoteCount = 0.0
+			
 		if !grounded:
 			targetState = state.inair
 	
@@ -306,6 +310,20 @@ func _process(delta):
 			$AttackingNode.attack()
 		else:
 			targetState = state.idle
+	
+	if currentState == state.inwater:
+		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+		add_velocity(delta, moveInput)
+		decay_impulse_velocity(delta)		
+		align_to_movement(moveInput)
+		float_on_surface(delta)
+		if moveDict['jumpCommandStart']:
+			jump()
+		
+		
+	if currentState == state.underwater:
+		decay_impulse_velocity(delta)
+		swim_underwater(delta)
 	
 	if currentState == state.angling:
 		decay_impulse_velocity(delta)
@@ -397,7 +415,6 @@ func air_move(delta, moveInput):
 	velocity = velocity.limit_length(maxVelocity + 0.5)
 	velocity.y = vely
 
-	
 func strafe(delta, moveInput):
 #	var localMoveInput = get_parent().transform.affine_inverse().basis * moveInput
 #	velocity = localMoveInput * strafeSpeed * delta
@@ -406,6 +423,14 @@ func strafe(delta, moveInput):
 	strafeVel += rawMoveInput.x * global_transform.basis.x
 	strafeVel += rawMoveInput.y * global_transform.basis.z
 	velocity = strafeVel.normalized()
+
+func float_on_surface(delta):
+#	global_transform.origin.y = lerp(global_transform.origin.y, $PlayerWaterNode.height, delta)
+#	velocity.y = ($PlayerWaterNode.height - global_transform.origin.y) * delta * buoyancy
+	global_transform.origin.y = $PlayerWaterNode.height
+
+func swim_underwater(delta):
+	pass
 
 func fill_jump_buffer():
 	jumpFrames = jumpBuffer
@@ -427,7 +452,9 @@ func jump():
 	var veladd = (velocity.length() / maxVelocity * jumpVelocityAdd)
 	var combiadd = ($CombiJumpCounter.combiAmount * combiJumpAdd)
 	velocity.y += jumpSpeed + veladd + combiadd;
-	jumpFrames = 0;
+	jumpFrames = 0
+	targetState = state.inair
+	coyoteCount = 0.0
 	print('jump')
 
 func inair_jump():
@@ -609,16 +636,6 @@ func _on_World_savegame_out(savegame):
 func enter_island(islandResource):
 	emit_signal("island_discovered", islandResource)
 
-
-func _on_SeaCheckComponent_emerged():
-	inWaterModifier = 1.0
-	velocity.y *= 0.6
-
-
-func _on_SeaCheckComponent_submerged():
-	velocity.y *= 0.6
-	inWaterModifier = -0.5
-
 func _on_ParentFloorChecker_parent_to(targetParent):
 #	var trans = global_transform
 #	HelperScripts.switch_parent(self, targetParent)
@@ -645,3 +662,12 @@ func _on_InvestigatingNode_start_investigating():
 
 func _on_InvestigatingNode_stop_investigating():
 	targetState = state.idle
+
+
+func _on_PlayerWaterNode_emerged():
+	targetState = state.inair
+	pass
+
+
+func _on_PlayerWaterNode_submerged():
+	targetState = state.inwater
