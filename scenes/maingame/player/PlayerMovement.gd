@@ -405,7 +405,7 @@ func fall(delta):
 
 func float_up(delta):
 	var fallvel = transform.basis.y * buoyancy * delta  
-	velocity = fallvel
+	velocity += fallvel
 	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 
 func fall_wall(delta):
@@ -438,19 +438,19 @@ func strafe(delta, moveInput):
 	velocity = strafeVel.normalized()
 
 func swim_underwater(delta, moveInput):
-	var vel = -cam.global_transform.basis.z * moveSpeed * moveInput.length() * delta * 100
+	var vel = -cam.global_transform.basis.z * swimSpeed * moveInput.length() * delta
 #	velocity.x = vel.x
 #	velocity.z = vel.z
 	velocity += vel * (moveFactor * moveFactor)
 	velocity = velocity.limit_length(maxVelocity)
 	
 func swim_up(delta):
-	var fallvel = transform.basis.y * buoyancy * delta  
-	velocity = fallvel
+	var fallvel = transform.basis.y * swimSpeed * delta  
+	velocity += fallvel
 	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 
 func swim_down(delta):
-	var fallvel = transform.basis.y * buoyancy * delta  
+	var fallvel = transform.basis.y * swimSpeed * delta  
 	velocity -= fallvel
 	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 
@@ -692,6 +692,7 @@ func _on_PlayerWaterNode_emerged():
 
 
 func _on_PlayerWaterNode_submerged():
+	reset_doublejump_counter()
 	targetState = state.inwater
 
 

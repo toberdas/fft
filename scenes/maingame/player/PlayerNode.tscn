@@ -114,6 +114,7 @@ maxVelocity = 6.0
 drag = 18.0
 jumpVelocityAdd = 2.0
 combiJumpAdd = 2.0
+buoyancy = 1.5
 camPoint = NodePath("ThirdPersonCamPoint")
 cam = NodePath("IndependentTransform/ThirdPersonCamGetup/Path")
 wallRay = NodePath("WallRay")
@@ -331,8 +332,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.687868, 4.77985, -5.68818 )
-offset = 16.6945
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.02625, 1.81454, 3.81361 )
+offset = 3.57734
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )
@@ -349,6 +350,7 @@ allowedStates = [ 0, 2 ]
 [node name="PlayerWaterNode" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561216, 0 )
 script = ExtResource( 36 )
+surfaceMax = 2.0
 
 [node name="SeaHeightComponent" parent="PlayerWaterNode" instance=ExtResource( 35 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -358,7 +360,7 @@ maxHeight = 6.0
 active = false
 
 [node name="SeaCheckComponent" parent="PlayerWaterNode" instance=ExtResource( 34 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.8576, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.193982, 0 )
 
 [node name="CollisionShape" parent="PlayerWaterNode/SeaCheckComponent" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.557958, 0 )

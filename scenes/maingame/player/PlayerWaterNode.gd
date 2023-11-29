@@ -1,7 +1,7 @@
 extends Spatial
 
-export var surfaceMin = 0
-export var surfaceMax = 3
+export var surfaceMin = 0.0
+export var surfaceMax = 3.0
 
 var direction = 0
 var emergeTimer : ProcessTimer
