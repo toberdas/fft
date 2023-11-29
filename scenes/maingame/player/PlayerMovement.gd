@@ -313,17 +313,19 @@ func _process(delta):
 	
 	if currentState == state.inwater:
 		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
-		add_velocity(delta, moveInput)
-		decay_impulse_velocity(delta)		
-		align_to_movement(moveInput)
-		float_on_surface(delta)
-		if moveDict['jumpCommandStart']:
-			jump()
+		decay_impulse_velocity(delta)
+		float_up(delta)
+#		add_velocity(delta, moveInput)
+#		align_to_movement(moveInput)
+#		float_on_surface(delta)
+#		if moveDict['jumpCommandStart']:
+#			jump()
 		
 		
 	if currentState == state.underwater:
+		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
 		decay_impulse_velocity(delta)
-		swim_underwater(delta)
+		swim_underwater(delta, moveInput)
 	
 	if currentState == state.angling:
 		decay_impulse_velocity(delta)
@@ -395,6 +397,11 @@ func fall(delta):
 	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 	#velocity.y = clamp(velocity.y - ((grav - $CombiJumpCounter.combiAmount * combiGravMinus) * inWaterModifier * delta), -maxFallSpeed, 10000)
 
+func float_up(delta):
+	var fallvel = transform.basis.y * ((grav - $CombiJumpCounter.combiAmount * combiGravMinus) * -.2) * delta
+	velocity -= fallvel
+	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
+
 func fall_wall(delta):
 	velocity.y = clamp(velocity.y - ((grav - $CombiJumpCounter.combiAmount * combiGravMinus * 0.1) * delta), -maxFallSpeed * 0.05, 10000)
 #	velocity.x *= 0.8
@@ -429,8 +436,12 @@ func float_on_surface(delta):
 #	velocity.y = ($PlayerWaterNode.height - global_transform.origin.y) * delta * buoyancy
 	global_transform.origin.y = $PlayerWaterNode.height
 
-func swim_underwater(delta):
-	pass
+func swim_underwater(delta, moveInput):
+	var vel = -cam.global_transform.basis.z * moveSpeed * moveInput.length() * delta * 100
+#	velocity.x = vel.x
+#	velocity.z = vel.z
+	velocity += vel * (moveFactor * moveFactor)
+	velocity = velocity.limit_length(maxVelocity)
 
 func fill_jump_buffer():
 	jumpFrames = jumpBuffer
@@ -671,3 +682,7 @@ func _on_PlayerWaterNode_emerged():
 
 func _on_PlayerWaterNode_submerged():
 	targetState = state.inwater
+
+
+func _on_PlayerWaterNode_underwater():
+	targetState = state.underwater

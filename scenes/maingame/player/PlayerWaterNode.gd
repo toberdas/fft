@@ -1,35 +1,35 @@
 extends Spatial
 
+export var surfaceMin = 0
+export var surfaceMax = 3
+
 var direction = 0
 var emergeTimer : ProcessTimer
 var height = 0.0
 
 signal emerged
 signal submerged
+signal underwater
+
+var isSubmerged = false
 
 func _ready():
 	emergeTimer = ProcessTimer.new(16.0)
 
 func _process(delta):
-	if direction != 0:
-		if emergeTimer.tick():
-			if direction == 1:
-				print("above water")
-				$SeaHeightComponent.active = false
-				emit_signal("emerged")
-			if direction == -1:
-				print("underwater")
-				$SeaHeightComponent.active = true
-				emit_signal("submerged")
-			emergeTimer.reset()
-			direction = 0
-	height = $SeaHeightComponent.height
+	if isSubmerged:
+		var difToSurface = abs(global_transform.origin.y - height)
+		if difToSurface > surfaceMax:
+			emit_signal("underwater")
+		else:
+			emit_signal("submerged")
+	height = $SeaHeightComponent.surfaceHeight
 		
 
 func _on_SeaCheckComponent_emerged():
-	emergeTimer.reset()
-	direction = 1
+	isSubmerged = false
+	emit_signal("emerged")
 
 func _on_SeaCheckComponent_submerged():
-	emergeTimer.reset()
-	direction = -1
+	isSubmerged = true
+	emit_signal("submerged")

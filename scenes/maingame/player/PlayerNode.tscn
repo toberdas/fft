@@ -331,8 +331,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.48095, 3.43515, 1.11154 )
-offset = 7.06489
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.687868, 4.77985, -5.68818 )
+offset = 16.6945
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )
@@ -431,6 +431,7 @@ shape = SubResource( 14 )
 [connection signal="stop_investigating" from="InvestigatingNode" to="PlayerCameraManager" method="_on_InvestigatingNode_stop_investigating"]
 [connection signal="emerged" from="PlayerWaterNode" to="." method="_on_PlayerWaterNode_emerged"]
 [connection signal="submerged" from="PlayerWaterNode" to="." method="_on_PlayerWaterNode_submerged"]
+[connection signal="underwater" from="PlayerWaterNode" to="." method="_on_PlayerWaterNode_underwater"]
 [connection signal="emerged" from="PlayerWaterNode/SeaCheckComponent" to="PlayerWaterNode" method="_on_SeaCheckComponent_emerged"]
 [connection signal="submerged" from="PlayerWaterNode/SeaCheckComponent" to="PlayerWaterNode" method="_on_SeaCheckComponent_submerged"]
 
