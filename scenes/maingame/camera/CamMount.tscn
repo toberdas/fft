@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/maingame/camera/Camera.gd" type="Script" id=1]
 [ext_resource path="res://scenes/maingame/camera/CamMount.gd" type="Script" id=2]
@@ -8,6 +8,18 @@
 [ext_resource path="res://assets/environments/CloudyEnvironment.tres" type="Environment" id=6]
 [ext_resource path="res://assets/environments/UnderWaterEnvironment.tres" type="Environment" id=7]
 [ext_resource path="res://assets/resources/elemental/sky/CurrentSkyResource.tres" type="Resource" id=8]
+[ext_resource path="res://assets/shaders/screenshaders/ss_edge.tres" type="Shader" id=9]
+
+[sub_resource type="QuadMesh" id=8]
+size = Vector2( 2, 2 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 9 )
+shader_param/outline_mode = 3
+shader_param/outline_intensity = 1.0
+shader_param/_round = false
+shader_param/outline_bias = 0.0
+shader_param/outline_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.3
@@ -251,6 +263,11 @@ far = 1500.0
 margin = 0.53
 script = ExtResource( 1 )
 mount = NodePath("..")
+
+[node name="MeshInstance" type="MeshInstance" parent="Camera"]
+extra_cull_margin = 16384.0
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 1024

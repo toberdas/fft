@@ -1532,5 +1532,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 threads/thread_model=2
-quality/directional_shadow/size=1024
+quality/shadows/filter_mode=2
+quality/filters/anisotropic_filter_level=1
+quality/subsurface_scattering/quality=0
 environment/default_environment="res://default_env.tres"

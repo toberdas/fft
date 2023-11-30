@@ -54,7 +54,7 @@ func _process(delta):
 func calculate_height():
 	var _height = 0.0
 	for bobber in bobbers:
-		_height += bobber.global_transform.origin.y
+		_height += bobber.height
 	_height /= 4
 	return _height
 

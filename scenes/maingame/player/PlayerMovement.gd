@@ -23,11 +23,14 @@ export var combiJumpAdd = 0.6
 export var combiGravMinus = 2
 export var doubleJump = 1
 export var maxFallVelocityLength = 2.0
+export var emergeFrames = 6.0
+export var buoyancy = 48.0
+export var swimSpeed = 24.0
 
 var playerResource : PlayerResource setget set_player_resource
 var saveGame 
 
-enum state{idle, accelerate, topspeed, brake, angling, strafing, jumping, reelinjump, dashload, dashing, inair, nibble, reelin, gaming, interacting, inmenu, inwater, limitless, onwall, walljumping, doublejump, reelinjump, attacked, investigating}
+enum state{idle, accelerate, topspeed, brake, angling, strafing, jumping, reelinjump, dashload, dashing, inair, nibble, reelin, gaming, interacting, inmenu, inwater, limitless, onwall, walljumping, doublejump, reelinjump, attacked, investigating, underwater}
 var immuneToAttackStates = [state.reelin, state.inmenu, state.nibble, state.gaming, state.interacting]
 var currentState = state.idle
 var targetState = 0
@@ -53,6 +56,8 @@ var wallGrabPosition = Vector3.ZERO
 var wallGraceFrameCounter = 0
 var inWaterModifier = 1.0
 var targetDirection = null
+var emergeBuffer : ProcessTimer
+
 
 export(NodePath) var ship
 export(NodePath) var camPoint
@@ -86,6 +91,7 @@ signal savegame_out_at_ready
 signal island_discovered
 
 func _ready():
+	emergeBuffer = ProcessTimer.new(emergeFrames)
 	if ship:
 		ship = get_node(ship)
 	cam = get_node(cam)
@@ -247,8 +253,7 @@ func _process(delta):
 			snap_to_target_direction()
 			emit_signal("jumped")
 			jump()
-			targetState = state.inair
-			coyoteCount = 0.0
+			
 		if !grounded:
 			targetState = state.inair
 	
@@ -306,6 +311,27 @@ func _process(delta):
 			$AttackingNode.attack()
 		else:
 			targetState = state.idle
+	
+	if currentState == state.inwater:
+		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+		decay_impulse_velocity(delta)
+		float_up(delta)
+		add_velocity(delta, moveInput)
+		align_to_movement(moveInput)
+		if Input.is_action_pressed("aligncam"):
+			swim_up(delta)
+		if Input.is_action_pressed("cast"):
+			swim_down(delta)
+		
+	if currentState == state.underwater:
+		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+		decay_impulse_velocity(delta)
+		add_velocity(delta, moveInput)
+		align_to_movement(moveInput)
+		if Input.is_action_pressed("aligncam"):
+			swim_up(delta)
+		if Input.is_action_pressed("cast"):
+			swim_down(delta)
 	
 	if currentState == state.angling:
 		decay_impulse_velocity(delta)
@@ -377,6 +403,11 @@ func fall(delta):
 	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 	#velocity.y = clamp(velocity.y - ((grav - $CombiJumpCounter.combiAmount * combiGravMinus) * inWaterModifier * delta), -maxFallSpeed, 10000)
 
+func float_up(delta):
+	var fallvel = transform.basis.y * buoyancy * delta  
+	velocity += fallvel
+	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
+
 func fall_wall(delta):
 	velocity.y = clamp(velocity.y - ((grav - $CombiJumpCounter.combiAmount * combiGravMinus * 0.1) * delta), -maxFallSpeed * 0.05, 10000)
 #	velocity.x *= 0.8
@@ -397,7 +428,6 @@ func air_move(delta, moveInput):
 	velocity = velocity.limit_length(maxVelocity + 0.5)
 	velocity.y = vely
 
-	
 func strafe(delta, moveInput):
 #	var localMoveInput = get_parent().transform.affine_inverse().basis * moveInput
 #	velocity = localMoveInput * strafeSpeed * delta
@@ -406,6 +436,23 @@ func strafe(delta, moveInput):
 	strafeVel += rawMoveInput.x * global_transform.basis.x
 	strafeVel += rawMoveInput.y * global_transform.basis.z
 	velocity = strafeVel.normalized()
+
+func swim_underwater(delta, moveInput):
+	var vel = -cam.global_transform.basis.z * swimSpeed * moveInput.length() * delta
+#	velocity.x = vel.x
+#	velocity.z = vel.z
+	velocity += vel * (moveFactor * moveFactor)
+	velocity = velocity.limit_length(maxVelocity)
+	
+func swim_up(delta):
+	var fallvel = transform.basis.y * swimSpeed * delta  
+	velocity += fallvel
+	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
+
+func swim_down(delta):
+	var fallvel = transform.basis.y * swimSpeed * delta  
+	velocity -= fallvel
+	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 
 func fill_jump_buffer():
 	jumpFrames = jumpBuffer
@@ -427,7 +474,9 @@ func jump():
 	var veladd = (velocity.length() / maxVelocity * jumpVelocityAdd)
 	var combiadd = ($CombiJumpCounter.combiAmount * combiJumpAdd)
 	velocity.y += jumpSpeed + veladd + combiadd;
-	jumpFrames = 0;
+	jumpFrames = 0
+	targetState = state.inair
+	coyoteCount = 0.0
 	print('jump')
 
 func inair_jump():
@@ -609,16 +658,6 @@ func _on_World_savegame_out(savegame):
 func enter_island(islandResource):
 	emit_signal("island_discovered", islandResource)
 
-
-func _on_SeaCheckComponent_emerged():
-	inWaterModifier = 1.0
-	velocity.y *= 0.6
-
-
-func _on_SeaCheckComponent_submerged():
-	velocity.y *= 0.6
-	inWaterModifier = -0.5
-
 func _on_ParentFloorChecker_parent_to(targetParent):
 #	var trans = global_transform
 #	HelperScripts.switch_parent(self, targetParent)
@@ -645,3 +684,17 @@ func _on_InvestigatingNode_start_investigating():
 
 func _on_InvestigatingNode_stop_investigating():
 	targetState = state.idle
+
+
+func _on_PlayerWaterNode_emerged():
+	targetState = state.inair
+	pass
+
+
+func _on_PlayerWaterNode_submerged():
+	reset_doublejump_counter()
+	targetState = state.inwater
+
+
+func _on_PlayerWaterNode_underwater():
+	targetState = state.underwater
