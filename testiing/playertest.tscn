@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/maingame/player/PlayerNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/platforming/Platform.tscn" type="PackedScene" id=2]
@@ -37,39 +37,6 @@ script = ExtResource( 18 )
 key = ExtResource( 14 )
 lootItem = ExtResource( 20 )
 
-[sub_resource type="PanoramaSky" id=1]
-
-[sub_resource type="Environment" id=7]
-resource_local_to_scene = true
-background_mode = 2
-background_sky = SubResource( 1 )
-background_color = Color( 0.764706, 0.568627, 0.94902, 1 )
-background_canvas_max_layer = 12
-background_camera_feed_id = 2
-ambient_light_color = Color( 0.788235, 0.639216, 0.639216, 1 )
-ambient_light_energy = 7.26
-fog_enabled = true
-fog_color = Color( 0.552941, 0.639216, 0.952941, 1 )
-fog_depth_begin = 200.0
-fog_depth_end = 1400.0
-fog_depth_curve = 2.0
-fog_transmit_enabled = true
-fog_transmit_curve = 0.57435
-dof_blur_far_distance = 100.0
-dof_blur_far_transition = 100.0
-dof_blur_far_amount = 1.0
-dof_blur_far_quality = 0
-glow_intensity = 3.49
-glow_strength = 1.07
-glow_bloom = 0.05
-
-[sub_resource type="Curve3D" id=8]
-resource_local_to_scene = true
-_data = {
-"points": PoolVector3Array( -2.52229, 1.73792, 2.62078, 2.52229, -1.73792, -2.62078, 1.73297, 1.87216, 6.43425, 1.85163, 0, 3.17422, -1.85163, 0, -3.17422, 5.07362, 4.87551, -2.45369, 3.10809, 0, -3.04196, -3.10809, 0, 3.04196, -4.48235, 4.68835, -4.22361, -2.5976, -0.696643, -1.5933, 2.5976, 0.696643, 1.5933, -2.42511, 2.63865, 6.45333, -1.52752, 0.855324, 2.08081, 1.52752, -0.855324, -2.08081, 1.73297, 1.87216, 6.43425 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
-}
-
 [node name="playertest" type="Spatial"]
 script = ExtResource( 19 )
 
@@ -77,14 +44,14 @@ script = ExtResource( 19 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 147.068 )
 
 [node name="RotatingPlatformRoot" parent="." instance=ExtResource( 9 )]
-transform = Transform( -0.929709, 0, 0.248067, 0, 1, 0, -0.248067, 0, -0.929709, 36.7464, 47.2417, 0 )
+transform = Transform( 0.958699, 0, 0.0824812, 0, 1, 0, -0.0824812, 0, 0.958699, 36.7464, 47.2417, 0 )
 axis = Vector3( 0, 1, 0 )
 direction = 1
 targetSpeed = 0.8
 on = true
 
 [node name="RotatingPlatformRoot2" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 0.186776, 0.939977, 0, -0.939977, 0.186776, 57.7148, 48.1208, 0 )
+transform = Transform( 1, 0, 0, 0, -0.719592, 0.633199, 0, -0.633199, -0.719592, 57.7148, 48.1208, 0 )
 axis = Vector3( 1, 0, 0 )
 direction = -1
 targetSpeed = 0.6
@@ -174,29 +141,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51.1215, -34.2114 )
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 55.9905, 0 )
 buoyancy = 2.0
 
-[node name="CamMount" parent="Player/IndependentTransform/PlayerFollower" index="0"]
-aboveWaterEnvironment = SubResource( 7 )
-
-[node name="FlockPath" parent="Player/PlayerFlockManager" index="0"]
-curve = SubResource( 8 )
-
-[node name="PathFollow" parent="Player/PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24813, 2.89421, 7.19602 )
-offset = 36.1528
-
-[node name="SeaHeightComponent" parent="Player/PlayerWaterNode" index="0"]
-a = 0.904
-b = 0.876
-
 [node name="ElementalNode" parent="." instance=ExtResource( 21 )]
 
 [editable path="Flock"]
-[editable path="Player"]
-[editable path="Player/IndependentTransform/PlayerFollower/CamMount"]
-[editable path="Player/IndependentTransform/PlayerFollower/MeshPivot/BlobScene"]
-[editable path="Player/IndependentTransform/PlayerFollower/MeshPivot/BlobScene/nickdeblob"]
-[editable path="Player/IndependentTransform/PlayerFollower/MeshPivot/BlobScene/blobmetarmenenanimaties"]
-[editable path="Player/AttackingNode"]
-[editable path="Player/ItemPickupNode/ItemSenseNode"]
-[editable path="Player/PlayerFlockManager/FlockPath"]
-[editable path="Player/PlayerWaterNode/SeaCheckComponent"]
