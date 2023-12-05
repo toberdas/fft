@@ -3,6 +3,9 @@ extends Follower
 export(Environment) var aboveWaterEnvironment
 export(Environment) var underWaterEnvironment
 
+export(Material) var underwaterMaterial
+export(Material) var abovewaterMaterial
+
 onready var camera = $Camera
 
 func _ready():
@@ -12,10 +15,10 @@ func _ready():
 
 
 func _on_SeaCheckComponent_emerged():
-#	camera.environment = aboveWaterEnvironment
+	$Camera/MeshInstance.set_surface_material(0, abovewaterMaterial)
 	pass
 
 
 func _on_SeaCheckComponent_submerged():
-#	camera.environment = underWaterEnvironment
+	$Camera/MeshInstance.set_surface_material(0, underwaterMaterial)
 	pass

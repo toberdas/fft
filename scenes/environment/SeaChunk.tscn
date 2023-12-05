@@ -17,7 +17,7 @@ script = ExtResource( 3 )
 
 [node name="SeaChunk" type="MeshInstance" parent="."]
 cast_shadow = 0
-extra_cull_margin = 3058.19
+extra_cull_margin = 3561.74
 mesh = SubResource( 22 )
 material/0 = ExtResource( 1 )
 
