@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://assets/shaders/screenshaders/ss_underwater.tres" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/tint = Color( 0.0627451, 0.823529, 0.972549, 1 )
+shader_param/wave_speed = 1.0
+shader_param/wave_freq = 5.0
+shader_param/wave_width = 1.0
