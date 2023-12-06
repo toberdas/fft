@@ -46,8 +46,8 @@ func set_properties_to_resource(elementalResource, delta):
 	sun_light.light_color = ColorUtil.move_toward_color(sun_light.light_color, elementalResource.skyResource.sunColor, .01)
 	sun_light.light_energy = move_toward(sun_light.light_energy, elementalResource.sunPower, .01)
 	skyEnvironment.fog_color = ColorUtil.move_toward_color(skyEnvironment.fog_color, elementalResource.skyResource.skyDarkColor, .01)
-	skyEnvironment.fog_depth_begin = move_toward(skyEnvironment.fog_depth_begin, 200 * (1.0 - elementalResource.fogThickness), 10)
-	skyEnvironment.fog_depth_end = move_toward(skyEnvironment.fog_depth_end, 1400 * (1.0 - elementalResource.fogThickness), 20)
+	skyEnvironment.fog_depth_begin = move_toward(skyEnvironment.fog_depth_begin, 200 * (1.0 - elementalResource.fogThickness), 100)
+	skyEnvironment.fog_depth_end = move_toward(skyEnvironment.fog_depth_end, 1400 * (1.0 - elementalResource.fogThickness), 200)
 	skyEnvironment.ambient_light_color = ColorUtil.move_toward_color(skyEnvironment.ambient_light_color, elementalResource.skyResource.skyDarkColor, 0.01)
 
 #func start_transition():

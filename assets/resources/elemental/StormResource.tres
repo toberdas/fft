@@ -23,4 +23,4 @@ seaTimeModifier = 0.2
 windDecibelAdd = 18
 seaDecibelAdd = 18
 sunPower = 0.5
-fogThickness = 0.7
+fogThickness = 0.8

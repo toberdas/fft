@@ -44,14 +44,14 @@ script = ExtResource( 19 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 147.068 )
 
 [node name="RotatingPlatformRoot" parent="." instance=ExtResource( 9 )]
-transform = Transform( 0.668626, 0, 0.690558, 0, 1, 0, -0.690558, 0, 0.668626, 36.7464, 47.2417, 0 )
+transform = Transform( -0.940854, 0, 0.192191, 0, 1, 0, -0.192191, 0, -0.940854, 36.7464, 47.2417, 0 )
 axis = Vector3( 0, 1, 0 )
 direction = 1
 targetSpeed = 0.8
 on = true
 
 [node name="RotatingPlatformRoot2" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 0.175945, 0.941094, 0, -0.941094, 0.175945, 57.7148, 48.1208, 0 )
+transform = Transform( 1, 0, 0, 0, -0.946365, 0.14469, 0, -0.14469, -0.946365, 57.7148, 48.1208, 0 )
 axis = Vector3( 1, 0, 0 )
 direction = -1
 targetSpeed = 0.6
@@ -139,7 +139,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51.1215, -34.2114 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 55.9905, 0 )
-buoyancy = 2.0
+buoyancy = 26.0
 
 [node name="ElementalNode" parent="." instance=ExtResource( 21 )]
 

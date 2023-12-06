@@ -4,10 +4,9 @@
 code = "shader_type spatial;
 render_mode unshaded, cull_disabled;
 
-//uniform vec4 fog_color : source_color = vec4(0.75);
-//uniform float fog_intensity : hint_range(0.0, 1.0, 0.01) = 0.1;
+uniform float darkness;
+uniform float fog_intensity : hint_range(0.0, 1.0, 0.001) = 0.001;
 
-uniform float amount : hint_range(0.01, 1.0, 0.01) = 0.1;
 uniform vec4 tint : hint_color; // tint effect
 uniform float wave_speed = 3.0; // wave loop speed
 uniform float wave_freq = 10.0; // wave vertical freq
@@ -22,23 +21,17 @@ void fragment(){
 	vec2 wave_uv_offset;
 	wave_uv_offset.x = cos((TIME*wave_speed)+SCREEN_UV.x+SCREEN_UV.y*wave_freq*2.0)*wave_width*0.01;
 
-	vec3 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV + wave_uv_offset.x).rgb * tint.rgb;
-
-//	float depth = texture(DEPTH_TEXTURE, SCREEN_UV + wave_uv_offset.x).x;
-//
-//	vec3 ndc = vec3((SCREEN_UV * 2.0) - 1.0 + wave_uv_offset.x, depth);
-//
-//	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
-//	view.xyz /= view.w;
-//	float linear_depth = -view.z; // Resulting value has a range of (-1, 0), which means we have to multiply it by -1 to get positive values
-//	vec3 color = vec3(linear_depth * amount);
-//	vec4 lastcolor = mix(vec4(color,1.0),vec4(screen_color,1.0), linear_depth);
-	ALBEDO = screen_color.rgb;
 	
-//	// Using this depth, a simple depth fog shader can be written. We just need to mix the screen_color with the fog_color using the depth as a value to interpolate by 
-//	float fog_factor = clamp(linear_depth * fog_intensity, 0.0, 1.0);
-//	vec4 fogged_color = mix(vec4(screen_color, 1.0), fog_color, fog_factor);
-//
-//	ALBEDO = fogged_color.rgb; // we then apply the fog color and alpha to the albedo and alpha channels
-//	ALPHA = fogged_color.a;
+	
+	float depth = texture(DEPTH_TEXTURE, SCREEN_UV + wave_uv_offset.x).x;
+
+	vec3 ndc = vec3((SCREEN_UV * 2.0) - 1.0 + wave_uv_offset.x, depth);
+
+	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	view.xyz /= view.w;
+	float linear_depth = -view.z; // Resulting value has a range of (-1, 0), which means we have to multiply it by -1 to get positive values
+	float stepped = smoothstep(0.0, 0.7, linear_depth * fog_intensity);
+	vec3 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV + wave_uv_offset.x).rgb * tint.rgb;
+	vec3 mixed_color = mix(screen_color,tint.rgb * (1.0 - darkness),stepped);
+	ALBEDO = mixed_color;
 }"
