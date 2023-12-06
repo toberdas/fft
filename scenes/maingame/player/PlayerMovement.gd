@@ -322,9 +322,12 @@ func _process(delta):
 			swim_up(delta)
 		if Input.is_action_pressed("cast"):
 			swim_down(delta)
+		if Input.is_action_pressed("jump"):
+			jump()
 		
 	if currentState == state.underwater:
 		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+		float_up(delta * 0.3)
 		decay_impulse_velocity(delta)
 		add_velocity(delta, moveInput)
 		align_to_movement(moveInput)
@@ -415,10 +418,11 @@ func fall_wall(delta):
 
 func add_velocity(delta, moveInput):
 	var vel = -global_transform.basis.z * moveSpeed * moveInput.length() * delta
-#	velocity.x = vel.x
-#	velocity.z = vel.z
 	velocity += vel * (moveFactor * moveFactor)
+	var vely = velocity.y
+	velocity.y = 0.0
 	velocity = velocity.limit_length(maxVelocity)
+	velocity.y = vely
 
 func air_move(delta, moveInput):
 	var vel = -global_transform.basis.z * moveSpeed * moveInput.length() * delta

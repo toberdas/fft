@@ -2,16 +2,36 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, cull_disabled;
+
+uniform float darkness;
+uniform float fog_intensity : hint_range(0.0, 1.0, 0.001) = 0.001;
 
 uniform vec4 tint : hint_color; // tint effect
 uniform float wave_speed = 3.0; // wave loop speed
 uniform float wave_freq = 10.0; // wave vertical freq
 uniform float wave_width = 1; // wave width 
 
+void vertex(){
+	POSITION = vec4(VERTEX, 1.0);
+}
+
 void fragment(){
 	vec2 scale_UV = SCREEN_UV;
 	vec2 wave_uv_offset;
-	wave_uv_offset.x = cos((TIME*wave_speed)+UV.x+UV.y*wave_freq*2.0)*wave_width*0.01;
-	ALBEDO = texture(SCREEN_TEXTURE, SCREEN_UV+wave_uv_offset).rgb*tint.rgb;
+	wave_uv_offset.x = cos((TIME*wave_speed)+SCREEN_UV.x+SCREEN_UV.y*wave_freq*2.0)*wave_width*0.01;
+
+	
+	
+	float depth = texture(DEPTH_TEXTURE, SCREEN_UV + wave_uv_offset.x).x;
+
+	vec3 ndc = vec3((SCREEN_UV * 2.0) - 1.0 + wave_uv_offset.x, depth);
+
+	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	view.xyz /= view.w;
+	float linear_depth = -view.z; // Resulting value has a range of (-1, 0), which means we have to multiply it by -1 to get positive values
+	float stepped = smoothstep(0.0, 0.7, linear_depth * fog_intensity);
+	vec3 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV + wave_uv_offset.x).rgb * tint.rgb;
+	vec3 mixed_color = mix(screen_color,tint.rgb * (1.0 - darkness),stepped);
+	ALBEDO = mixed_color;
 }"

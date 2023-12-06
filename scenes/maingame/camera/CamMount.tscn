@@ -6,8 +6,9 @@
 [ext_resource path="res://scenes/maingame/camera/SkySprite.gd" type="Script" id=4]
 [ext_resource path="res://scenes/helper/SeaCheckComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/environments/CloudyEnvironment.tres" type="Environment" id=6]
-[ext_resource path="res://assets/environments/UnderWaterEnvironment.tres" type="Environment" id=7]
 [ext_resource path="res://assets/resources/elemental/sky/CurrentSkyResource.tres" type="Resource" id=8]
+[ext_resource path="res://assets/materials/mat_abovewater_screen.tres" type="Material" id=9]
+[ext_resource path="res://assets/materials/mat_underwater_screen.tres" type="Material" id=10]
 
 [sub_resource type="QuadMesh" id=8]
 size = Vector2( 2, 2 )
@@ -247,7 +248,8 @@ size = Vector2( 1280, 720 )
 script = ExtResource( 2 )
 target = NodePath("../ThirdPersonGetup")
 aboveWaterEnvironment = ExtResource( 6 )
-underWaterEnvironment = ExtResource( 7 )
+underwaterMaterial = ExtResource( 10 )
+abovewaterMaterial = ExtResource( 9 )
 
 [node name="Camera" type="ClippedCamera" parent="."]
 environment = ExtResource( 3 )
