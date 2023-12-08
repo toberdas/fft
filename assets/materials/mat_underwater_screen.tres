@@ -4,11 +4,9 @@
 
 [resource]
 shader = ExtResource( 1 )
-
 shader_param/darkness = null
 shader_param/fog_intensity = 0.001
 shader_param/tint = Color( 0.0980392, 0.752941, 0.882353, 1 )
-
 shader_param/wave_speed = 1.0
 shader_param/wave_freq = 5.0
 shader_param/wave_width = 1.0

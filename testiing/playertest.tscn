@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/maingame/player/PlayerNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/platforming/Platform.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/resources/items/specificItems/bait/CauliflowerMushroom.tres" type="Resource" id=5]
 [ext_resource path="res://scenes/platforming/PlatformRecht.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/img/textures/rock_1.png" type="Texture" id=7]
-[ext_resource path="res://scenes/platforming/platformtypes/RotatingPlatformLong.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/item/3DItem.tscn" type="PackedScene" id=10]
 [ext_resource path="res://testiing/attackthing.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/interacts/specific/Chest.tscn" type="PackedScene" id=12]
@@ -43,27 +42,6 @@ script = ExtResource( 19 )
 [node name="FishIslandScene" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 147.068 )
 
-[node name="RotatingPlatformRoot" parent="." instance=ExtResource( 9 )]
-<<<<<<< HEAD
-transform = Transform( 0.904849, 0, -0.327328, 0, 1, 0, 0.327328, 0, 0.904849, 36.7464, 47.2417, 0 )
-=======
-transform = Transform( -0.940854, 0, 0.192191, 0, 1, 0, -0.192191, 0, -0.940854, 36.7464, 47.2417, 0 )
->>>>>>> zwemmen
-axis = Vector3( 0, 1, 0 )
-direction = 1
-targetSpeed = 0.8
-on = true
-
-[node name="RotatingPlatformRoot2" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, -0.946365, 0.14469, 0, -0.14469, -0.946365, 57.7148, 48.1208, 0 )
-axis = Vector3( 1, 0, 0 )
-direction = -1
-targetSpeed = 0.6
-on = true
-
-[node name="RotatingPlatformRoot3" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 76.8374, 44.0792, 0 )
-
 [node name="Spatial" parent="." instance=ExtResource( 2 )]
 transform = Transform( 42.5409, 0, 0, 0, 1, 0, 0, 0, 47.7807, 0, 46.7288, -1.43024 )
 
@@ -77,7 +55,7 @@ transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, -9.03565, 52
 transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, -9.03565, 55.0852, -1.99415 )
 
 [node name="Ship" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.7735, -65.9631 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.7735, -101.235 )
 heightDelta = 6.0
 quatDelta = 0.1
 
@@ -142,8 +120,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0929451, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51.1215, -34.2114 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 55.9905, 0 )
-buoyancy = 26.0
+transform = Transform( 1.06549, 0, 0, 0, 1.06549, 0, 0, 0, 1.06549, 0, 55.9905, 0 )
+diveSpeed = 26.0
 
 [node name="ElementalNode" parent="." instance=ExtResource( 21 )]
 

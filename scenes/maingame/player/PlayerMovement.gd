@@ -24,8 +24,9 @@ export var combiGravMinus = 2
 export var doubleJump = 1
 export var maxFallVelocityLength = 2.0
 export var emergeFrames = 6.0
-export var buoyancy = 48.0
-export var swimSpeed = 24.0
+export var buoyancy = 24.0
+export var swimSpeed = 14.0
+export var diveSpeed = 24.0
 
 var playerResource : PlayerResource setget set_player_resource
 var saveGame 
@@ -315,26 +316,24 @@ func _process(delta):
 	if currentState == state.inwater:
 		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
 		decay_impulse_velocity(delta)
-		float_up(delta)
+		swim_up_down(delta * buoyancy)
 		add_velocity(delta, moveInput)
 		align_to_movement(moveInput)
 		if Input.is_action_pressed("aligncam"):
-			swim_up(delta)
-		if Input.is_action_pressed("cast"):
-			swim_down(delta)
+			swim_up_down(-delta * diveSpeed * 2.0)
 		if Input.is_action_pressed("jump"):
 			jump()
 		
 	if currentState == state.underwater:
 		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
-		float_up(delta * 0.3)
+		swim_up_down(delta * buoyancy * 0.3)
 		decay_impulse_velocity(delta)
 		add_velocity(delta, moveInput)
 		align_to_movement(moveInput)
 		if Input.is_action_pressed("aligncam"):
-			swim_up(delta)
-		if Input.is_action_pressed("cast"):
-			swim_down(delta)
+			swim_up_down(-delta * diveSpeed)
+		if Input.is_action_pressed("jump"):
+			swim_up_down(delta * swimSpeed)
 	
 	if currentState == state.angling:
 		decay_impulse_velocity(delta)
@@ -371,7 +370,8 @@ func _process(delta):
 	
 	velocity = move_and_slide_with_snap(velocity + impulseVelocity + fallVelocity, snap, Vector3.UP, true, 3)
 	playerResource.savedTransform = global_transform
-
+func method(args):
+	pass
 func get_input():
 	var moveInput = Vector3.ZERO
 	var orthox = cam.global_transform.basis.x.normalized()
@@ -405,11 +405,6 @@ func fall(delta):
 	velocity -= fallvel
 	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 	#velocity.y = clamp(velocity.y - ((grav - $CombiJumpCounter.combiAmount * combiGravMinus) * inWaterModifier * delta), -maxFallSpeed, 10000)
-
-func float_up(delta):
-	var fallvel = transform.basis.y * buoyancy * delta  
-	velocity += fallvel
-	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 
 func fall_wall(delta):
 	velocity.y = clamp(velocity.y - ((grav - $CombiJumpCounter.combiAmount * combiGravMinus * 0.1) * delta), -maxFallSpeed * 0.05, 10000)
@@ -448,14 +443,9 @@ func swim_underwater(delta, moveInput):
 	velocity += vel * (moveFactor * moveFactor)
 	velocity = velocity.limit_length(maxVelocity)
 	
-func swim_up(delta):
-	var fallvel = transform.basis.y * swimSpeed * delta  
+func swim_up_down(delta):
+	var fallvel = transform.basis.y * delta  
 	velocity += fallvel
-	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
-
-func swim_down(delta):
-	var fallvel = transform.basis.y * swimSpeed * delta  
-	velocity -= fallvel
 	velocity.y = clamp(velocity.y, -maxFallSpeed, 10000)
 
 func fill_jump_buffer():

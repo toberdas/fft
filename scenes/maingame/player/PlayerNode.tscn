@@ -114,7 +114,6 @@ maxVelocity = 6.0
 drag = 18.0
 jumpVelocityAdd = 2.0
 combiJumpAdd = 2.0
-buoyancy = 24.0
 camPoint = NodePath("ThirdPersonCamPoint")
 cam = NodePath("IndependentTransform/ThirdPersonCamGetup/Path")
 wallRay = NodePath("WallRay")
@@ -332,8 +331,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89426, 4.87498, -2.7434 )
-offset = 11.4322
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.569462, 4.74785, -5.83726 )
+offset = 17.9669
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )
@@ -439,6 +438,7 @@ shape = SubResource( 14 )
 
 [editable path="IndependentTransform/PlayerFollower/CamMount"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene"]
+[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/SlimeLowPoly"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/nickdeblob"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/blobmetarmenenanimaties"]
 [editable path="AttackingNode"]

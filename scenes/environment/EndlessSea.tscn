@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/environment/EndlessSea.gd" type="Script" id=1]
+[ext_resource path="res://scenes/environment/SeaMonsterAwakeningScene.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/environment/UnderWaterChecker.gd" type="Script" id=4]
 [ext_resource path="res://scenes/environment/ResourceUpdater.gd" type="Script" id=7]
 
@@ -12,3 +13,5 @@ script = ExtResource( 4 )
 
 [node name="ResourceUpdater" type="Node" parent="."]
 script = ExtResource( 7 )
+
+[node name="SeaMonsterScene" parent="." instance=ExtResource( 2 )]

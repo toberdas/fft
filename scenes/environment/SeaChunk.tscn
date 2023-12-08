@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/materials/mat_SeaChunk.tres" type="Material" id=1]
 [ext_resource path="res://scenes/environment/SeaChunk.gd" type="Script" id=3]
@@ -10,7 +10,10 @@ subdivide_width = 4
 subdivide_depth = 4
 
 [sub_resource type="BoxShape" id=28]
-extents = Vector3( 50, 68.1689, 50 )
+extents = Vector3( 50, 90, 50 )
+
+[sub_resource type="BoxShape" id=29]
+extents = Vector3( 50, 30, 50 )
 
 [node name="SeaChunkRoot" type="Spatial"]
 script = ExtResource( 3 )
@@ -34,7 +37,16 @@ collision_layer = 0
 collision_mask = 8192
 
 [node name="CollisionShape" type="CollisionShape" parent="FollowArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
 shape = SubResource( 28 )
+
+[node name="MonsterArea" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="MonsterArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -78.6963, 0 )
+shape = SubResource( 29 )
 
 [connection signal="area_entered" from="FollowArea" to="." method="_on_FollowArea_area_entered"]
 [connection signal="area_exited" from="FollowArea" to="." method="_on_FollowArea_area_exited"]

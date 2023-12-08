@@ -1,6 +1,8 @@
 extends Resource
 class_name EndlessSeaResource
 
+export(Resource) var seamonsterResource = null
+
 export(Material) var seaChunkMaterialAbove = preload("res://assets/materials/mat_SeaChunk.tres")
 export(Material) var seaChunkMaterialUnder = preload("res://assets/materials/mat_SeaChunk_Under.tres")
 

@@ -15,8 +15,9 @@ export var turnSpeed = 2
 func _process(_delta):
 	$RayCast.cast_to = follow.transform.origin
 	var rayCol = $RayCast.get_collider()
+	var rayNorm = $RayCast.get_collision_normal()
 	if rayCol:
-		third_person_point.global_transform.origin = $RayCast.get_collision_point()
+		third_person_point.global_transform.origin = $RayCast.get_collision_point() + rayNorm
 	else:
 		third_person_point.global_transform.origin = follow.global_transform.origin
 func _ready():

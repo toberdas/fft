@@ -2,19 +2,25 @@ extends Spatial
 
 signal onwall
 
+export(ShaderMaterial) var blobMaterial
+
 func _on_Player_walking():
+	$AnimationPlayer.play("RESET")
 	$AnimationPlayer.play("go_run")
 
 func _on_Player_standing():
+	$AnimationPlayer.play("RESET")
 	$AnimationPlayer.play("go_idle")
 
 func _on_Player_reelingin():
 	$AnimationPlayer.play("reelin")
 
 func _on_Player_jumped():
+	$AnimationPlayer.play("RESET")
 	$AnimationPlayer.play("jump")
 
 func _on_Player_landed():
+	$AnimationPlayer.play("RESET")
 	$AnimationPlayer.play("land")
 
 

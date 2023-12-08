@@ -789,6 +789,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/helper/SeaHeightComponent.gd"
 }, {
+"base": "Resource",
+"class": "SeaMonsterResource",
+"language": "GDScript",
+"path": "res://assets/resources/sea/seamonster/SeaMonsterResource.gd"
+}, {
 "base": "Node",
 "class": "SecondOrderDynamics",
 "language": "GDScript",
@@ -1181,6 +1186,7 @@ _global_script_class_icons={
 "ScreenTransition": "",
 "SeaBobber": "",
 "SeaHeightComponent": "",
+"SeaMonsterResource": "",
 "SecondOrderDynamics": "",
 "SecondOrderDynamicsFloat": "",
 "ShipResource": "",

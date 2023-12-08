@@ -16,3 +16,4 @@ func _on_FollowArea_body_entered(body):
 
 func _on_FollowArea_body_exited(body):
 	endlessSeaResource.followList.erase(body)
+
