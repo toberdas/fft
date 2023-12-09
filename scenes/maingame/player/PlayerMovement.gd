@@ -438,10 +438,11 @@ func strafe(delta, moveInput):
 
 func swim_underwater(delta, moveInput):
 	var vel = -cam.global_transform.basis.z * swimSpeed * moveInput.length() * delta
-#	velocity.x = vel.x
-#	velocity.z = vel.z
 	velocity += vel * (moveFactor * moveFactor)
+	var vely = velocity.y
+	velocity.y = 0.0
 	velocity = velocity.limit_length(maxVelocity)
+	velocity.y = vely
 	
 func swim_up_down(delta):
 	var fallvel = transform.basis.y * delta  

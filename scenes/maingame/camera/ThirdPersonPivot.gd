@@ -17,7 +17,7 @@ func _process(_delta):
 	var rayCol = $RayCast.get_collider()
 	var rayNorm = $RayCast.get_collision_normal()
 	if rayCol:
-		third_person_point.global_transform.origin = $RayCast.get_collision_point() + rayNorm
+		third_person_point.global_transform.origin = $RayCast.get_collision_point() + rayNorm * 0.5
 	else:
 		third_person_point.global_transform.origin = follow.global_transform.origin
 func _ready():

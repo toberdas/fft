@@ -13,7 +13,6 @@ func _ready():
 
 func _process(delta):
 	if $SteeringArea.check_if_player_in_area():
-#		if isSteering:
 		var _steerInput = Vector2.ZERO
 		_steerInput.y = int(Input.is_action_pressed("ship_up")) - int(Input.is_action_pressed("ship_down"))
 
@@ -22,12 +21,6 @@ func _process(delta):
 			updateDirection(_steerInput)
 				
 func updateDirection(input):
-#
-#	steerDirection += input.x * steerIncrement
-#	steerDirection = clamp(steerDirection, -1.0, 1.0)
-#	acceleration += input.y * accelerationIncrement
-#	acceleration = clamp(acceleration, -1.0, 1.0)
-#	print([steerDirection, acceleration])
 	emit_signal("steerUpdate", input.x, input.y)
 	pass
 

@@ -27,7 +27,7 @@ transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 1.4212
 curve = SubResource( 3 )
 
 [node name="Follow" type="PathFollow" parent="Path"]
-transform = Transform( 0.999994, 0, 0, 0, 0.999999, 0, 0, 0, 0.999987, 0.00156126, -5.6471, 4.21301 )
+transform = Transform( 0.999994, 0, 0, 0, 0.999999, 0, 0, 0, 0.999987, 0, -1.38319, -0.960548 )
 offset = 26.99
 rotation_mode = 0
 

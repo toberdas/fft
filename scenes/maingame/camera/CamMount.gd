@@ -2,6 +2,7 @@ extends Follower
 
 export(Environment) var aboveWaterEnvironment
 
+export(ShaderMaterial) var screenMaterial
 export(ShaderMaterial) var underwaterMaterial
 export(ShaderMaterial) var abovewaterMaterial
 
@@ -13,20 +14,34 @@ func _ready():
 	GlobalSingleton.camMount = self
 	yield(get_tree().create_timer(1.0), "timeout")
 	HelperScripts.switch_parent(self, owner.get_parent())
+	$Camera/MeshInstance.set_surface_material(0, screenMaterial)
+	
 
 func _process(delta):
-	var smoothDepth = smoothstep(0.0, 200.0, -global_transform.origin.y + 60.0)
-	underwaterMaterial.set_shader_param("fog_intensity", smoothDepth * 0.003)
-	underwaterMaterial.set_shader_param("darkness", smoothDepth)
+	
+	if underwater:
+		var smoothDepth = smoothstep(0.0, 200.0, -global_transform.origin.y + 60.0)
+		screenMaterial.set_shader_param("fog_intensity", smoothDepth * 0.003)
+		screenMaterial.set_shader_param("darkness", smoothDepth)
 	pass
 	
 func _on_SeaCheckComponent_emerged():
 	underwater = false
-	$Camera/MeshInstance.set_surface_material(0, abovewaterMaterial)
+	screenMaterial.set_shader_param("tint", abovewaterMaterial.get_shader_param("tint"))
+	screenMaterial.set_shader_param("darkness", abovewaterMaterial.get_shader_param("darkness"))
+	screenMaterial.set_shader_param("fog_intensity", abovewaterMaterial.get_shader_param("fog_intensity"))
+	screenMaterial.set_shader_param("wave_speed", abovewaterMaterial.get_shader_param("wave_speed"))
+	screenMaterial.set_shader_param("wave_freq", abovewaterMaterial.get_shader_param("wave_freq"))
+	screenMaterial.set_shader_param("wave_width", abovewaterMaterial.get_shader_param("wave_width"))
 	pass
 
 
 func _on_SeaCheckComponent_submerged():
 	underwater = true
-	$Camera/MeshInstance.set_surface_material(0, underwaterMaterial)
+	screenMaterial.set_shader_param("tint", underwaterMaterial.get_shader_param("tint"))
+	screenMaterial.set_shader_param("darkness", underwaterMaterial.get_shader_param("darkness"))
+	screenMaterial.set_shader_param("fog_intensity", underwaterMaterial.get_shader_param("fog_intensity"))
+	screenMaterial.set_shader_param("wave_speed", underwaterMaterial.get_shader_param("wave_speed"))
+	screenMaterial.set_shader_param("wave_freq", underwaterMaterial.get_shader_param("wave_freq"))
+	screenMaterial.set_shader_param("wave_width", underwaterMaterial.get_shader_param("wave_width"))
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/maingame/camera/Camera.gd" type="Script" id=1]
 [ext_resource path="res://scenes/maingame/camera/CamMount.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/maingame/camera/SkySprite.gd" type="Script" id=4]
 [ext_resource path="res://scenes/helper/SeaCheckComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/environments/CloudyEnvironment.tres" type="Environment" id=6]
+[ext_resource path="res://assets/materials/screenshader.tres" type="Material" id=7]
 [ext_resource path="res://assets/resources/elemental/sky/CurrentSkyResource.tres" type="Resource" id=8]
 [ext_resource path="res://assets/materials/mat_abovewater_screen.tres" type="Material" id=9]
 [ext_resource path="res://assets/materials/mat_underwater_screen.tres" type="Material" id=10]
@@ -248,6 +249,7 @@ size = Vector2( 1280, 720 )
 script = ExtResource( 2 )
 target = NodePath("../ThirdPersonGetup")
 aboveWaterEnvironment = ExtResource( 6 )
+screenMaterial = ExtResource( 7 )
 underwaterMaterial = ExtResource( 10 )
 abovewaterMaterial = ExtResource( 9 )
 
@@ -255,7 +257,7 @@ abovewaterMaterial = ExtResource( 9 )
 environment = ExtResource( 3 )
 current = true
 far = 1500.0
-margin = 0.53
+margin = 1.0
 script = ExtResource( 1 )
 mount = NodePath("..")
 

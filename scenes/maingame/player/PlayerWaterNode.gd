@@ -13,6 +13,8 @@ signal underwater
 
 var isSubmerged = false
 
+
+
 func _ready():
 	emergeTimer = ProcessTimer.new(16.0)
 
@@ -21,8 +23,10 @@ func _process(delta):
 		var difToSurface = abs(global_transform.origin.y - height)
 		if difToSurface > surfaceMax:
 			emit_signal("underwater")
+			$BubbleParticles.emitting = true
 		else:
 			emit_signal("submerged")
+			$BubbleParticles.emitting = false
 	height = $SeaHeightComponent.surfaceHeight
 		
 

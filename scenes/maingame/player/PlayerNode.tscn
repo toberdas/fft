@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scenes/maingame/player/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://scenes/maingame/player/PlayerInteracter.gd" type="Script" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://scenes/ship/UpgradeCollectionScene.tscn" type="PackedScene" id=40]
 [ext_resource path="res://assets/resources/upgrades/specific/MainUpgradeCollection.tres" type="Resource" id=41]
 [ext_resource path="res://assets/img/textures/seaweed_1.png" type="Texture" id=42]
+[ext_resource path="res://scenes/environment/BubbleEmitter.tscn" type="PackedScene" id=43]
 
 [sub_resource type="CapsuleShape" id=17]
 radius = 0.8
@@ -331,8 +332,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.569462, 4.74785, -5.83726 )
-offset = 17.9669
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.87381, 4.19998, -1.21208 )
+offset = 25.7448
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )
@@ -350,6 +351,9 @@ allowedStates = [ 0, 2 ]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561216, 0 )
 script = ExtResource( 36 )
 surfaceMax = 4.0
+
+[node name="BubbleParticles" parent="PlayerWaterNode" instance=ExtResource( 43 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26267, 0 )
 
 [node name="SeaHeightComponent" parent="PlayerWaterNode" instance=ExtResource( 35 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -438,8 +442,7 @@ shape = SubResource( 14 )
 
 [editable path="IndependentTransform/PlayerFollower/CamMount"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene"]
-[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/SlimeLowPoly"]
-[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/nickdeblob"]
+[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/BlobLowPoly"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/blobmetarmenenanimaties"]
 [editable path="AttackingNode"]
 [editable path="ItemPickupNode/ItemSenseNode"]
