@@ -81,7 +81,7 @@ signal reelingin
 signal jumped
 signal landed
 signal plunged
-signal reelin
+signal ask_for_reeljump
 signal onwall
 signal damaged
 signal fly_start
@@ -122,7 +122,7 @@ func _process(delta):
 	
 	if currentState == state.idle:
 		decay_impulse_velocity(delta)
-		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+		drag_velocity(delta)
 		emit_signal("standing")
 		align_to_movement(moveInput)
 		add_velocity(delta, moveInput)
@@ -148,6 +148,7 @@ func _process(delta):
 			start_jump()
 			
 	if currentState == state.topspeed:
+		drag_velocity(delta)
 		decay_impulse_velocity(delta)
 		emit_signal("walking")
 		align_to_movement(moveInput)
@@ -169,6 +170,7 @@ func _process(delta):
 			start_jump()
 			
 	if currentState == state.strafing:
+		drag_velocity(delta)
 		decay_impulse_velocity(delta)
 		emit_signal("strafing")
 		align_to_camera(cam)
@@ -185,8 +187,8 @@ func _process(delta):
 		if !grounded:
 			targetState = state.inair
 			emit_signal("cancelcast")
-		if Input.is_action_just_pressed("lunge"):
-			emit_signal("reelin")
+		if Input.is_action_pressed("jump"):
+			emit_signal("ask_for_reeljump")
 		
 
 	
@@ -195,9 +197,9 @@ func _process(delta):
 		if doubleJumpFrames > 0 : doubleJumpFrames -= 1
 		decay_impulse_velocity_inair(delta)
 		if coyoteCount > 0.0: coyoteCount -= delta
-#		emit_signal("jumped")
+
 		fall(delta)
-#		align_to_camera(cam)
+
 		align_to_movement(moveInput)
 		air_move(delta, moveInput)
 		if Input.is_action_just_pressed('dash'):
@@ -225,14 +227,11 @@ func _process(delta):
 			
 	if currentState == state.onwall:
 		var savedY = global_transform.origin.y
-#		global_transform.origin = global_transform.origin.move_toward(wallGrabPosition, delta * 16.0)
-#		global_transform.origin.y = savedY
+
 		emit_signal("onwall", wallGrabPosition)
 		decay_impulse_velocity(delta)
 		fall_wall(delta)
-#		align_to_movement(moveInput)
-#		air_move(delta, moveInput)
-#		velocity.y = 0.0
+
 		velocity.x = 0.0
 		velocity.z = 0.0
 		if moveDict['jumpCommandStart']:
@@ -312,9 +311,11 @@ func _process(delta):
 			$AttackingNode.attack()
 		else:
 			targetState = state.idle
+			if grounded:
+				reset_dash_counter()
 	
 	if currentState == state.inwater:
-		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+		drag_velocity(delta)
 		decay_impulse_velocity(delta)
 		swim_up_down(delta * buoyancy)
 		add_velocity(delta, moveInput)
@@ -325,7 +326,7 @@ func _process(delta):
 			jump()
 		
 	if currentState == state.underwater:
-		velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+		drag_velocity(delta)
 		swim_up_down(delta * buoyancy * 0.3)
 		decay_impulse_velocity(delta)
 		add_velocity(delta, moveInput)
@@ -340,6 +341,7 @@ func _process(delta):
 		fall(delta)
 		velocity = lerp(velocity, Vector3.ZERO, delta * drag * 0.1)
 		align_to_camera(cam)
+
 	
 	if currentState == state.attacked:
 		decay_impulse_velocity(delta)
@@ -370,8 +372,7 @@ func _process(delta):
 	
 	velocity = move_and_slide_with_snap(velocity + impulseVelocity + fallVelocity, snap, Vector3.UP, true, 3)
 	playerResource.savedTransform = global_transform
-func method(args):
-	pass
+
 func get_input():
 	var moveInput = Vector3.ZERO
 	var orthox = cam.global_transform.basis.x.normalized()
@@ -395,6 +396,10 @@ func decay_impulse_velocity_inair(delta):
 	if impulseVelocity.length() < 1.0:
 		impulseVelocity = Vector3.ZERO		
 
+func drag_velocity(delta):
+	velocity = velocity.move_toward(Vector3.ZERO, drag * delta) ##DRAG
+#	velocity -= velocity * velocity * delta * 20
+
 func decay_impulse_velocity(delta):
 	impulseVelocity = lerp(impulseVelocity, Vector3.ZERO, delta * drag)
 	if impulseVelocity.length() < 1.0:
@@ -413,8 +418,8 @@ func fall_wall(delta):
 
 func add_velocity(delta, moveInput):
 	var vel = -global_transform.basis.z * moveSpeed * moveInput.length() * delta
-	velocity += vel * (moveFactor * moveFactor)
 	var vely = velocity.y
+	velocity += vel * (moveFactor * moveFactor)
 	velocity.y = 0.0
 	velocity = velocity.limit_length(maxVelocity)
 	velocity.y = vely
@@ -438,8 +443,8 @@ func strafe(delta, moveInput):
 
 func swim_underwater(delta, moveInput):
 	var vel = -cam.global_transform.basis.z * swimSpeed * moveInput.length() * delta
-	velocity += vel * (moveFactor * moveFactor)
 	var vely = velocity.y
+	velocity += vel * (moveFactor * moveFactor)
 	velocity.y = 0.0
 	velocity = velocity.limit_length(maxVelocity)
 	velocity.y = vely
@@ -491,9 +496,11 @@ func wall_jump():
 
 func rod_jump(point):
 	var is_possible = true
-	if saveGame:
-		is_possible = saveGame.upgradeCollectionResource.get_upgrade("rodtricks").check_if_equip_full("Rod jump")
-	if is_possible or debug:
+#	if saveGame:
+#		is_possible = saveGame.upgradeCollectionResource.get_upgrade("rodtricks").check_if_equip_full("Rod jump")
+	if is_possible:
+		snap = Vector3.ZERO
+		reset_doublejump_counter()
 		targetState = state.inair
 		var targetPoint = point
 		var dir = targetPoint - global_transform.origin
@@ -510,6 +517,8 @@ func land():
 	if saveGame:
 		if saveGame.upgradeCollectionResource.get_upgrade("dash").check_if_equip_full("Double dash"):
 			dashCounter = 2
+		else:
+			dashCounter = 1
 	else:
 		dashCounter = 1
 	wallgrabCounter = 1
@@ -527,6 +536,15 @@ func land_on_wall():
 
 	wallgrabCounter = 1
 	print('wallgrab')
+
+func reset_dash_counter():
+	if saveGame:
+		if saveGame.upgradeCollectionResource.get_upgrade("dash").check_if_equip_full("Double dash"):
+			dashCounter = 2
+		else:
+			dashCounter = 1
+	else:
+		dashCounter = 1
 
 func start_loading_dash():
 	dashPowerCounter = dashPowerLimit * 0.25
@@ -572,8 +590,6 @@ func enter_ship():
 	return $PlayerFlockManager.empty_flock_to_ship()
 
 func check_if_dash_possible():
-	if debug:
-		return true
 	if saveGame:
 		if dashCounter > 0:
 			return true
@@ -627,14 +643,8 @@ func _on_FloorCheckers_not_on_floor():
 	grounded = false
 	snap = Vector3.ZERO
 
-
-func _on_CastManager_reelin(point):
-	rod_jump(point)
-
-
 func _on_PlayerAttackbleNode_playerattacked(attackingNode):
 	attacked(attackingNode)
-
 
 func _on_PlayerAttackbleNode_playerrecovered():
 	if currentState == state.attacked:
@@ -654,14 +664,10 @@ func enter_island(islandResource):
 	emit_signal("island_discovered", islandResource)
 
 func _on_ParentFloorChecker_parent_to(targetParent):
-#	var trans = global_transform
-#	HelperScripts.switch_parent(self, targetParent)
-#	global_transform = trans
 	pass
 
 
 func _on_ParentFloorChecker_unparented(direction):
-#	impulseVelocity += direction * maxVelocity * 0.8
 	pass
 
 
@@ -693,3 +699,8 @@ func _on_PlayerWaterNode_submerged():
 
 func _on_PlayerWaterNode_underwater():
 	targetState = state.underwater
+
+
+func _on_CastManager_reeljump(jumpPoint):
+	if jumpPoint:
+		rod_jump(jumpPoint)

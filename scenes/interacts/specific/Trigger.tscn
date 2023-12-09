@@ -88,8 +88,11 @@ shape = SubResource( 6 )
 
 [node name="InteractableComponent" parent="." instance=ExtResource( 1 )]
 
+[node name="Area" parent="InteractableComponent" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62403, 0 )
+
 [node name="CollisionShape" parent="InteractableComponent/Area" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02185, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.60559, 0 )
 shape = SubResource( 7 )
 
 [node name="OmniLight" type="OmniLight" parent="."]

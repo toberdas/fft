@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://scenes/maingame/player/PlayerMovement.gd" type="Script" id=1]
 [ext_resource path="res://scenes/maingame/player/PlayerInteracter.gd" type="Script" id=2]
@@ -47,6 +47,9 @@
 [sub_resource type="CapsuleShape" id=17]
 radius = 0.8
 height = 0.2
+
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 0.758846, 0.739753, 0.830505 )
 
 [sub_resource type="PanoramaSky" id=1]
 
@@ -152,18 +155,17 @@ margin_bottom = 14.0
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 3.04429, -1.83013 )
 
 [node name="PlayerInteracter" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0836, -1.04499 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40521, -0.899411 )
 script = ExtResource( 2 )
 interactScene = ExtResource( 5 )
 
-[node name="RayCast" type="RayCast" parent="PlayerInteracter"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075542, 0.0321677 )
-enabled = true
-cast_to = Vector3( 0, 0, -4 )
+[node name="InteractArea" type="Area" parent="PlayerInteracter"]
+collision_layer = 0
 collision_mask = 8
-collide_with_areas = true
-collide_with_bodies = false
-debug_shape_thickness = 5
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerInteracter/InteractArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.726032, -0.67223 )
+shape = SubResource( 19 )
 
 [node name="Follower" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825142, 0 )
@@ -332,8 +334,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.87381, 4.19998, -1.21208 )
-offset = 25.7448
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.40325, 4.5682, -2.93514 )
+offset = 23.9119
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )
@@ -369,6 +371,7 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.193982, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.557958, 0 )
 shape = SubResource( 14 )
 
+[connection signal="ask_for_reeljump" from="." to="IndependentTransform/PlayerFollower/CastManager" method="_on_Player_ask_for_reeljump"]
 [connection signal="cancelinteract" from="." to="PlayerInteracter" method="_on_Player_cancelinteract"]
 [connection signal="damaged" from="." to="PlayerMenu" method="_on_Player_damaged"]
 [connection signal="damaged" from="." to="PlayerMenu/PlayerInventory" method="_on_Player_damaged"]
@@ -405,6 +408,8 @@ shape = SubResource( 14 )
 [connection signal="interacted" from="PlayerInteracter" to="." method="_on_RaycastPivot_interacted"]
 [connection signal="interaction_cancelled" from="PlayerInteracter" to="." method="_on_RaycastPivot_interaction_cancelled"]
 [connection signal="interaction_cancelled" from="PlayerInteracter" to="PlayerMenu" method="_on_PlayerInteracter_interaction_cancelled"]
+[connection signal="area_entered" from="PlayerInteracter/InteractArea" to="PlayerInteracter" method="_on_InteractArea_area_entered"]
+[connection signal="area_exited" from="PlayerInteracter/InteractArea" to="PlayerInteracter" method="_on_InteractArea_area_exited"]
 [connection signal="not_on_floor" from="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers" to="." method="_on_FloorCheckers_not_on_floor"]
 [connection signal="on_floor" from="IndependentTransform/PlayerFollower/MeshPivot/FloorCheckers" to="." method="_on_FloorCheckers_on_floor"]
 [connection signal="cast_cleared" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_cast_cleared"]
@@ -415,6 +420,7 @@ shape = SubResource( 14 )
 [connection signal="fish_lost" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_fish_lost"]
 [connection signal="ignore_nibble" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_ignore_nibble"]
 [connection signal="nibble" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_nibble"]
+[connection signal="reeljump" from="IndependentTransform/PlayerFollower/CastManager" to="." method="_on_CastManager_reeljump"]
 [connection signal="start_cast" from="IndependentTransform/PlayerFollower/CastManager" to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_start_cast"]
 [connection signal="thrown" from="IndependentTransform/PlayerFollower/CastManager" to="PlayerCameraManager" method="_on_CastManager_thrown"]
 [connection signal="thrown" from="IndependentTransform/PlayerFollower/CastManager" to="IndependentTransform/PlayerFollower/MeshPivot/BlobScene" method="_on_CastManager_thrown"]
@@ -443,7 +449,6 @@ shape = SubResource( 14 )
 [editable path="IndependentTransform/PlayerFollower/CamMount"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene"]
 [editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/BlobLowPoly"]
-[editable path="IndependentTransform/PlayerFollower/MeshPivot/BlobScene/blobmetarmenenanimaties"]
 [editable path="AttackingNode"]
 [editable path="ItemPickupNode/ItemSenseNode"]
 [editable path="PlayerFlockManager/FlockPath"]

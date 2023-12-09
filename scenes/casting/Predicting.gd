@@ -5,7 +5,7 @@ var castResource : CastResource
 var predictDict = {}
 var predictTime = 0.06
 var depthPower = 2
-var predictMaxTry = 64
+var predictMaxTry = 84
 
 onready var trajectory = $Trajectory
 

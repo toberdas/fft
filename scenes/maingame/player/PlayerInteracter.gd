@@ -2,7 +2,7 @@ extends Spatial
 
 export(PackedScene) var interactScene
 
-onready var raycast = $RayCast
+var areaMap = {}
 
 signal interacted
 signal interaction_cancelled
@@ -12,10 +12,14 @@ signal cam_to_player
 var currentScene = null
 var heldInteract = null
 var heldInteractComponent = null
-#var interactOrigin = null
+
 
 func _on_Player_playeraction():
-	var coll = raycast.get_collider()
+	var collar = $InteractArea.get_overlapping_areas()
+	var coll = null
+	if collar.size()>0:
+		coll = collar[0]
+
 	if coll && interactScene && !heldInteract:
 		currentScene = interactScene.instance()
 		get_tree().get_root().add_child(currentScene)
@@ -27,8 +31,7 @@ func _on_Player_playeraction():
 		currentScene.connect("scene_close_started", self, "scene_end_start")
 		currentScene.start()
 		yield(currentScene, "scene_open_start")
-#		heldInteractComponent.interact_opened(owner)
-#		heldInteractComponent.interactScene = currentScene 
+
 		emit_signal("cam_to_interact", currentScene)
 		emit_signal("interacted")
 		
@@ -38,7 +41,16 @@ func scene_end_start():
 	emit_signal("cam_to_player")
 
 func scene_ended():
-#	heldInteractComponent.interact_closed(owner)
 	heldInteract = null
-#	heldInteractComponent = null
 	emit_signal("interaction_cancelled") ##sent to player to resume idle state
+
+func _on_InteractArea_area_entered(area):
+	if !areaMap.has(area):
+		var instance = ThreeDPrompt.prompt(ThreeDPrompt.xboxInputs.b, area.global_transform.origin)
+		area.add_child(instance)
+		areaMap[area] = instance
+
+func _on_InteractArea_area_exited(area):
+	if areaMap.has(area):
+		areaMap[area].queue_free()
+		areaMap.erase(area)

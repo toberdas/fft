@@ -894,6 +894,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/helper/3DPickable.gd"
 }, {
+"base": "Resource",
+"class": "ThreeDPrompt",
+"language": "GDScript",
+"path": "res://scenes/ui/prompt/3DPrompt.gd"
+}, {
+"base": "Resource",
+"class": "ThreeDPromptResource",
+"language": "GDScript",
+"path": "res://scenes/ui/prompt/3DPromptResource.gd"
+}, {
 "base": "Node",
 "class": "TimedInput",
 "language": "GDScript",
@@ -1207,6 +1217,8 @@ _global_script_class_icons={
 "ThreadLoader": "",
 "ThreeDItem": "",
 "ThreeDPickable": "",
+"ThreeDPrompt": "",
+"ThreeDPromptResource": "",
 "TimedInput": "",
 "TimedTriggerCondition": "",
 "TimerDictionary": "",
@@ -1257,6 +1269,7 @@ CellularAutomataData="*res://scripts/singletons/CellularAutomataData.gd"
 GlobalTimer="*res://scripts/singletons/GlobalTimer.gd"
 TimePiece="*res://scripts/singletons/TimePiece.gd"
 WarningSingleton="*res://scenes/ui/warnings/WarningSingleton.gd"
+PromptSingleton="*res://scenes/ui/prompt/PromptSingleton.gd"
 
 [debug]
 
@@ -1354,7 +1367,7 @@ y={
 }
 cancelinteract={
 "deadzone": 0.5,
-"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":81,"unicode":0,"echo":false,"script":null)
  ]
 }

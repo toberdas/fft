@@ -25,10 +25,12 @@ func _on_Player_landed():
 
 
 func _on_CastManager_thrown():
-	$blobmetarmenenanimaties/AnimationPlayer.play("throw")
+	pass
+#	$blobmetarmenenanimaties/AnimationPlayer.play("throw")
 
 func _on_CastManager_cast_cleared():
-	$blobmetarmenenanimaties/AnimationPlayer.play("reset")
+	pass
+#	$blobmetarmenenanimaties/AnimationPlayer.play("reset")
 
 
 func _on_Player_strafing():
@@ -40,4 +42,5 @@ func _on_Player_onwall(loc):
 
 
 func _on_CastManager_start_cast():
-	$blobmetarmenenanimaties/AnimationPlayer.play("windup")
+	pass
+#	$blobmetarmenenanimaties/AnimationPlayer.play("windup")

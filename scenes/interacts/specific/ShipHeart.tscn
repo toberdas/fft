@@ -51,6 +51,7 @@ script = ExtResource( 4 )
 [node name="ShipHeartUpgradeScene" parent="FishMenu" index="0" instance=ExtResource( 6 )]
 
 [node name="InteractableComponent" parent="." index="4" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18634, 0 )
 shape = SubResource( 2 )
 
 [node name="KeyAddNode" type="Spatial" parent="." index="5"]

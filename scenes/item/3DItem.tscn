@@ -33,8 +33,9 @@ shape = SubResource( 4 )
 [node name="Sprite3D" type="Sprite3D" parent="Body"]
 transform = Transform( 1.85319, 0, 0, 0, 1.85319, 0, 0, 0, 1.85319, 0, 0, 0 )
 modulate = Color( 0, 1, 0.953125, 1 )
-pixel_size = 0.005
 billboard = 1
+shaded = true
+alpha_cut = 1
 texture = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Body"]

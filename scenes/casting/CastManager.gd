@@ -14,8 +14,8 @@ signal fish_hooked
 signal thrown
 signal cast_cleared
 signal nibble
+signal reeljump
 signal ignore_nibble
-signal reelin
 signal start_cast
 
 func _ready():
@@ -44,7 +44,7 @@ func cast():
 
 func create_cast_resource_connected():
 	var castResource = CastResource.new()
-#	castResource.connect("cast_done")
+	castResource.connect("cast_stopped", self, "clear_cast")
 #	castResource.connect("cast_failed")
 	castResource.connect("cast_start", self, "emit_signal", ["thrown"])
 	castResource.connect("fish_hooked", self, "hooked_fish")
@@ -89,17 +89,16 @@ func _on_Player_startpredict():
 func emit_signal_custom(fish, name):
 	emit_signal(name, fish)
 
-func _on_Player_reelin():
+func reel_jump():
 	if currentCastScenes.size() > 0:
 		var castNode = currentCastScenes.back().castNode
 		if castNode:
 			if !castNode.casting: 
 				var sumPoint = average_all_cast_bobbers_origins()
-				emit_signal("reelin", sumPoint)
 				for ccs in currentCastScenes:
 					ccs.queue_free()
 				currentCastScenes = []
-				emit_signal("cast_cleared")
+				return sumPoint
 
 func average_all_cast_bobbers_origins():
 	var point = Vector3.ZERO
@@ -112,3 +111,7 @@ func average_all_cast_bobbers_origins():
 
 func _on_Player_player_resource_ready(playerResource):
 	equipResource = playerResource.equipResource
+
+
+func _on_Player_ask_for_reeljump():
+	emit_signal("reeljump", reel_jump())

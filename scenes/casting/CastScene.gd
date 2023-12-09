@@ -80,3 +80,4 @@ func hook_fish(fish): #this is run when you engage a nibble
 func set_cast_resource(nr : CastResource):
 	castResource = nr
 	castResource.connect("fish_hooked", self, "hook_fish")
+	castResource.connect("cast_stopped", self, "queue_free")

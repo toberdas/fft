@@ -28,24 +28,16 @@ func _ready():
 func _process(delta):
 	if casting:
 		line_to_rest(fallSpeed)
-
-		if detecting_pathwalker.walk_path(delta) > 0.95: #execute the pathfollows walkpath function, this makes it walk the parent path and returns false if end isnt reached and true if end is reached SET FOLLOW SPEED AND SPEEDCURVE SOMEWHERE
-			$Chain.fasten_to_anchor(castbobber) #reparent bobber to last link in chain so it doesnt move with player
-			$Chain.loosen_anchor()
+		if detecting_pathwalker.walk_path(delta) > 0.95:
+			Warning.new(preload("res://scenes/ui/warnings/NothingHitWithBobberWarning.tres"))
 			casting = false
 			castFailed = true
-			print("step_done")
 			fallSpeed += 0.5
-			return
-		
 		$Chain.unfreeze_partial(detecting_pathwalker.unit_offset)
 		$CastLine.points = HelperScripts.fraction_array(lineArray, detecting_pathwalker.unit_offset) #update points of drawline
-		
 		if detecting_pathwalker.bodyHit:
 			print('body hit')
 			casting = false
-#			lineArray = HelperScripts.fraction_array(lineArray, detecting_pathwalker.unit_offset) #update points of drawline
-			
 			$Chain.cut_chain(detecting_pathwalker.unit_offset)
 			$CastPath.curve = $Chain.curve_from_chain()
 			lineArray = Array($CastPath.curve.get_baked_points())
@@ -53,11 +45,14 @@ func _process(delta):
 			$Chain.fasten_to_anchor(castbobber)
 			$Chain.anchor_to_node(detecting_pathwalker.bodyHit)
 			fallSpeed += 1.0
-			castResource.done_with_cast()
 	else:
 		line_to_rest(fallSpeed)
 	if castFailed:
 		var c = reel_in(.1)
+		if c:
+			castResource.stop_cast()
+			queue_free()
+			
 
 func start_cast(predictDict):
 	var linear = get_line_distributed_points(predictDict["linearray"])

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scenes/ui/warnings/WarningResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+text = "Try to hit something with your bobber"
+lifetime = 1.0

@@ -19,6 +19,7 @@ signal predict_start
 signal cast_start
 signal cast_done
 signal cast_failed
+signal cast_stopped
 signal fish_got_away
 
 func hooked_fish():
@@ -43,7 +44,9 @@ func reeled_in_fish():
 
 func done_with_cast():
 	emit_signal("cast_done")
-	pass
+
+func stop_cast():
+	emit_signal("cast_stopped")
 
 func set_nibbling_fish(fish:Fish):
 	nibblingFish = fish
