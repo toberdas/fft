@@ -21,9 +21,9 @@ func _enter_tree():
 
 func _process(delta):
 	if underwater:
-		var smoothDepth = smoothstep(0.0, 200.0, -global_transform.origin.y + 60.0)
-		screenMaterial.set_shader_param("fog_intensity", smoothDepth * 0.003)
-		screenMaterial.set_shader_param("darkness", smoothDepth)
+		var smoothDepth = smoothstep(0.0, 200.0, -global_transform.origin.y + 90.0)
+		screenMaterial.set_shader_param("fog_intensity", smoothDepth * 0.002)
+		screenMaterial.set_shader_param("darkness", smoothDepth * 0.25)
 	pass
 
 func set_above():
@@ -49,8 +49,5 @@ func _on_SeaCheckComponent_submerged():
 	screenMaterial.set_shader_param("wave_width", underwaterMaterial.get_shader_param("wave_width"))
 	pass
 
-
 func _on_Player_death():
-	screenMaterial.set_shader_param("tint", Color.black)
-	screenMaterial.set_shader_param("darkness", 1.0)
-	screenMaterial.set_shader_param("fog_intensity", 1.0)
+	$ColorRect.visible = true

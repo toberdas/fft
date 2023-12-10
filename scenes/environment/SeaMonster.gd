@@ -1,7 +1,7 @@
 extends Spatial
 
 var target = null
-export var monsterSpeed = 10.0
+export var monsterSpeed = 15.0
 
 func _process(delta):
 	if target:

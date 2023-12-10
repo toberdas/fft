@@ -7,6 +7,7 @@ func _ready():
 	to_main_menu()
 
 func to_main_menu():
+	$AnimationPlayer.play("RESET")
 	$AnimationPlayer.play("fade_in")
 	clear_add_node()
 	var mainMenu = mainMenuScene.instance()
@@ -41,6 +42,7 @@ func _on_SaveLoadNode_world_out(world):
 	add_to_addnode(world)
 	world.connect("world_loaded", self, "start_play")
 	world.connect("back_to_menu", self, "to_main_menu")
+	world.connect("world_dead", self, "clear_add_node")
 	world.start_world()
 #	yield(world, "world_loaded")
 #	$AnimationPlayer.play("fade_in")

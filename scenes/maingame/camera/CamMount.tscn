@@ -289,5 +289,10 @@ skyResource = ExtResource( 8 )
 
 [node name="SeaCheckComponent" parent="." instance=ExtResource( 5 )]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [connection signal="emerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_emerged"]
 [connection signal="submerged" from="SeaCheckComponent" to="." method="_on_SeaCheckComponent_submerged"]

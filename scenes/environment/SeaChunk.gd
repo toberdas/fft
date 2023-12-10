@@ -20,5 +20,4 @@ func _on_FollowArea_body_exited(body):
 
 
 func _on_MonsterArea_body_entered(body):
-	if endlessSeaResource.monsterTarget == null:
-		endlessSeaResource.monsterTarget = body
+	endlessSeaResource.awaken(body)

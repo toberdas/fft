@@ -31,7 +31,7 @@ export var diveSpeed = 24.0
 var playerResource : PlayerResource setget set_player_resource
 var saveGame 
 
-enum state{idle, accelerate, topspeed, brake, angling, strafing, jumping, reelinjump, dashload, dashing, inair, nibble, reelin, gaming, interacting, inmenu, inwater, limitless, onwall, walljumping, doublejump, reelinjump, attacked, investigating, underwater}
+enum state{idle, accelerate, topspeed, brake, angling, strafing, jumping, reelinjump, dashload, dashing, inair, nibble, reelin, gaming, interacting, inmenu, inwater, limitless, onwall, walljumping, doublejump, reelinjump, attacked, investigating, underwater, dead}
 var immuneToAttackStates = [state.reelin, state.inmenu, state.nibble, state.gaming, state.interacting]
 var currentState = state.idle
 var targetState = 0
@@ -89,6 +89,7 @@ signal fly_end
 signal player_resource_ready
 signal savegame_out_at_ready
 signal death
+signal exit_world
 
 signal island_discovered
 
@@ -370,7 +371,13 @@ func _process(delta):
 	if currentState == state.investigating:
 		decay_impulse_velocity(delta)
 		velocity = Vector3.ZERO
-	
+		
+	if currentState == state.dead:
+		decay_impulse_velocity(delta)
+		velocity = Vector3.ZERO
+		if Input.is_action_just_pressed("jump"):
+			emit_signal("exit_world")
+			
 	velocity = move_and_slide_with_snap(velocity + impulseVelocity + fallVelocity, snap, Vector3.UP, true, 3)
 	playerResource.savedTransform = global_transform
 
@@ -627,6 +634,7 @@ func fly_end():
 	emit_signal("fly_end")
 	
 func die():
+	targetState = state.dead
 	emit_signal("death")
 
 func _on_RaycastPivot_interacted():

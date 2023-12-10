@@ -15,12 +15,17 @@ signal map_out
 signal map_ready
 signal player_out
 signal world_loaded
+signal world_dead
 
 func _ready():
 	pass
 
 func exit_world():
+	yield(get_tree().create_timer(1.0),"timeout")
 	emit_signal("back_to_menu")
+
+func world_died():
+	emit_signal("world_dead")
 
 func start_world():
 	GlobalSingleton.register_node(self)
