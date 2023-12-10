@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/nickdeblob.glb-80b3e85db5726aa29c33202724e59b19.scn"
+path="res://.import/Trigger.glb-c09e078db76dd2be7d9a9105ea4f3533.scn"
 
 [deps]
 
-source_file="res://import/nickdeblob.glb"
-dest_files=[ "res://.import/nickdeblob.glb-80b3e85db5726aa29c33202724e59b19.scn" ]
+source_file="res://import/Trigger.glb"
+dest_files=[ "res://.import/Trigger.glb-c09e078db76dd2be7d9a9105ea4f3533.scn" ]
 
 [params]
 

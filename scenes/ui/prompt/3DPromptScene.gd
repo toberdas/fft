@@ -4,7 +4,7 @@ var timer = 0.0
 
 func _process(delta):
 	timer += delta
-	$Sprite3D.transform.origin.y += cos(timer * 0.6) * 0.002
+	$Sprite3D.transform.origin.y += cos(timer * 0.6) * 0.003
 
 func show_prompt(index):
 	$Sprite3D.frame = index

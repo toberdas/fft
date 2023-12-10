@@ -5,10 +5,6 @@ enum MODES{TWOD, THREED, BOTH, ALL}
 
 export(MODES) var mode = MODES.TWOD
 
-export(Texture) var actionIcon
-export(Texture) var hoverIcon
-export(Texture) var defaultIcon
-
 export(NodePath) var area
 export(NodePath) var sprite
 
@@ -100,11 +96,11 @@ func shoot_ray(mask = 0):
 
 func set_state(_state):
 	if _state == POINTERSTATE.DEFAULT:
-		sprite.texture = defaultIcon
+		sprite.frame = _state
 	if _state == POINTERSTATE.HOVER:
-		sprite.texture = hoverIcon
+		sprite.frame = _state
 	if _state == POINTERSTATE.ACTION:
-		sprite.texture = actionIcon
+		sprite.frame = _state
 	state = _state
 
 func switch(on):

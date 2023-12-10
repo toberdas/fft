@@ -208,7 +208,7 @@ shape = SubResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.231219, 0 )
 
 [node name="InteractableComponent" parent="chest" instance=ExtResource( 7 )]
-transform = Transform( 0.484541, 0, 0, 0, 0.832189, 0, 0, 0, 0.725337, 0, 3.57971, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97551, 0 )
 shape = SubResource( 4 )
 
 [node name="ChestAnimationPlayer" type="AnimationPlayer" parent="."]

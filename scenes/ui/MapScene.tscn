@@ -4,23 +4,7 @@
 [ext_resource path="res://scenes/ui/HeaderLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/MapScene.gd" type="Script" id=3]
 [ext_resource path="res://scenes/ui/PlayerMenuBackground.tscn" type="PackedScene" id=4]
-
-[sub_resource type="StyleBoxFlat" id=1]
-content_margin_left = 12.0
-content_margin_right = 12.0
-content_margin_top = 12.0
-content_margin_bottom = 12.0
-bg_color = Color( 0.44, 0.3168, 0.3168, 1 )
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color( 0.831373, 0.588235, 0.588235, 1 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-anti_aliasing_size = 2.0
+[ext_resource path="res://assets/themes/panel_style.tres" type="StyleBox" id=5]
 
 [node name="MapScene" type="Control"]
 anchor_right = 1.0
@@ -54,7 +38,7 @@ margin_right = 1256.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/Panel"]
 anchor_right = 1.0

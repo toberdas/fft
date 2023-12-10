@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://scenes/maingame/worlds/FlowField.gd" type="Script" id=2]
-[ext_resource path="res://assets/themes/PanelStyle.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/themes/panel_style.tres" type="StyleBox" id=3]
 [ext_resource path="res://scenes/ui/InventoryPointer.tscn" type="PackedScene" id=9]
 
 [node name="Inventory" type="MarginContainer"]
@@ -25,12 +25,12 @@ script = ExtResource( 2 )
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 12.0
 margin_top = 12.0
-margin_right = 788.0
-margin_bottom = 488.0
+margin_right = 1268.0
+margin_bottom = 708.0
 custom_constants/separation = 12
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 776.0
+margin_right = 1256.0
 margin_bottom = 14.0
 text = "Items"
 align = 1
@@ -45,20 +45,20 @@ custom_styles/panel = ExtResource( 3 )
 [node name="InventoryUI" type="MarginContainer" parent="VBoxContainer"]
 show_behind_parent = true
 margin_top = 26.0
-margin_right = 776.0
-margin_bottom = 476.0
+margin_right = 1256.0
+margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ItemAddCenter" type="CenterContainer" parent="VBoxContainer/InventoryUI"]
-margin_right = 776.0
-margin_bottom = 450.0
+margin_right = 1256.0
+margin_bottom = 670.0
 
 [node name="ItemAddControl" type="Control" parent="VBoxContainer/InventoryUI/ItemAddCenter"]
-margin_left = 388.0
-margin_top = 225.0
-margin_right = 388.0
-margin_bottom = 225.0
+margin_left = 628.0
+margin_top = 335.0
+margin_right = 628.0
+margin_bottom = 335.0
 
 [node name="InventoryPointer" parent="VBoxContainer/InventoryUI/ItemAddCenter/ItemAddControl" instance=ExtResource( 9 )]
 z_index = 10
@@ -68,8 +68,8 @@ z_as_relative = false
 
 [node name="Panel" type="Panel" parent="VBoxContainer/InventoryUI"]
 show_behind_parent = true
-margin_right = 776.0
-margin_bottom = 450.0
+margin_right = 1256.0
+margin_bottom = 670.0
 custom_styles/panel = ExtResource( 3 )
 
 [connection signal="resized" from="." to="." method="_on_Inventory_resized"]

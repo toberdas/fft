@@ -2,8 +2,9 @@ extends CellAdditionScene
 
 var triggerResource setget set_trigger_resource
 
-onready var button_animation_player = $ButtonMeshInstance/ButtonAnimationPlayer
-onready var button_mesh_instance = $ButtonMeshInstance
+onready var button_animation_player = $ButtonAnimationPlayer
+
+onready var button_mesh_instance = $Trigger/triggerbutton
 
 signal triggered
 

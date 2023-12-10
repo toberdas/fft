@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/img/ui/inputs.png" type="Texture" id=1]
+[ext_resource path="res://scenes/ui/prompt/2DPrompt.gd" type="Script" id=2]
+
+[node name="2DPrompt" type="Sprite"]
+texture = ExtResource( 1 )
+hframes = 8
+script = ExtResource( 2 )

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/ui/FishTheme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ui/FocusGrabber.gd" type="Script" id=2]
+[ext_resource path="res://assets/themes/panel_style.tres" type="StyleBox" id=3]
 
 [node name="HBoxContainer" type="HBoxContainer"]
 anchor_right = 1.0
@@ -27,7 +28,7 @@ margin_right = 200.0
 margin_bottom = 588.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_top = 140.0

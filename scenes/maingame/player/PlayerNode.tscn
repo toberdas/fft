@@ -334,8 +334,8 @@ curve = SubResource( 11 )
 moveResource = SubResource( 12 )
 
 [node name="PathFollow" parent="PlayerFlockManager/FlockPath" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.40325, 4.5682, -2.93514 )
-offset = 23.9119
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04391, 2.98495, 3.16206 )
+offset = 30.4178
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.287339, 0 )

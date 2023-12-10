@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/inventory/EquipSlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui/UIFocusable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/themes/panel_style.tres" type="StyleBox" id=3]
 
 [node name="EquipSlotScene" type="CenterContainer"]
 anchor_right = 1.0
@@ -10,10 +11,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterControl" type="Control" parent="."]
-margin_left = 400.0
-margin_top = 250.0
-margin_right = 400.0
-margin_bottom = 250.0
+margin_left = 640.0
+margin_top = 360.0
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="Panel" type="Panel" parent="CenterControl"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 3 )
 
 [node name="EquipSlot" parent="CenterControl" instance=ExtResource( 1 )]
 
