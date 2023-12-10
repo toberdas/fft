@@ -5,9 +5,11 @@ var ship
 var saveGame
 var map = null
 
+
 const playerScene = preload("res://scenes/maingame/player/PlayerNode.tscn")
 const shipScene = preload("res://scenes/ship/Ship.tscn")
 
+signal back_to_menu
 signal savegame_out
 signal map_out
 signal map_ready
@@ -16,6 +18,9 @@ signal world_loaded
 
 func _ready():
 	pass
+
+func exit_world():
+	emit_signal("back_to_menu")
 
 func start_world():
 	GlobalSingleton.register_node(self)
@@ -53,6 +58,7 @@ func _on_MapEntityManager_entities_loaded():
 		player.saveGame = saveGame
 		GlobalSingleton.player = player
 		add_child(player)
+		player.connect("death", self, "exit_world")
 		emit_signal("player_out", player)
 	if saveGame.shipResource:
 		ship = shipScene.instance()

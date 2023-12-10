@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/maingame/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://scenes/island/ThreadLoader.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/maingame/SaveLoadNode.gd" type="Script" id=3]
-[ext_resource path="res://scenes/ui/mainmenu/MainMenu.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -61,8 +60,6 @@ script = ExtResource( 3 )
 [node name="ThreadLoader" parent="SaveLoadNode" instance=ExtResource( 2 )]
 
 [node name="AddNode" type="Spatial" parent="."]
-
-[node name="MainMenu" parent="AddNode" instance=ExtResource( 4 )]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0

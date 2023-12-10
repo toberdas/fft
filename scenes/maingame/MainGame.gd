@@ -40,6 +40,7 @@ func _on_SaveLoadNode_world_out(world):
 	currentWorld = world
 	add_to_addnode(world)
 	world.connect("world_loaded", self, "start_play")
+	world.connect("back_to_menu", self, "to_main_menu")
 	world.start_world()
 #	yield(world, "world_loaded")
 #	$AnimationPlayer.play("fade_in")

@@ -4,6 +4,8 @@ export(NodePath) var castPoint
 export(PackedScene) var defaultCast
 export var debug = false;
 
+const castScene = preload("res://scenes/casting/CastScene.tscn")
+
 var equipResource : EquipResource
 var maxCasts = 2
 var currentCastScenes = []
@@ -33,12 +35,12 @@ func cast():
 	var rodPickupItem = equipResource.get_slot_pickup("Rod")
 	if baitPickupItem && rodPickupItem:
 		if castPoint.get_child_count() < maxCasts:
-			var ccs = defaultCast.instance()
+			var ccs = castScene.instance()
 			ccs.castResource = castResource
 			connect_and_add(ccs)
 	if debug:
 		if castPoint.get_child_count() < maxCasts:
-			var ccs = defaultCast.instance()
+			var ccs = castScene.instance()
 			ccs.castResource = castResource
 			connect_and_add(ccs)
 

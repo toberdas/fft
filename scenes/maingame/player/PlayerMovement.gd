@@ -88,6 +88,7 @@ signal fly_start
 signal fly_end
 signal player_resource_ready
 signal savegame_out_at_ready
+signal death
 
 signal island_discovered
 
@@ -625,6 +626,9 @@ func fly_end():
 	targetState = state.idle
 	emit_signal("fly_end")
 	
+func die():
+	emit_signal("death")
+
 func _on_RaycastPivot_interacted():
 	targetState = state.interacting
 

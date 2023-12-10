@@ -52,3 +52,4 @@ shape = SubResource( 29 )
 [connection signal="area_exited" from="FollowArea" to="." method="_on_FollowArea_area_exited"]
 [connection signal="body_entered" from="FollowArea" to="." method="_on_FollowArea_body_entered"]
 [connection signal="body_exited" from="FollowArea" to="." method="_on_FollowArea_body_exited"]
+[connection signal="body_entered" from="MonsterArea" to="." method="_on_MonsterArea_body_entered"]

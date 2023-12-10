@@ -6,9 +6,9 @@ export(PackedScene) var reelin
 
 var castResource : CastResource setget set_cast_resource
 
-var predictNode = null
-var castNode = null
-var reelinNode = null
+onready var predictNode = $Predicting
+onready var castNode = $Casting
+onready var reelinNode = $Reelin
 
 enum ANGLESTATE{IDLE,PREDICTING,CASTING,WAITING,REELIN,RESET,NIBBLE,HOOKED,ADMIRE}
 
@@ -48,15 +48,12 @@ func _process(_delta):
 		free_cast()
 			
 func start_predict():
-	predictNode = predicting.instance()
 	predictNode.castResource = castResource
-	add_child(predictNode)
 	targetState = ANGLESTATE.PREDICTING
 
 func start_cast():
-	castNode = casting.instance()
 	castNode.castResource = castResource
-	add_child(castNode)
+	castNode.castResource = castResource
 	castNode.start_cast(predictNode.predictDict)
 	targetState = ANGLESTATE.CASTING
 	predictNode.queue_free()
@@ -69,10 +66,8 @@ func free_cast(_f = null):
 	queue_free()
 
 func hook_fish(fish): #this is run when you engage a nibble
-	reelinNode = reelin.instance()
-	reelinNode.castResource = castResource
-	add_child(reelinNode)
-	reelinNode.start(fish, castNode.lineArray)
+	reelin.castResource = castResource
+	reelin.start(fish, castNode.lineArray)
 	targetState = ANGLESTATE.HOOKED
 	castNode.queue_free()
 	fish.hooked(self.get_parent()) #run the fish's hooked method, telling it it got hooked and what it got hooked to! use the angle node for this, as the bobber will be freed after hooking

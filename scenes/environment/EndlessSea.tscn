@@ -14,4 +14,4 @@ script = ExtResource( 4 )
 [node name="ResourceUpdater" type="Node" parent="."]
 script = ExtResource( 7 )
 
-[node name="SeaMonsterScene" parent="." instance=ExtResource( 2 )]
+[node name="SeaMonsterAwakening" parent="." instance=ExtResource( 2 )]

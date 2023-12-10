@@ -1,17 +1,13 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/maingame/player/PlayerNode.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/platforming/Platform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ship/Ship.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/fish/FishNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/resources/items/specificItems/bait/CauliflowerMushroom.tres" type="Resource" id=5]
 [ext_resource path="res://scenes/platforming/PlatformRecht.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/img/textures/rock_1.png" type="Texture" id=7]
 [ext_resource path="res://scenes/interacts/specific/Trigger.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/item/3DItem.tscn" type="PackedScene" id=10]
-[ext_resource path="res://testiing/attackthing.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/interacts/specific/Chest.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/fishisland/FishIslandScene.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/resources/items/specificItems/KEYS/BlueKey.tres" type="Resource" id=14]
 [ext_resource path="res://scenes/fish/Flock.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/helper/SeaHeightComponent.tscn" type="PackedScene" id=16]
@@ -40,31 +36,10 @@ lootItem = ExtResource( 20 )
 [node name="playertest" type="Spatial"]
 script = ExtResource( 19 )
 
-[node name="FishIslandScene" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 147.068 )
-
-[node name="Spatial" parent="." instance=ExtResource( 2 )]
-transform = Transform( 42.5409, 0, 0, 0, 1, 0, 0, 0, 47.7807, 0, 46.7288, -1.43024 )
-
-[node name="Spatial2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, 0, 50.2334, 6.24253 )
-
-[node name="Spatial3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, -9.03565, 52.7396, 5.79901 )
-
-[node name="Spatial4" parent="." instance=ExtResource( 2 )]
-transform = Transform( 5.05968, 0, 0, 0, 1.38617, 0, 0, 0, 3.82146, -9.03565, 55.0852, -1.99415 )
-
 [node name="Ship" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.7735, -101.235 )
 heightDelta = 6.0
 quatDelta = 0.1
-
-[node name="Fish" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49.9616, -25.8588 )
-
-[node name="Fish2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 3.69204, 0, 0, 0, 3.69204, 0, 0, 0, 3.69204, 1.24087, 49.9616, -25.8588 )
 
 [node name="MeshInstance" parent="." instance=ExtResource( 6 )]
 transform = Transform( 2.12335, 0, 0, 0, 2.12335, 0, 0, 0, 2.12335, 0, 51.4531, 0 )
@@ -75,15 +50,12 @@ transform = Transform( 2.12335, 0, 0, 0, 2.12335, 0, 0, 0, 2.12335, 6.10973, 50.
 material/0 = SubResource( 5 )
 
 [node name="MeshInstance3" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.10973, 53.1699, 11.5578 )
+transform = Transform( 42.3893, 0, 0, 0, 1, 0, 0, 0, 39.1518, -1.40859, 46.6815, -0.32337 )
 material/0 = SubResource( 5 )
 
 [node name="MeshInstance4" parent="." instance=ExtResource( 6 )]
 transform = Transform( 2.12335, 0, 0, 0, 2.12335, 0, 0, 0, 2.12335, 3.83168, 52.8952, 0.0453196 )
 material/0 = SubResource( 5 )
-
-[node name="Spatial5" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46712, 47.4024, -5.07049 )
 
 [node name="3DItem" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.06753, 48.9053, -1.4442 )

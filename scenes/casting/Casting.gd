@@ -20,10 +20,6 @@ onready var detecting_pathwalker = $CastPath/DetectingPathwalker
 signal castdone
 signal castcancelled
 signal reeledin
-
-func _ready():
-	castbobber.castResource = castResource
-	castbobber.add_bait()
 	
 func _process(delta):
 	if casting:
@@ -55,6 +51,8 @@ func _process(delta):
 			
 
 func start_cast(predictDict):
+	castbobber.castResource = castResource
+	castbobber.add_bait()
 	var linear = get_line_distributed_points(predictDict["linearray"])
 	var dist = (linear.front() - linear.back()).length()
 	var resolution = int(max(8, dist / 3.0))

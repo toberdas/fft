@@ -12,6 +12,7 @@ export(float) var wave = 6
 export(float) var worldWaveAmp = 8
 export(float) var worldWaveTimeScale = 0.6
 
+var monsterTarget = null
 var followList = []
 var time = 0.0
 

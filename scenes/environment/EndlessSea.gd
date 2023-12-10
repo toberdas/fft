@@ -52,3 +52,4 @@ func set_endless_sea_resource(newResource):
 	endlessSeaResource = newResource
 	$UnderWaterChecker.endlessSeaResource = newResource
 	$ResourceUpdater.endlessSeaResource = newResource
+	$SeaMonsterAwakening.endlessSeaResource = newResource
